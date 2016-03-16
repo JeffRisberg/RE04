@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-export default React.createClass({
+class Repos extends React.Component {
     render() {
         return (
             <div>
@@ -16,4 +16,6 @@ export default React.createClass({
             </div>
         )
     }
-})
+}
+
+export default Repos;
