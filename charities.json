@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Red Cross",
+    "ein": "94-12345678",
+    "description": "National Health"
+  },
+  {
+    "name": "SPCA",
+    "ein": "94-34343434",
+    "description": "Protect dogs"
+  },
+  {
+    "name": "Wounded Warriors",
+    "ein": "94-12121212",
+    "description": "Veterans support"
+  }
+]
