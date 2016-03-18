@@ -11,9 +11,9 @@ export default React.createClass({
                     <div className="navbar-inner">
                         <div className="navbar-collapse collapse">
                             <h1>RE04 Example</h1>
-                            <ul className="nav navbar-nav">
+                            <ul className="nav navbar-nav" style={{background: '#eee'}}>
                                 <li><NavLink to="/about">About</NavLink></li>
-                                <li><NavLink to="/charityList">CharityList</NavLink></li>
+                                <li><NavLink to="/charityList">Charity List</NavLink></li>
                             </ul>
                         </div>
                     </div>

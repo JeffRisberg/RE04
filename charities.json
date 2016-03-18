@@ -1,17 +1,20 @@
 [
   {
+    "id": 1,
     "name": "Red Cross",
     "ein": "94-12345678",
-    "description": "National Health"
+    "description": "Recovery after disasters"
   },
   {
-    "name": "SPCA",
+    "id": 2,
+    "name": "ASPCA",
     "ein": "94-34343434",
-    "description": "Protect dogs"
+    "description": "Protect dogs and cats"
   },
   {
+    "id": 3,
     "name": "Wounded Warriors",
     "ein": "94-12121212",
-    "description": "Veterans support"
+    "description": "Support veterans"
   }
 ]

@@ -7,7 +7,7 @@ class CharityList extends React.Component {
     constructor() {
         super();
 
-        this.charities = null;
+        this.state = {charities: []};
     }
 
     loadCharitiesFromServer() {
@@ -17,8 +17,7 @@ class CharityList extends React.Component {
             dataType: 'json',
             cache: false,
             success: function (data) {
-                this.charities = data;
-                this.render();
+                this.setState({charities: data});
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -27,27 +26,18 @@ class CharityList extends React.Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount");
-
         this.loadCharitiesFromServer();
     }
 
     render() {
-        console.log("render");
+        var charityNodes = this.state.charities.map(function (charity, index) {
+            return (
+                <Charity charity={charity} key={index}>
+                    Charity
+                </Charity>
+            );
+        });
 
-        var charityNodes = "";
-
-        console.log(this.charities);
-
-        if (this.charities != null) {
-            charityNodes = this.charities.map(function (charity, index) {
-                return (
-                    <Charity name={charity.name} ein={charity.ein} key={index}>
-                        Charity
-                    </Charity>
-                );
-            });
-        }
         return (
             <table className="table">
                 <thead>

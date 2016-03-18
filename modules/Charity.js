@@ -5,8 +5,13 @@ class Charity extends React.Component {
     render() {
         return (
             <tr>
-                <td>{this.props.name}</td>
-                <td>{this.props.ein}</td>
+                <td>{this.props.charity.name}</td>
+                <td>{this.props.charity.ein}</td>
+                <td>
+                    <Link to={"/donation/" + this.props.charity.id} className="btn">
+                        Donate Now
+                    </Link>
+                </td>
             </tr>
         )
     }

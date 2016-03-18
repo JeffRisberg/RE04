@@ -16,6 +16,23 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.get('/charities.json/:id', function (req, res) {
+    fs.readFile('charities.json', function (err, data) {
+        res.setHeader('Cache-Control', 'no-cache');
+        var charities = JSON.parse(data);
+        var charityId = parseInt(req.params.id);
+        var filteredCharities = charities.filter(function (charity) {
+            return charity.id == charityId;
+        });
+        if (filteredCharities.length == 1) {
+            res.json(filteredCharities[0]);
+        }
+        else {
+            res.json(null);
+        }
+    });
+});
+
 /** Return a list of charities */
 app.get('/charities.json', function (req, res) {
     fs.readFile('charities.json', function (err, data) {
