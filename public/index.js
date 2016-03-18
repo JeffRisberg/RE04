@@ -1,20 +1,18 @@
 import React from 'react'
+import ReactDOM from 'react-dom';
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 
-import App from './modules/App'
-import About from './modules/About'
-import Repos from './modules/Repos'
-import Repo from './modules/Repo'
-import Home from './modules/Home'
+import App from '../modules/App'
+import About from '../modules/About'
+import CharityList from '../modules/CharityList'
+import Home from '../modules/Home'
 
-render((
+React.render((
     <Router history={hashHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={Home}/>
-            <Route path="/repos" component={Repos}/>
-            {/* add the new route */}
-            <Route path="/repos/:userName/:repoName" component={Repo}/>
+            <Route path="/charities" component={CharityList}/>
             <Route path="/about" component={About}/>
         </Route>
     </Router>
