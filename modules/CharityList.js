@@ -44,6 +44,7 @@ class CharityList extends React.Component {
                 <tr>
                     <th>Name</th>
                     <th>EIN</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

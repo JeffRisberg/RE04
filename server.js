@@ -16,6 +16,7 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+/** Return a single charity by id */
 app.get('/charities.json/:id', function (req, res) {
     fs.readFile('charities.json', function (err, data) {
         res.setHeader('Cache-Control', 'no-cache');
