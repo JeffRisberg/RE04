@@ -7,15 +7,19 @@ export default React.createClass({
     render() {
         return (
             <div>
-                <h1>RE04 Examples</h1>
-                <ul role="nav">
-                    <li><NavLink to="/about">About</NavLink></li>
-                    <li><NavLink to="/charityList">CharityList</NavLink></li>
-                </ul>
+                <div className="navbar">
+                    <div className="navbar-inner">
+                        <div className="navbar-collapse collapse">
+                            <h1>RE04 Example</h1>
+                            <ul className="nav navbar-nav">
+                                <li><NavLink to="/about">About</NavLink></li>
+                                <li><NavLink to="/charityList">CharityList</NavLink></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-                {/* add this */}
                 {this.props.children}
-
             </div>
         )
     }

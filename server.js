@@ -11,6 +11,7 @@ app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/', express.static(path.resolve(__dirname, 'dist')));
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

@@ -49,9 +49,17 @@ class CharityList extends React.Component {
             });
         }
         return (
-            <div className="charityList">
+            <table className="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>EIN</th>
+                </tr>
+                </thead>
+                <tbody>
                 {charityNodes}
-            </div>
+                </tbody>
+            </table>
         );
     }
 }
