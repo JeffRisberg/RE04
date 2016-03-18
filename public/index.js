@@ -8,11 +8,11 @@ import About from '../modules/About'
 import CharityList from '../modules/CharityList'
 import Home from '../modules/Home'
 
-React.render((
+ReactDOM.render((
     <Router history={hashHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={Home}/>
-            <Route path="/charities" component={CharityList}/>
+            <Route path="/charityList" component={CharityList}/>
             <Route path="/about" component={About}/>
         </Route>
     </Router>
