@@ -6,14 +6,12 @@ class Charity extends React.Component {
         return (
             <tr>
                 <td><p>
-                {this.props.charity.name}
-                <br></br>
-                {this.props.charity.mission}
+                    <strong>{this.props.charity.name}</strong>
                 <br></br>
                 {this.props.charity.addressline1}
                 <br></br>
-                {this.props.charity.city},
-                {this.props.charity.state}
+                {this.props.charity.city},&nbsp;
+                {this.props.charity.state}&nbsp;
                 {this.props.charity.zip}
                 <br></br>
                 Tax ID: {this.props.charity.ein}
