@@ -40,9 +40,8 @@ class CharityList extends React.Component {
             <table className="table">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>EIN</th>
-                    <th>Action</th>
+                    <th>Charity</th>
+                    <th style={{textAlign: 'right'}}>Action</th>
                 </tr>
                 </thead>
                 <tbody>
