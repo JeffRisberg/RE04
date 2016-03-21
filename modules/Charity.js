@@ -8,8 +8,8 @@ class Charity extends React.Component {
                 <td><p>
                     <strong>{this.props.charity.name}</strong>
                 <br/>
-                {this.props.charity.mission && <span>{this.props.charity.mission}<br/></span>}
-                {this.props.charity.addressline1}
+                {false && this.props.charity.mission && <span>{this.props.charity.mission}<br/></span>}
+                {this.props.charity.addressLine1}
                 <br/>
                 {this.props.charity.city},&nbsp;
                 {this.props.charity.state}&nbsp;
