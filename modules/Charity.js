@@ -7,15 +7,14 @@ class Charity extends React.Component {
             <tr>
                 <td><p>
                 {this.props.charity.name}
-                <br></br>
-                {this.props.charity.mission}
-                <br></br>
+                <br/>
+                {this.props.charity.mission && <span>{this.props.charity.mission}<br/></span>}
                 {this.props.charity.addressline1}
-                <br></br>
+                <br/>
                 {this.props.charity.city},
                 {this.props.charity.state}
                 {this.props.charity.zip}
-                <br></br>
+                <br/>
                 Tax ID: {this.props.charity.ein}
                 </p></td>
                 <td style={{textAlign: 'right'}}>
