@@ -1,23 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import Charity from './Charity'
+import Donation from './Donation'
 
-class CharityList extends React.Component {
+class GivingHistory extends React.Component {
     constructor() {
         super();
 
-        this.state = {charities: []};
+        this.state = {donations: []};
     }
 
-    loadCharitiesFromServer() {
-        var url = "api/charities";
+    loadDonationsFromServer() {
+        var url = "api/donations";
         $.ajax({
             url: url,//this.props.url,
             dataType: 'json',
             cache: false,
             success: function (data) {
-                this.setState({charities: data.charities});
+                this.setState({donations: data.donations});
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -26,13 +26,13 @@ class CharityList extends React.Component {
     }
 
     componentDidMount() {
-        this.loadCharitiesFromServer();
+        this.loadDonationsFromServer();
     }
 
     render() {
-        var charityNodes = this.state.charities.map(function (charity, index) {
+        var donationNodes = this.state.donations.map(function (donation, index) {
             return (
-                <Charity charity={charity} key={index}></Charity>
+                <Donation donation={donation} key={index}></Donation>
             );
         });
 
@@ -40,17 +40,17 @@ class CharityList extends React.Component {
             <table className="table">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>EIN</th>
-                    <th>Action</th>
+                    <th>Charity</th>
+                    <th>Amount</th>
+                    <th>Date</th>
                 </tr>
                 </thead>
                 <tbody>
-                {charityNodes}
+                {donationNodes}
                 </tbody>
             </table>
         );
     }
 }
 
-export default CharityList;
+export default GivingHistory;

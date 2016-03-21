@@ -8,7 +8,7 @@ class Charity extends React.Component {
                 <td>{this.props.charity.name}</td>
                 <td>{this.props.charity.ein}</td>
                 <td>
-                    <Link to={"/donation/" + this.props.charity.id} className="btn">
+                    <Link to={"/donate/" + this.props.charity.id} className="btn">
                         Donate Now
                     </Link>
                 </td>

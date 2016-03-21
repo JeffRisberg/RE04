@@ -2,9 +2,9 @@
   "name": "RE04",
   "version": "1.0.0",
   "description": "React Router Example",
-  "main": "server.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server/index.js",
     "postinstall": "webpack --config config/webpack.js",
     "webpack": "webpack --config config/webpack.js",
     "webpack-watch": "webpack --config config/webpack.js --watch --colors"
@@ -28,6 +28,8 @@
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1",
     "body-parser": "^1.4.3",
-    "express": "^4.13.1"
+    "express": "^4.13.1",
+    "nedb": "^1.8.0",
+    "glob": "^7.0.3"
   }
 }

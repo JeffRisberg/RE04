@@ -14,6 +14,7 @@ export default React.createClass({
                             <ul className="nav navbar-nav" style={{background: '#eee'}}>
                                 <li><NavLink to="/about">About</NavLink></li>
                                 <li><NavLink to="/charityList">Charity List</NavLink></li>
+                                <li><NavLink to="/givingHistory">Giving History</NavLink></li>
                             </ul>
                         </div>
                     </div>

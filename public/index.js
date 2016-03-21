@@ -6,7 +6,8 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 import App from '../modules/App'
 import Home from '../modules/Home'
 import CharityList from '../modules/CharityList'
-import Donation from '../modules/Donation'
+import Donate from '../modules/Donate'
+import GivingHistory from '../modules/GivingHistory'
 import About from '../modules/About'
 
 ReactDOM.render((
@@ -14,7 +15,8 @@ ReactDOM.render((
         <Route path="/" component={App}>
             <IndexRoute component={Home}/>
             <Route path="charityList" component={CharityList}/>
-            <Route path="donation/:charityId" component={Donation}/>
+            <Route path="donate/:charityId" component={Donate}/>
+            <Route path="givingHistory" component={GivingHistory}/>
             <Route path="about" component={About}/>
         </Route>
     </Router>
