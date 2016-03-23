@@ -34,12 +34,12 @@ class Donation extends React.Component {
         if (this.state.loading == false) {
             return (
                 <tr>
-                    <td>{this.state.charity.name}</td>
+                    <td width="20%">{this.state.charity.name}</td>
                     <td>$ {this.props.donation.amount}</td>
                     <td>
-                        {this.props.donation.shareEmail ? "Email" : ""}
-                        {this.props.donation.shareName ? "Name" : ""}
-                        {this.props.donation.shareAddress ? "Address" : ""}
+                        {this.props.donation.shareEmail ? "Email" : "NoEmail"}&nbsp;
+                        {this.props.donation.shareName ? "Name" : "NoName"}&nbsp;
+                        {this.props.donation.shareAddress ? "Address" : "NoAddress"}
                     </td>
                     <td>
                         {this.props.donation.flatCharge}
@@ -48,7 +48,9 @@ class Donation extends React.Component {
             )
         }
         else {
-            return null;
+            return (
+                <tr></tr>
+            );
         }
     }
 }

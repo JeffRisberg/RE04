@@ -43,7 +43,6 @@ class GivingHistory extends React.Component {
                 <tr>
                     <th>Charity</th>
                     <th>Amount</th>
-                    <th>Date</th>
                     <th>Flags</th>
                     <th>Flat Charge</th>
                 </tr>

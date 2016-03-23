@@ -1,2 +1,3 @@
-{"_id":"1","id":"1","donorId":1,"transactionDate":"1308537031053"}
-{"_id":"2","id":"2","donorId":1,"transactionDate":"1308537051053"}
+{"_id":"1","id":"1","donorId":1,"transactionDate":"03/10/2016"}
+{"_id":"2","id":"2","donorId":1,"transactionDate":"03/11/2016"}
+{"_id":"3","id":"3","donorId":2,"transactionDate":"03/18/2016"}
