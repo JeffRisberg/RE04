@@ -72,6 +72,8 @@ class Donate extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         You are donating to: {this.state.charity.name}
                         <br/>
+                        {this.state.charity.addressLine1}<br/>
+                        {this.state.charity.city}, {this.state.charity.state} {this.state.charity.zip}
                         Description: {this.state.charity.description}
                         <br/>
                         Enter amount:

@@ -2,13 +2,14 @@ import React from 'react'
 import { Link } from 'react-router'
 
 class Charity extends React.Component {
+
     render() {
         return (
             <tr>
                 <td><p>
                     <strong>{this.props.charity.name}</strong>
                 <br/>
-                {false && this.props.charity.mission && <span>{this.props.charity.mission}<br/></span>}
+                {this.props.charity.mission && <span>{this.props.charity.mission}<br/></span>}
                 {this.props.charity.addressLine1}
                 <br/>
                 {this.props.charity.city},&nbsp;

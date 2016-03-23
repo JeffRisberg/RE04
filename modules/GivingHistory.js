@@ -1,23 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import Donation from './Donation'
+import Transaction from './Transaction'
 
 class GivingHistory extends React.Component {
     constructor() {
         super();
 
-        this.state = {donations: []};
+        this.state = {transactions: []};
     }
 
-    loadDonationsFromServer() {
-        var url = "api/donations";
+    loadTransactionsFromServer() {
+        //var url = "/ws/orders/history/99999";
+        var url = "api/transactions";
         $.ajax({
-            url: url,//this.props.url,
+            url: url,
             dataType: 'json',
             cache: false,
             success: function (data) {
-                this.setState({donations: data.donations});
+                this.setState({transactions: data.transactions});
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -26,13 +27,13 @@ class GivingHistory extends React.Component {
     }
 
     componentDidMount() {
-        this.loadDonationsFromServer();
+        this.loadTransactionsFromServer();
     }
 
     render() {
-        var donationNodes = this.state.donations.map(function (donation, index) {
+        var transactionNodes = this.state.transactions.map(function (transaction, index) {
             return (
-                <Donation donation={donation} key={index}></Donation>
+                <Transaction transaction={transaction} key={index}></Transaction>
             );
         });
 
@@ -43,10 +44,12 @@ class GivingHistory extends React.Component {
                     <th>Charity</th>
                     <th>Amount</th>
                     <th>Date</th>
+                    <th>Flags</th>
+                    <th>Flat Charge</th>
                 </tr>
                 </thead>
                 <tbody>
-                {donationNodes}
+                {transactionNodes}
                 </tbody>
             </table>
         );

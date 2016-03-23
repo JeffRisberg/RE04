@@ -1,3 +1,2 @@
-{"_id":"1","id":"1","charityName":"Red Cross","amount":"45","transactionDate":"1308537031053"}
-{"charityName":"National Park Service","amount":71,"transactionDate":1458542845330,"id":"211","_id":"1TuH2Ls6JK2I8ncy"}
-{"_id":"2","id":"2","charityName":"American Cancer Society","amount":"300","transactionDate":"1398537031053"}
+{"_id":"1","id":"1","charityId":"1","amount":"45","transactionId":"1"}
+{"_id":"2","id":"2","charityId":"2","amount":"300","transactionId":"2"}

@@ -12,7 +12,6 @@ app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, '../public')));
 app.use('/', express.static(path.resolve(__dirname, '../dist')));
-//app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css'))); // redirect CSS bootstrap
 
 mocks.forEach(function (route) {
     route(app);
