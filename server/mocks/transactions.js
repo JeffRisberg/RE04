@@ -8,8 +8,8 @@ module.exports = function (app) {
 
     // Create an embedded table using NEDB if it doesn't exist yet
     var nedb = require('nedb');
-    var transactionDB = new nedb({filename: 'transactions', autoload: true});
-    var donationsDB = new nedb({filename: 'donations', autoload: true});
+    var transactionDB = app.transactionDB;
+    var donationDB = app.donationDB;
 
     transactionsRouter.get('/', function (req, res) {
         delete req.query["_"];
@@ -21,7 +21,7 @@ module.exports = function (app) {
     });
 
     transactionsRouter.get('/:id/donations', function (req, res) {
-        donationsDB.find({transactionId: req.params.id}).exec(function (error, donations) {
+        donationDB.find({transactionId: req.params.id}).exec(function (error, donations) {
             res.send({
                 'donations': donations
             })
@@ -39,9 +39,9 @@ module.exports = function (app) {
                 req.body.transaction.id = 1;
 
             // Insert the new record
-            transactionDB.insert(req.body.transaction, function (err, newDonation) {
+            transactionDB.insert(req.body.transaction, function (err, newTransaction) {
                 res.status(201);
-                res.send(JSON.stringify({transaction: newDonation}));
+                res.send(JSON.stringify({transaction: newTransaction}));
             })
         });
     });

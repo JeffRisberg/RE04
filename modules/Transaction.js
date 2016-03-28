@@ -36,7 +36,7 @@ class Transaction extends React.Component {
     render() {
         var transactionId = this.props.transaction.id;
         var transDateStr = this.props.transaction.transactionDate;
-        //var transDate = parseInt(transDateStr);
+        var transDate = parseInt(transDateStr);
 
         if (this.state.donations.length > 0) {
             var donationNodes = this.state.donations.map(function (donation, index) {
@@ -47,7 +47,7 @@ class Transaction extends React.Component {
             return (
                 <tr>
                     <td colSpan="99">
-                        Transaction: {transactionId} created on {transDateStr}
+                        Transaction {transactionId}, created on {moment(transDate).format("MM/dd/yyyy hh:mm:ss")}
                         <br/>
                         <table className="table" style={{width: "100%"}}>
                             <tbody>
@@ -62,7 +62,7 @@ class Transaction extends React.Component {
             return (
                 <tr>
                     <td colSpan="99">
-                        Transaction: {transactionId} created on {transDateStr}
+                        Transaction {transactionId}, created on {transDateStr}
                         <br/>
                         No donations
                     </td>

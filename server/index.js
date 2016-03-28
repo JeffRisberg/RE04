@@ -13,6 +13,11 @@ app.set('port', (process.env.PORT || 3000));
 app.use('/', express.static(path.join(__dirname, '../public')));
 app.use('/', express.static(path.resolve(__dirname, '../dist')));
 
+var nedb = require('nedb');
+
+app.donationDB = new nedb({filename: 'donations', autoload: true});
+app.transactionDB = new nedb({filename: 'transactions', autoload: true});
+
 mocks.forEach(function (route) {
     route(app);
 });
