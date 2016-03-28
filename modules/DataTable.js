@@ -60,7 +60,7 @@ class DataTable extends React.Component {
     render() {
         var edit = this.state.edit;
 
-        return React.DOM.table(null,
+        return React.DOM.table({className: 'table'},
             React.DOM.thead({onClick: this._sort},
                 React.DOM.tr(null,
                     this.props.headers.map(function (title, idx) {
@@ -81,7 +81,7 @@ class DataTable extends React.Component {
                                 if (edit && edit.row === rowidx && edit.cell === idx) {
                                     content = React.DOM.form({onSubmit: this._save}, React.DOM.input({
                                             type: 'text',
-                                            defaultValue: content,
+                                            defaultValue: content
                                         })
                                     );
                                 }
