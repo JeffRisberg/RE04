@@ -5,9 +5,9 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "postinstall": "webpack --config config/webpack.js",
-    "webpack": "webpack --config config/webpack.js",
-    "webpack-watch": "webpack --config config/webpack.js --watch --colors"
+    "postinstall": "webpack",
+    "webpack": "webpack",
+    "webpack-watch": "webpack --watch --colors"
   },
   "author": "Jeff Risberg",
   "license": "ISC",
