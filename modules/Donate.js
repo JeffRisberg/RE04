@@ -37,15 +37,13 @@ class Donate extends React.Component {
         e.preventDefault();
         var charity = this.state.charity;
         if (charity != null) {
-            var charityName = charity.name;
-
             var amountStr = ReactDOM.findDOMNode(this.refs.amount).value.trim();
             var amount = parseInt(amountStr);
             var datetimeStr = ReactDOM.findDOMNode(this.refs.datetime).value.trim();
             var datetime = parseInt(datetimeStr);
 
             var transaction = {donorId: 1, transactionDate: datetime};
-            var donation = {charityId: charityId, amount: amount, flatChard: 0.35};
+            var donation = {charityId: charity.id, amount: amount, flatCharge: 0.35};
 
             $.ajax({
                 url: '/api/transactions',

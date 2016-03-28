@@ -47,7 +47,7 @@ class Transaction extends React.Component {
             return (
                 <tr>
                     <td colSpan="99">
-                        Transaction {transactionId}, created on {moment(transDate).format("MM/dd/yyyy hh:mm:ss")}
+                        Transaction {transactionId}, created on {moment(transDate).format("MM/DD/YYYY hh:mm:ss")}
                         <br/>
                         <table className="table" style={{width: "100%"}}>
                             <tbody>
