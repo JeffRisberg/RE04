@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 
 import moment from 'moment';
 
+import SessionStore from './SessionStore'
+
 class Donate extends React.Component {
     constructor() {
         super();
@@ -52,7 +54,6 @@ class Donate extends React.Component {
                 dataType: 'json',
                 data: JSON.stringify({transaction: transaction}),
                 success: function (data) {
-                    console.log(data.transaction);
                     var transactionId = data.transaction.id;
                     donation.transactionId = transactionId;
                     $.ajax({

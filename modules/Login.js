@@ -26,7 +26,7 @@ class Login extends React.Component {
         e.preventDefault();
 
         var login = ReactDOM.findDOMNode(this.refs.login).value.trim();
-        var password = ReactDOM.findDOMNode(this.refs.login).value.trim();
+        var password = ReactDOM.findDOMNode(this.refs.password).value.trim();
 
         var credentials = {login: login, password: password};
 

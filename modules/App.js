@@ -27,13 +27,13 @@ class App extends React.Component {
                     <div className="navbar-inner">
                         <div className="navbar-collapse collapse">
                             <div className="row" style={{background: '#eee'}}>
-                                <div className="col-md-4" style={{marginTop: '20px', textAlign: 'left'}}>
+                                <div className="col-md-3" style={{marginTop: '20px', textAlign: 'left'}}>
                                     Search
                                 </div>
-                                <div className="col-md-4" style={{textAlign: 'center'}}>
+                                <div className="col-md-6" style={{textAlign: 'center'}}>
                                     <h1 style={{marginTop: '10px'}}>RE04 Example</h1>
                                 </div>
-                                <div className="col-md-4" style={{marginTop: '20px', textAlign: 'right'}}>
+                                <div className="col-md-3" style={{marginTop: '20px', textAlign: 'right'}}>
                                     {headerText}
                                 </div>
                             </div>

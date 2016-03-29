@@ -14,11 +14,16 @@ class GivingHistory extends React.Component {
     loadTransactionsFromServer() {
         if (SessionStore.isLoggedIn()) {
             var donorId = SessionStore.getDonorId();
+            var token = SessionStore.getToken();
 
             var url = "api/transactions?donorId=" + donorId;
 
             $.ajax({
                 url: url,
+                beforeSend: function (request)
+                {
+                    request.setRequestHeader("auth-token", token);
+                },
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
