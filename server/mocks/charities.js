@@ -8,7 +8,7 @@ module.exports = function (app) {
 
     // Create an embedded table using NEDB if it doesn't exist yet
     var nedb = require('nedb');
-    var charityDB = new nedb({filename: 'charities', autoload: true});
+    var charityDB = app.charityDB;
 
     charitiesRouter.get('/', function (req, res) {
         delete req.query["_"];

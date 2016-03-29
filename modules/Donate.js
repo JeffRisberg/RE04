@@ -47,9 +47,9 @@ class Donate extends React.Component {
 
             $.ajax({
                 url: '/api/transactions',
+                type: 'POST',
                 contentType: "application/json",
                 dataType: 'json',
-                type: 'POST',
                 data: JSON.stringify({transaction: transaction}),
                 success: function (data) {
                     console.log(data.transaction);

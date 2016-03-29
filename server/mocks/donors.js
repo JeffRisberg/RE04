@@ -8,7 +8,7 @@ module.exports = function (app) {
 
     // Create an embedded table using NEDB if it doesn't exist yet
     var nedb = require('nedb');
-    var donorDB = new nedb({filename: 'donors', autoload: true});
+    var donorDB = app.donorDB;
 
     donorsRouter.get('/', function (req, res) {
         delete req.query["_"];
@@ -34,6 +34,27 @@ module.exports = function (app) {
                 res.status(201);
                 res.send(JSON.stringify({donor: newDonation}));
             })
+        });
+    });
+
+    donorsRouter.post('/login', function (req, res) {
+        var login = req.body.login;
+        var password = req.body.password;
+
+        // FIXME:  should check password as well
+        donorDB.find({login: login}).limit(1).exec(function (err, donors) {
+            var RESTFUL_AUTH_TOKEN = "RESTFUL_AUTH_TOKEN:" + login;
+
+            if (donors.length != 0) {
+                var donorId = donors[0].id;
+
+                res.status(200);
+                res.send(JSON.stringify({token: RESTFUL_AUTH_TOKEN, donorId: donorId}));
+            }
+            else {
+                res.status(500);
+                res.send(JSON.stringify({token: RESTFUL_AUTH_TOKEN, donorId: null}));
+            }
         });
     });
 
