@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 import Transaction from './Transaction'
-import SessionStore from './SessionStore'
+import SessionStore from './../stores/SessionStore'
 
 class GivingHistory extends React.Component {
     constructor() {

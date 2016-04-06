@@ -6,9 +6,8 @@ module.exports = function (app) {
     var bodyParser = require('body-parser');
     donorsRouter.use(bodyParser.json());
 
-    // Create an embedded table using NEDB if it doesn't exist yet
-    var nedb = require('nedb');
     var donorDB = app.donorDB;
+    var transactionDB = app.transactionDB;
 
     donorsRouter.get('/', function (req, res) {
         delete req.query["_"];
@@ -48,14 +47,30 @@ module.exports = function (app) {
             if (donors.length != 0) {
                 var donorId = donors[0].id;
 
-                res.status(200);
-                res.send(JSON.stringify({token: RESTFUL_AUTH_TOKEN, donorId: donorId}));
-            }
-            else {
+                transactionDB.find({}).sort({id: -1}).limit(1).exec(function (err, transactions) {
+                    var newTransactionId = 1;
+
+                    if (transactions.length != 0) {
+                        newTransactionId = transactions[0].id + 1;
+                    }
+
+                    var newTransaction = {id: newTransactionId, donorId: donorId};
+                    // Insert the new record
+                    transactionDB.insert(newTransaction, function (err, newTransaction) {
+                        res.status(201);
+                        res.send(JSON.stringify(
+                            {token: RESTFUL_AUTH_TOKEN, donorId: donorId, orderId: newTransactionId}));
+                    });
+                });
+            } else {
                 res.status(500);
-                res.send(JSON.stringify({token: RESTFUL_AUTH_TOKEN, donorId: null}));
+                res.send(JSON.stringify({token: RESTFUL_AUTH_TOKEN, donorId: null, orderId: orderId}))
             }
-        });
+        })
+    });
+
+    donorsRouter.post('/logout', function (req, res) {
+        // to be filled in
     });
 
     donorsRouter.get('/:id', function (req, res) {
@@ -89,5 +104,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/api/donors', donorsRouter);
+    app.use('/ws/donors', donorsRouter);
 };

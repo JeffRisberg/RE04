@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 import NavLink from './NavLink'
-import SessionStore from './SessionStore'
+import SessionStore from './../stores/SessionStore'
 
 class App extends React.Component {
     constructor() {
@@ -43,7 +43,7 @@ class App extends React.Component {
                                 <li><NavLink to="/about">About</NavLink></li>
                                 <li><NavLink to="/charityList">Charity List</NavLink></li>
                                 <li><NavLink to="/givingHistory">Giving History</NavLink></li>
-                                <li><NavLink to="/donationSummary">Table</NavLink></li>
+                                <li><NavLink to="/basket">Giving Basket</NavLink></li>
                             </ul>
                         </div>
                     </div>

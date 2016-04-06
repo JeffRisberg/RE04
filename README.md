@@ -4,7 +4,7 @@ React-Router Example with backend database (NeDB)
 
 # To Start up
 
-Firist, install Node and NPM
+First, install Node and NPM
 
 npm install
 

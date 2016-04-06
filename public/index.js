@@ -10,7 +10,9 @@ import About from '../modules/About'
 import CharityList from '../modules/CharityList'
 import Donate from '../modules/Donate'
 import GivingHistory from '../modules/GivingHistory'
-import DonationSummary from '../modules/DonationSummary'
+import Basket from '../modules/Basket'
+import Checkout from '../modules/Checkout'
+import Confirmation from '../modules/Confirmation'
 
 ReactDOM.render((
     <Router history={hashHistory}>
@@ -21,7 +23,9 @@ ReactDOM.render((
             <Route path="charityList" component={CharityList}/>
             <Route path="donate/:charityId" component={Donate}/>
             <Route path="givingHistory" component={GivingHistory}/>
-            <Route path="donationSummary" component={DonationSummary}/>
+            <Route path="basket" component={Basket}/>
+            <Route path="checkout" component={Checkout}/>
+            <Route path="confirmation/:orderId" component={Confirmation}/>
         </Route>
     </Router>
 ), document.getElementById('app'));

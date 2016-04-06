@@ -6,11 +6,18 @@ module.exports = function (app) {
     var bodyParser = require('body-parser');
     charitiesRouter.use(bodyParser.json());
 
-    // Create an embedded table using NEDB if it doesn't exist yet
-    var nedb = require('nedb');
     var charityDB = app.charityDB;
 
     charitiesRouter.get('/', function (req, res) {
+        delete req.query["_"];
+        charityDB.find(req.query).exec(function (error, charities) {
+            res.send({
+                'charities': charities
+            })
+        })
+    });
+
+    charitiesRouter.get('/categories/:id', function (req, res) {
         delete req.query["_"];
         charityDB.find(req.query).exec(function (error, charities) {
             res.send({
@@ -67,5 +74,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/api/charities', charitiesRouter);
+    app.use('/ws/charities', charitiesRouter);
 };

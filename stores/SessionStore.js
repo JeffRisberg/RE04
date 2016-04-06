@@ -39,6 +39,14 @@ class SessionStore {
         return this.donorId;
     }
 
+    setOrderId(orderId) {
+        this.orderId = orderId;
+    }
+
+    getOrderId() {
+        return this.orderId;
+    }
+
     setToken(token) {
         this.token = token;
         this.emitter.emit('change');

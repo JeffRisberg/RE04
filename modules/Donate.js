@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 
 import moment from 'moment';
 
-import SessionStore from './SessionStore'
+import SessionStore from './../stores/SessionStore'
 
 class Donate extends React.Component {
     constructor() {

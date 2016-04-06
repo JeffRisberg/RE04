@@ -6,8 +6,6 @@ module.exports = function (app) {
     var bodyParser = require('body-parser');
     donationsRouter.use(bodyParser.json());
 
-    // Create an embedded table using NEDB if it doesn't exist yet
-    var nedb = require('nedb');
     var donationDB = app.donationDB;
 
     donationsRouter.get('/', function (req, res) {
@@ -68,5 +66,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/api/donations', donationsRouter);
+    app.use('/ws/donations', donationsRouter);
 };

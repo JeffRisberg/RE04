@@ -11,9 +11,9 @@ class CharityList extends React.Component {
     }
 
     loadCharitiesFromServer() {
-        var url = "api/charities";
+        var url = "/ws/charities/categories/1";
         $.ajax({
-            url: url,//this.props.url,
+            url: url,
             dataType: 'json',
             cache: false,
             success: function (data) {

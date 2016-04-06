@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router'
 
-import SessionStore from './SessionStore'
+import SessionStore from '../stores/SessionStore'
 
 class Login extends React.Component {
     constructor() {
@@ -14,9 +14,29 @@ class Login extends React.Component {
     }
 
     logout() {
+        var token = SessionStore.getToken();
+
+        var url = "/ws/donors/logout";
+        $.ajax({
+            url: url,
+            type: 'PUT',
+            beforeSend: function (request)
+            {
+                request.setRequestHeader("auth-token", token);
+            },
+            contentType: "application/json",
+            dataType: 'json',
+            success: function (data) {
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+
         SessionStore.setLogin(null);
         SessionStore.setPassword(null);
         SessionStore.setDonorId(null);
+        SessionStore.setOrderId(null);
         SessionStore.clearToken();
 
         this.setState({loggedIn: SessionStore.isLoggedIn()});
@@ -33,9 +53,10 @@ class Login extends React.Component {
         SessionStore.setLogin(login);
         SessionStore.setPassword(password);
         SessionStore.setDonorId(null);
+        SessionStore.setOrderId(null);
         SessionStore.clearToken();
 
-        var url = "api/donors/login";
+        var url = "/ws/donors/login";
         $.ajax({
             url: url,
             type: 'POST',
@@ -45,6 +66,7 @@ class Login extends React.Component {
             success: function (data) {
                 SessionStore.setToken(data.token);
                 SessionStore.setDonorId(data.donorId);
+                SessionStore.setOrderId(data.orderId);
                 this.setState({loggedIn: SessionStore.isLoggedIn()});
             }.bind(this),
             error: function (xhr, status, err) {
