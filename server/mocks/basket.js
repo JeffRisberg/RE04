@@ -8,5 +8,14 @@ module.exports = function (app) {
 
     var transactionDB = app.transactionDB;
 
-    app.use('/ws/basket', basketRouter);
+    basketRouter.get('/', function (req, res) {
+        delete req.query["_"];
+        transactionDB.find(req.query).exec(function (error, charities) {
+            res.send({
+                'data': charities
+            })
+        })
+    });
+
+    app.use('/api/basket', basketRouter);
 };

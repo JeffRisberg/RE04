@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import moment from 'moment';
 
 import SessionStore from './../stores/SessionStore'
+import CharityStore from './../stores/CharityStore'
 
 class Donate extends React.Component {
     constructor() {

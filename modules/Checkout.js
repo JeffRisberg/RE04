@@ -23,14 +23,14 @@ class Checkout extends React.Component {
     loadBasketFromServer() {
         if (SessionStore.isLoggedIn()) {
             $.ajax({
-                url: "/ws/basket/",
+                url: "/api/basket/",
                 beforeSend: function (request) {
                     request.setRequestHeader("auth-token", SessionStore.getToken());
                 },
                 dataType: 'json',
                 cache: false,
-                success: function (data) {
-                    this.setState({order: data});
+                success: function (response) {
+                    this.setState({order: response.data});
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
@@ -62,7 +62,7 @@ class Checkout extends React.Component {
         var orderId = SessionStore.getOrderId();
 
         $.ajax({
-            url: '/ws/basket/checkout',
+            url: '/api/basket/checkout',
             beforeSend: function (request) {
                 request.setRequestHeader("auth-token", SessionStore.getToken());
             },

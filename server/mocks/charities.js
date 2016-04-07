@@ -12,7 +12,7 @@ module.exports = function (app) {
         delete req.query["_"];
         charityDB.find(req.query).exec(function (error, charities) {
             res.send({
-                'charities': charities
+                'data': charities
             })
         })
     });
@@ -21,7 +21,7 @@ module.exports = function (app) {
         delete req.query["_"];
         charityDB.find(req.query).exec(function (error, charities) {
             res.send({
-                'charities': charities
+                'data': charities
             })
         })
     });
@@ -47,13 +47,13 @@ module.exports = function (app) {
         charityDB.find({id: req.params.id}).exec(function (error, charities) {
             if (charities.length > 0)
                 res.send({
-                    'charity': charities[0],
-                    'status': true
+                    'data': charities[0]
                 });
-            else
+            else {
                 res.send({
-                    'status': false
+                    'data': null
                 });
+            }
         });
     });
 
@@ -74,5 +74,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/ws/charities', charitiesRouter);
+    app.use('/api/charities', charitiesRouter);
 };

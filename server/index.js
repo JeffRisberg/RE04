@@ -15,6 +15,7 @@ app.use('/', express.static(path.resolve(__dirname, '../dist')));
 
 var nedb = require('nedb');
 
+app.authTokenDB = new nedb({filename: 'authTokens', autoload: true});
 app.charityDB = new nedb({filename: 'charities', autoload: true});
 app.donorDB = new nedb({filename: 'donors', autoload: true});
 app.transactionDB = new nedb({filename: 'transactions', autoload: true});

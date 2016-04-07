@@ -1,22 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import Transaction from './Transaction'
-import SessionStore from './../stores/SessionStore'
+import SessionStore from '../stores/SessionStore'
+import GivingHistoryStore from '../stores/GivingHistoryStore'
+import GivingHistoryItem from './GivingHistoryItem'
 
 class GivingHistory extends React.Component {
     constructor() {
         super();
 
-        this.state = {transactions: []};
+        this.state = {givingHistoryItems: []};
     }
 
-    loadTransactionsFromServer() {
+    loadGivingHistoryFromServer() {
         if (SessionStore.isLoggedIn()) {
             var donorId = SessionStore.getDonorId();
             var token = SessionStore.getToken();
 
-            var url = "api/transactions?donorId=" + donorId;
+            var url = "/ws/donors/" + donorId + "/history?year=2016";
 
             $.ajax({
                 url: url,
@@ -27,7 +28,7 @@ class GivingHistory extends React.Component {
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
-                    this.setState({transactions: data.transactions});
+                this.setState({givingHistoryItems: data});
                 }.bind(this),
                 error: function (xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
@@ -37,31 +38,22 @@ class GivingHistory extends React.Component {
     }
 
     componentDidMount() {
-        this.loadTransactionsFromServer();
+        this.loadGivingHistoryFromServer();
     }
 
     render() {
         if (SessionStore.isLoggedIn()) {
-            var transactionNodes = this.state.transactions.map(function (transaction, index) {
+            var givingHistoryItemNodes = this.state.givingHistoryItems.map(function (givingHistoryItem, index) {
                 return (
-                    <Transaction transaction={transaction} key={index}></Transaction>
+                    <GivingHistoryItem givingHistoryItem={givingHistoryItem} key={index}>
+                    </GivingHistoryItem>
                 );
             });
 
             return (
-                <table className="table">
-                    <thead>
-                    <tr>
-                        <th>Charity</th>
-                        <th>Amount</th>
-                        <th>Flags</th>
-                        <th>Flat Charge</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {transactionNodes}
-                    </tbody>
-                </table>
+                <div style={{padding: '10px', border: '1px solid gray'}}>
+                    {givingHistoryItemNodes}
+                </div>
             );
         }
         else {

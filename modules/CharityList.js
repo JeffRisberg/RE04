@@ -10,24 +10,11 @@ class CharityList extends React.Component {
         this.state = {charities: []};
     }
 
-    loadCharitiesFromServer() {
-        var url = "/ws/charities/categories/1";
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                this.setState({charities: data.charities});
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
+    componentDidMount() {
+        this.setState({charities: this.props.charities});
+        console.log(this.props.charities);
     }
 
-    componentDidMount() {
-        this.loadCharitiesFromServer();
-    }
 
     render() {
         var charityNodes = this.state.charities.map(function (charity, index) {

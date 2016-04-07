@@ -17,7 +17,7 @@ class Confirmation extends React.Component {
 
         if (SessionStore.isLoggedIn()) {
             $.ajax({
-                url: "/ws/donors/" + SessionStore.getDonorId() + "/history/" + orderId,
+                url: "/api/donors/" + SessionStore.getDonorId() + "/history/" + orderId,
                 beforeSend: function (request) {
                     request.setRequestHeader("auth-token", SessionStore.getToken());
                 },

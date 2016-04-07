@@ -39,13 +39,13 @@ module.exports = function (app) {
         donationDB.find({id: req.params.id}).exec(function (error, donations) {
             if (donations.length > 0)
                 res.send({
-                    'donation': donations[0],
-                    'status': true
+                    'data': donations[0]
                 });
-            else
+            else {
                 res.send({
-                    'status': false
+                    'data': null
                 });
+            }
         });
     });
 
@@ -66,5 +66,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/ws/donations', donationsRouter);
+    app.use('/api/donations', donationsRouter);
 };

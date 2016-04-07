@@ -6,14 +6,26 @@ module.exports = function (app) {
     var bodyParser = require('body-parser');
     donorsRouter.use(bodyParser.json());
 
+    var authTokenDB = app.authTokenDB;
     var donorDB = app.donorDB;
     var transactionDB = app.transactionDB;
+
+    function generateUUID() {
+        var d = new Date().getTime();
+
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+        return uuid;
+    }
 
     donorsRouter.get('/', function (req, res) {
         delete req.query["_"];
         donorDB.find(req.query).exec(function (error, donors) {
             res.send({
-                'donors': donors
+                'data': donors
             })
         })
     });
@@ -42,7 +54,7 @@ module.exports = function (app) {
 
         // FIXME:  should check password as well
         donorDB.find({login: login}).limit(1).exec(function (err, donors) {
-            var RESTFUL_AUTH_TOKEN = "RESTFUL_AUTH_TOKEN:" + login;
+            var token = generateUUID();
 
             if (donors.length != 0) {
                 var donorId = donors[0].id;
@@ -51,20 +63,24 @@ module.exports = function (app) {
                     var newTransactionId = 1;
 
                     if (transactions.length != 0) {
-                        newTransactionId = transactions[0].id + 1;
+                        newTransactionId = parseInt(transactions[0].id) + 1;
                     }
 
                     var newTransaction = {id: newTransactionId, donorId: donorId};
                     // Insert the new record
                     transactionDB.insert(newTransaction, function (err, newTransaction) {
-                        res.status(201);
-                        res.send(JSON.stringify(
-                            {token: RESTFUL_AUTH_TOKEN, donorId: donorId, orderId: newTransactionId}));
+
+                        var newAuthToken = {token: token, donorId: donorId, orderId: newTransactionId};
+
+                        authTokenDB.insert(newAuthToken, function (err, result) {
+                            res.status(201);
+                            res.send(JSON.stringify({data: newAuthToken}));
+                        });
                     });
                 });
             } else {
-                res.status(500);
-                res.send(JSON.stringify({token: RESTFUL_AUTH_TOKEN, donorId: null, orderId: orderId}))
+                res.status(404);
+                res.send(JSON.stringify({data: null}));
             }
         })
     });
@@ -77,13 +93,14 @@ module.exports = function (app) {
         donorDB.find({id: req.params.id}).exec(function (error, donors) {
             if (donors.length > 0)
                 res.send({
-                    'donor': donors[0],
-                    'status': true
+                    'data': donors[0]
                 });
-            else
+            else {
+                req.status(404);
                 res.send({
-                    'status': false
+                    'data': null
                 });
+            }
         });
     });
 
@@ -104,5 +121,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/ws/donors', donorsRouter);
+    app.use('/api/donors', donorsRouter);
 };

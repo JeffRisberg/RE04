@@ -16,7 +16,7 @@ class Login extends React.Component {
     logout() {
         var token = SessionStore.getToken();
 
-        var url = "/ws/donors/logout";
+        var url = "/api/donors/logout";
         $.ajax({
             url: url,
             type: 'PUT',
@@ -26,7 +26,7 @@ class Login extends React.Component {
             },
             contentType: "application/json",
             dataType: 'json',
-            success: function (data) {
+            success: function (response) {
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -56,21 +56,21 @@ class Login extends React.Component {
         SessionStore.setOrderId(null);
         SessionStore.clearToken();
 
-        var url = "/ws/donors/login";
+        var url = "/api/donors/login";
         $.ajax({
             url: url,
             type: 'POST',
             contentType: "application/json",
             dataType: 'json',
             data: JSON.stringify(credentials),
-            success: function (data) {
-                SessionStore.setToken(data.token);
-                SessionStore.setDonorId(data.donorId);
-                SessionStore.setOrderId(data.orderId);
+            success: function (response) {
+                SessionStore.setToken(response.data.token);
+                SessionStore.setDonorId(response.data.donorId);
+                SessionStore.setOrderId(response.data.orderId);
                 this.setState({loggedIn: SessionStore.isLoggedIn()});
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                ;
             }.bind(this)
         });
     }

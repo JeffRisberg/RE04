@@ -48,13 +48,14 @@ module.exports = function (app) {
         transactionDB.find({id: req.params.id}).exec(function (error, transactions) {
             if (transactions.length > 0)
                 res.send({
-                    'transaction': transactions[0],
-                    'status': true
+                    'data': transactions[0],
                 });
-            else
+            else {
+                res.status(404);
                 res.send({
-                    'status': false
+                    'data': null
                 });
+            }
         });
     });
 
@@ -75,5 +76,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/ws/transactions', transactionsRouter);
+    app.use('/api/transactions', transactionsRouter);
 };

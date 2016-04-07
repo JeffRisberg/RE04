@@ -16,7 +16,7 @@ class Basket extends React.Component {
     loadBasketFromServer() {
         if (SessionStore.isLoggedIn()) {
             $.ajax({
-                url: "/ws/basket/",
+                url: "/api/basket/",
                 beforeSend: function (request) {
                     request.setRequestHeader("auth-token", SessionStore.getToken());
                 },
@@ -39,7 +39,7 @@ class Basket extends React.Component {
     clearBasket() {
         if (SessionStore.isLoggedIn()) {
             $.ajax({
-                url: "/ws/basket/clear",
+                url: "/api/basket/clear",
                 beforeSend: function (request) {
                     request.setRequestHeader("auth-token", SessionStore.getToken());
                 },
