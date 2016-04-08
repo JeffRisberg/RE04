@@ -9,18 +9,14 @@ class Browse extends React.Component {
 
         this.state = {charities: []};
         this.loadCharitiesFromServer = this.loadCharitiesFromServer.bind(this);
-        this.loadCategoriesFromServer.bind(this);
+        this.loadCategoriesFromServer = this.loadCategoriesFromServer.bind(this);
     }
 
     render() {
-        let clickHandler = event => {
-            return this.loadCharitiesFromServer;
-        };
-
         if (this.state.categories != null && this.state.categories.length > 0) {
             var categoryNodes = this.state.categories.map(function (category, index) {
                 return (
-                    <Category category={category} loadCharities={clickHandler} key={index}></Category>
+                    <Category category={category} loadCharities={this.loadCharitiesFromServer} key={index}></Category>
                 );
             });
             return (

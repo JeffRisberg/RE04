@@ -11,16 +11,22 @@ class GivingHistoryStore {
         this.addListener = this.addListener.bind(this);
     }
 
-    loadCharityFromServer() {
-        let { charityId } = this.props.params;
+    addListener(eventType: string, fn: Function) {
+        this.emitter.addListener(eventType, fn);
+    }
 
-        var url = "api/charities";
+
+    loadGivingHistoryFromServer() {
+        let { ch } = this.props.params;
+
+        var url = "api/donors/givingHistory";
         $.ajax({
-            url: url + "/" + charityId,
+            url: url,
             dataType: 'json',
             cache: false,
             success: function (data) {
-                this.setState({loading: false, charity: data.charity});
+                //this.setState({loading: false, charity: data.charity});
+                // notify
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());

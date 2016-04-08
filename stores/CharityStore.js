@@ -11,6 +11,10 @@ class CharityStore {
         this.addListener = this.addListener.bind(this);
     }
 
+    addListener(eventType: string, fn: Function) {
+        this.emitter.addListener(eventType, fn);
+    }
+
     loadCharityFromServer() {
         let { charityId } = this.props.params;
 
@@ -20,7 +24,8 @@ class CharityStore {
             dataType: 'json',
             cache: false,
             success: function (data) {
-                this.setState({loading: false, charity: data.charity});
+                //this.setState({loading: false, charity: data.charity});
+                // notify
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());

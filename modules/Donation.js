@@ -1,57 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router'
-import moment from 'moment';
 
 class Donation extends React.Component {
 
-    constructor () {
+    constructor() {
         super();
-        this.state = {loading: true, charity: null};
-    }
-
-    loadCharityFromServer() {
-        var charityId = this.props.donation.charityId;
-
-        var url = "/api/charities/"+charityId;
-        $.ajax({
-            url: url,//this.props.url,
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                this.setState({loading: false, charity: data.charity});
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
-    }
-
-    componentDidMount() {
-        this.loadCharityFromServer();
     }
 
     render() {
-        if (this.state.loading == false) {
-            return (
-                <tr>
-                    <td width="20%">{this.state.charity.name}</td>
-                    <td>$ {this.props.donation.amount}</td>
-                    <td>
-                        {this.props.donation.shareEmail ? "Email" : "NoEmail"}&nbsp;
-                        {this.props.donation.shareName ? "Name" : "NoName"}&nbsp;
-                        {this.props.donation.shareAddress ? "Address" : "NoAddress"}
-                    </td>
-                    <td>
-                        {this.props.donation.flatCharge}
-                    </td>
-                </tr>
-            )
-        }
-        else {
-            return (
-                <tr></tr>
-            );
-        }
+        var charityName = this.props.donation.charity.name;
+        var amount = this.props.donation.amount;
+        var recipientName = (this.props.donation.gift == null) ? null : this.props.donation.gift.recipientName;
+
+        return (
+            <div style={{marginBottom: '15px'}}>
+                <a href="">{charityName}</a>
+                &nbsp;&nbsp;Amount - ${amount.toFixed(2)}
+                <br/>
+                Program: {this.props.donation.designation}
+                <br/>
+                Share Name: {this.props.donation.shareName}, Share Email: {this.props.donation.shareEmail}, Share Address: {this.props.donation.shareAddress}
+                <br/>
+                Gift Name: { recipientName}
+                <hr/>
+            </div>
+        );
     }
 }
 

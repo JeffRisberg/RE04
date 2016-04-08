@@ -6,18 +6,10 @@ import Charity from './Charity'
 class CharityList extends React.Component {
     constructor() {
         super();
-
-        this.state = {charities: []};
     }
-
-    componentDidMount() {
-        this.setState({charities: this.props.charities});
-        console.log(this.props.charities);
-    }
-
 
     render() {
-        var charityNodes = this.state.charities.map(function (charity, index) {
+        var charityNodes = this.props.charities.map(function (charity, index) {
             return (
                 <Charity charity={charity} key={index}></Charity>
             );
