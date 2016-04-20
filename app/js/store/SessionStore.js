@@ -1,18 +1,13 @@
 import React from 'react'
 
-import {EventEmitter} from 'fbemitter';
-
 class SessionStore {
     constructor() {
         this.login = null;
         this.token = null;
-
-        this.emitter = new EventEmitter();
-        this.addListener = this.addListener.bind(this);
     }
 
     addListener(eventType: string, fn: Function) {
-        this.emitter.addListener(eventType, fn);
+        //this.emitter.addListener(eventType, fn);
     }
 
     setLogin(login) {
@@ -49,7 +44,7 @@ class SessionStore {
 
     setToken(token) {
         this.token = token;
-        this.emitter.emit('change');
+        //this.emitter.emit('change');
     }
 
     getToken() {
@@ -58,7 +53,7 @@ class SessionStore {
 
     clearToken() {
         this.token = null;
-        this.emitter.emit('change');
+        //this.emitter.emit('change');
     }
 
     isLoggedIn() {

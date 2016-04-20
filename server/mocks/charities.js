@@ -12,6 +12,7 @@ module.exports = function (app) {
         delete req.query["_"];
         charityDB.find(req.query).exec(function (error, charities) {
             res.send({
+                'status': "ok",
                 'data': charities
             })
         })
@@ -21,6 +22,7 @@ module.exports = function (app) {
         delete req.query["_"];
         charityDB.find(req.query).exec(function (error, charities) {
             res.send({
+                'status': "ok",
                 'data': charities
             })
         })
@@ -74,5 +76,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/api/charities', charitiesRouter);
+    app.use('/ws/charities', charitiesRouter);
 };

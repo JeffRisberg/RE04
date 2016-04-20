@@ -25,6 +25,7 @@ module.exports = function (app) {
         delete req.query["_"];
         donorDB.find(req.query).exec(function (error, donors) {
             res.send({
+                'status': "ok",
                 'data': donors
             })
         })
@@ -111,7 +112,7 @@ module.exports = function (app) {
 
     donorsRouter.put('/:id', function (req, res) {
         res.send({
-            'donors': {
+            'data': {
                 id: req.params.id
             }
         });
@@ -121,5 +122,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/api/donors', donorsRouter);
+    app.use('/ws/donors', donorsRouter);
 };

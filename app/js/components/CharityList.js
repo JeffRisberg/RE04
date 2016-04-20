@@ -16,13 +16,7 @@ class CharityList extends React.Component {
         });
 
         return (
-            <table className="table">
-                <thead>
-                <tr>
-                    <th>Charity</th>
-                    <th style={{textAlign: 'right'}}>Action</th>
-                </tr>
-                </thead>
+                <table className="table">
                 <tbody>
                 {charityNodes}
                 </tbody>

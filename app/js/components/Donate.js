@@ -1,5 +1,5 @@
 import React from 'react'
-import SessionStore from '../stores/SessionStore'
+import SessionStore from '../../../store/SessionStore'
 
 class Donate extends React.Component {
     constructor() {

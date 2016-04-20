@@ -19,8 +19,8 @@ class Browse extends React.Component {
             ? (<CharityList charities={this.state.charities}/>)
             : null;
 
-        let loadCharitiesHandler = (catId) => {
-            return this.loadCharitiesFromServer(catId);
+        let loadCharitiesHandler = (category) => {
+            return this.loadCharitiesFromServer(category);
         };
         var categoryNodes = this.state.categories.map(function (category, index) {
             return (
@@ -56,9 +56,9 @@ class Browse extends React.Component {
             url: url,
             dataType: 'json',
             cache: false,
-            success: function (data) {
-                this.loadCharitiesFromServer(data[0]);
-                this.setState({categories: data});
+            success: function (response) {
+                this.loadCharitiesFromServer(response.data[0]);
+                this.setState({categories: response.data});
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -72,8 +72,8 @@ class Browse extends React.Component {
             url: url,
             dataType: 'json',
             cache: false,
-            success: function (data) {
-                this.setState({charities: data, category: category});
+            success: function (response) {
+                this.setState({charities: response.data, category: category});
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());

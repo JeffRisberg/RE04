@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router'
 
-import SessionStore from '../stores/SessionStore'
+import SessionStore from '../../../store/SessionStore'
 
 class Checkout extends React.Component {
     constructor() {
@@ -23,7 +23,7 @@ class Checkout extends React.Component {
     loadBasketFromServer() {
         if (SessionStore.isLoggedIn()) {
             $.ajax({
-                url: "/api/basket/",
+                url: "/ws/basket/",
                 beforeSend: function (request) {
                     request.setRequestHeader("auth-token", SessionStore.getToken());
                 },
@@ -62,7 +62,7 @@ class Checkout extends React.Component {
         var orderId = SessionStore.getOrderId();
 
         $.ajax({
-            url: '/api/basket/checkout',
+            url: '/ws/basket/checkout',
             beforeSend: function (request) {
                 request.setRequestHeader("auth-token", SessionStore.getToken());
             },

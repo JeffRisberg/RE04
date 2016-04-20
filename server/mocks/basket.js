@@ -17,5 +17,5 @@ module.exports = function (app) {
         })
     });
 
-    app.use('/api/basket', basketRouter);
+    app.use('/ws/basket', basketRouter);
 };

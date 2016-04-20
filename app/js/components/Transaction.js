@@ -15,7 +15,7 @@ class Transaction extends React.Component {
     loadDonationsFromServer() {
         var transactionId = this.props.transaction.id;
 
-        var url = "/api/transactions/" + transactionId + "/donations";
+        var url = "/ws/transactions/" + transactionId + "/donations";
         $.ajax({
             url: url,//this.props.url,
             dataType: 'json',

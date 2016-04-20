@@ -13,7 +13,8 @@ module.exports = function (app) {
         delete req.query["_"];
         transactionDB.find(req.query).exec(function (error, transactions) {
             res.send({
-                'transactions': transactions
+                'status': "ok",
+                'data': transactions
             })
         })
     });
@@ -21,7 +22,8 @@ module.exports = function (app) {
     transactionsRouter.get('/:id/donations', function (req, res) {
         donationDB.find({transactionId: req.params.id}).exec(function (error, donations) {
             res.send({
-                'donations': donations
+                'status': "ok",
+                'data': donations
             })
         });
     });
@@ -76,5 +78,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/api/transactions', transactionsRouter);
+    app.use('/ws/transactions', transactionsRouter);
 };

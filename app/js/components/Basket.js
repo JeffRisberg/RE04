@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import SessionStore from '../stores/SessionStore'
+import SessionStore from '../../../store/SessionStore'
 import Donation from './Donation'
 
 class Basket extends React.Component {
@@ -16,7 +16,7 @@ class Basket extends React.Component {
     loadBasketFromServer() {
         if (SessionStore.isLoggedIn()) {
             $.ajax({
-                url: "/api/basket/",
+                url: "/ws/basket/",
                 beforeSend: function (request) {
                     request.setRequestHeader("auth-token", SessionStore.getToken());
                 },
@@ -39,7 +39,7 @@ class Basket extends React.Component {
     clearBasket() {
         if (SessionStore.isLoggedIn()) {
             $.ajax({
-                url: "/api/basket/clear",
+                url: "/ws/basket/clear",
                 beforeSend: function (request) {
                     request.setRequestHeader("auth-token", SessionStore.getToken());
                 },

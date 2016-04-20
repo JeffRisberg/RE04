@@ -12,7 +12,8 @@ module.exports = function (app) {
         delete req.query["_"];
         donationDB.find(req.query).exec(function (error, donations) {
             res.send({
-                'donations': donations
+                'status': "ok",
+                'data': donations
             })
         })
     });
@@ -39,6 +40,7 @@ module.exports = function (app) {
         donationDB.find({id: req.params.id}).exec(function (error, donations) {
             if (donations.length > 0)
                 res.send({
+                    'status': "ok",
                     'data': donations[0]
                 });
             else {
@@ -56,6 +58,7 @@ module.exports = function (app) {
 
     donationsRouter.put('/:id', function (req, res) {
         res.send({
+            'status': "ok",
             'donations': {
                 id: req.params.id
             }
@@ -66,5 +69,5 @@ module.exports = function (app) {
         res.status(204).end();
     });
 
-    app.use('/api/donations', donationsRouter);
+    app.use('/ws/donations', donationsRouter);
 };

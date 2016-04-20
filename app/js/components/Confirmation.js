@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import SessionStore from '../stores/SessionStore'
+import SessionStore from '../../../store/SessionStore'
 import Donation from './Donation'
 
 class Confirmation extends React.Component {
@@ -17,7 +17,7 @@ class Confirmation extends React.Component {
 
         if (SessionStore.isLoggedIn()) {
             $.ajax({
-                url: "/api/donors/" + SessionStore.getDonorId() + "/history/" + orderId,
+                url: "/ws/donors/" + SessionStore.getDonorId() + "/history/" + orderId,
                 beforeSend: function (request) {
                     request.setRequestHeader("auth-token", SessionStore.getToken());
                 },

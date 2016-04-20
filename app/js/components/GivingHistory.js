@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import SessionStore from '../stores/SessionStore'
-import GivingHistoryStore from '../stores/GivingHistoryStore'
+import SessionStore from '../store/SessionStore'
 import GivingHistoryItem from './GivingHistoryItem'
 
 class GivingHistory extends React.Component {

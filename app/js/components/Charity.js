@@ -9,9 +9,6 @@ class Charity extends React.Component {
                 <td><p>
                     <strong>{this.props.charity.name}</strong>
                 <br/>
-                {this.props.charity.mission && <span>{this.props.charity.mission}<br/></span>}
-                {this.props.charity.addressLine1}
-                <br/>
                 {this.props.charity.city},&nbsp;
                 {this.props.charity.state}&nbsp;
                 {this.props.charity.zip}
@@ -19,7 +16,7 @@ class Charity extends React.Component {
                 Tax ID: {this.props.charity.ein}
                 </p></td>
                 <td style={{textAlign: 'right'}}>
-                    <Link to={"/donate/" + this.props.charity.id} className="btn">
+                    <Link to={"/donate/" + this.props.charity.ein} className="btn">
                         Donate Now
                     </Link>
                 </td>

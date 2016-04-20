@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router'
 
 import NavLink from './NavLink'
-import SessionStore from './../stores/SessionStore'
+import SessionStore from '../store/SessionStore'
 
-class App extends React.Component {
+class AppRoot extends React.Component {
     constructor() {
         super();
 
@@ -23,7 +23,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <div className="navbar">
+                <div className="navbar navbar-default">
                     <div className="navbar-inner">
                         <div className="navbar-collapse collapse">
                             <div className="row" style={{background: '#eee'}}>
@@ -31,17 +31,18 @@ class App extends React.Component {
                                     Search
                                 </div>
                                 <div className="col-md-6" style={{textAlign: 'center'}}>
-                                    <h1 style={{marginTop: '10px'}}>RE04 Example</h1>
+                                    <h1 style={{marginTop: '10px'}}>Wells Fargo Prototype</h1>
                                 </div>
                                 <div className="col-md-3" style={{marginTop: '20px', textAlign: 'right'}}>
                                     {headerText}
                                 </div>
                             </div>
 
-                            <ul className="nav navbar-nav" style={{background: '#ddd'}}>
+                            <ul className="nav navbar-nav">
                                 <li><NavLink to="/login">Login</NavLink></li>
                                 <li><NavLink to="/about">About</NavLink></li>
-                                <li><NavLink to="/charityList">Charity List</NavLink></li>
+                                <li><NavLink to="/search">Search Charities</NavLink></li>
+                                <li><NavLink to="/browse">Browse Charities</NavLink></li>
                                 <li><NavLink to="/givingHistory">Giving History</NavLink></li>
                                 <li><NavLink to="/basket">Giving Basket</NavLink></li>
                             </ul>
@@ -55,4 +56,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default AppRoot;
