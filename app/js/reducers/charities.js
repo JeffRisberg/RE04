@@ -1,8 +1,8 @@
-import { GET_GIVING_HISTORY } from '../constants/ActionTypes'
+import { GET_CHARITY } from '../constants/ActionTypes'
 
-const giving_history = (state = [], action = {}) => {
+const charities = (state = [], action = {}) => {
   switch (action.type) {
-    case 'RESET_GIVING_HISTORY': // clear prior charities
+    case 'RESET_CHARITIES': // clear prior charities
     {
       const idList = [];
       const records = {};
@@ -14,7 +14,7 @@ const giving_history = (state = [], action = {}) => {
 
       return {idList, records};
     }
-    case 'APPEND_GIVING_HISTORY':
+    case 'APPEND_CHARITIES':
     {
       const idList = state.idList;
       const records = state.records;
@@ -33,4 +33,4 @@ const giving_history = (state = [], action = {}) => {
   }
 };
 
-export default giving_history;
+export default charities;

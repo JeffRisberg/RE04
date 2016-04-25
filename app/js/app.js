@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux'
 
-import store from './store';
+import reducers from './reducers';
 
 import AppRoot from './components/AppRoot.js';
 import Home from './components/Home.js';
@@ -12,23 +14,35 @@ import About from './components/About.js';
 import Browse from './components/Browse.js';
 import GivingHistory from './components/GivingHistory.js';
 
-import { fetchCharities, fetchTransactions } from './actions/index.js';
+var inventory = {
+    items: {idList: [], records: {}},
+    events: {idList: [], records: {}}
+};
+
+const reducer = combineReducers({
+    ...reducers,
+    routing: routerReducer
+});
+
+const middleware = routerMiddleware(browserHistory);
+
+const store = createStore(
+    reducers,
+    inventory,
+    applyMiddleware(middleware)
+);
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={hashHistory}>
+        <Router history={browserHistory}>
             <Route path="/" component={AppRoot}>
                 <IndexRoute component={Home}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/about" component={About}/>
                 <Route path="/browse" component={Browse}/>
-                <Route path="/GivingHistory" component={GivingHistory}/>
+                <Route path="/givingHistory" component={GivingHistory}/>
             </Route>
         </Router>
     </Provider>,
     document.getElementById('app-root')
 );
-
-fetchCharities()(store.dispatch);
-
-fetchTransactions()(store.dispatch);

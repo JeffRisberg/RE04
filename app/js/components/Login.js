@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import SessionStore from '../store/SessionStore'
 
-import { login, logout } from '../actions';
+import { login, logout } from '../actions/donor';
 
 class Login extends React.Component {
     constructor() {

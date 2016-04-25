@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux'
-import { charities } from './charity'
+
+import { charities } from './charities'
 import { giving_history } from './giving_history'
 
-const rootReducer = combineReducers({
+export default combineReducers({
   charities,
   giving_history
 });
-
-export default rootReducer
