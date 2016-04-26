@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import CategoryScroller from './CategoryScroller';
+import TopCharitiesScroller from './TopCharitiesScroller';
 import Browse from './Browse';
 
 export default React.createClass({
@@ -9,7 +9,7 @@ export default React.createClass({
         return <div>
 
             <div>
-                <div><CategoryScroller internalName="top-charities" /></div>
+                <div><TopCharitiesScroller topCharitiesCategoryId="1" /></div>
                 <hr/>
                 <Browse/>
             </div>

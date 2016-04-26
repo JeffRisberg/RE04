@@ -14,19 +14,20 @@ export const queryCategories = () => {
     }
 };
 
-export const queryTopCategories = () => {
+export const getCategory = (id) => {
     return function (dispatch) {
 
-        return fetch('/ws/categories', {})
+        return fetch('/ws/categories/' + id, {})
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                    type: 'RESET_CATEGORIES',
+                    type: 'APPEND_CATEGORIES',
                     categories: json.data
                 })
             });
     }
 };
+
 
 
 

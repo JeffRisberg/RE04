@@ -12,6 +12,7 @@ import SessionStore from '../store/SessionStore'
 class Donate extends React.Component {
     constructor() {
         super();
+        //get the latest from JustGive repo, because Peter is now using a forms package.
         this.state = {
             charity: null, amount: null,
             shareName: true, shareEmail: true, shareAddress: true,
@@ -25,6 +26,7 @@ class Donate extends React.Component {
     }
 
     render() {
+        // move this back into componentDidMount, since it will be done once, while renders happens several times.
         var ein = this.props.params.ein;
 
         var charity = null;
@@ -32,7 +34,8 @@ class Donate extends React.Component {
             var record = this.props.charities.records[prop];
 
             if (record.ein == ein) charity = record;
-        };
+        }
+        ;
 
         return (
             <form onSubmit={this.handleSubmit}>

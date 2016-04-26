@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
+import { queryTransactions } from '../actions/transactions';
+
 import SessionStore from '../store/SessionStore'
 import GivingHistoryItem from './GivingHistoryItem'
 

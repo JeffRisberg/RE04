@@ -2,7 +2,7 @@ import { RESET_CATEGORIES } from '../constants/ActionTypes'
 
 const categories = (state = [], action = {}) => {
   switch (action.type) {
-    case 'RESET_CATEGORIES': // clear prior charities
+    case 'RESET_CATEGORIES': // clear prior categories
     {
       const idList = [];
       const records = {};

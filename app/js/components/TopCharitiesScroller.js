@@ -2,15 +2,15 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
-import { queryCategories } from '../actions/categories';
+import { getListCharities } from '../actions/listCharities';
 
 /**
- * Draws a left-right horizontal scroller of top categories
+ * Draws a left-right horizontal scroller of charities in a specified category.
  *
  * @author Peter Cowan, Jeff Risberg
  * @since April 2016
  */
-class CategoryScroller extends React.Component {
+class TopCharitiesScroller extends React.Component {
 
     constructor(props) {
         super(props);
@@ -21,9 +21,10 @@ class CategoryScroller extends React.Component {
     }
 
     render() {
-        const categoryRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
+        // this is wrong
+        const charityRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
 
-        const imageItems = categoryRecords.map(function (category, index) {
+        const imageItems = charityRecords.map(function (charity, index) {
             var imagePath = '/images/' + category.logoImage.path;
             var imageFile = category.logoImage.fileName;
             return (
@@ -54,17 +55,18 @@ class CategoryScroller extends React.Component {
 const mapStateToProps = (state) => {
     return {
         categories: state.categories,
+        listCharities: state.listCharities,
         charities: state.charities
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         onMount: () => {
-            queryCategories()(dispatch);
+            getListCharities()(dispatch);
         }
     };
 };
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CategoryScroller);
+)(TopCharitiesScroller);
