@@ -36,10 +36,14 @@ class Browse extends React.Component {
             );
         });
 
-        const charityRecords = this.props.charities.idList.map(id => this.props.charities.records[id]);
+        const charityRecords = this.props.charities.idList.map(id => this.props.charities.records[id])
+            .filter(charity => {
+                return (this.category == null) || (charity.categoryId == this.category.id);
+            }
+        );
 
         var charityList = (charityRecords.length > 0)
-            ? (<CharityList charities={charityRecords} />)
+            ? (<CharityList charities={charityRecords}/>)
             : null;
 
         var charityListHeader = (this.category != null)
@@ -73,6 +77,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onMount: () => {
             queryCategories()(dispatch);
+            queryCharities(null)(dispatch);
         },
         onChangeCategory: (category) => {
             queryCharities(category)(dispatch);
