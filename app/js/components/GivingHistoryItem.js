@@ -3,6 +3,9 @@ import { Link } from 'react-router'
 
 import moment from 'moment';
 
+/**
+ * Renders one givingHistoryItem
+ */
 class GivingHistoryItem extends React.Component {
 
     constructor() {

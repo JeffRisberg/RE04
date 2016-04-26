@@ -1,9 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux';
 
-import SessionStore from '../../../store/SessionStore'
+import SessionStore from '../store/SessionStore'
 import Donation from './Donation'
 
+/**
+ * Render the confirmation screen
+ *
+ * @author Peter Cowan
+ * @since April 2016
+ */
 class Confirmation extends React.Component {
     constructor() {
         super();
@@ -11,7 +18,11 @@ class Confirmation extends React.Component {
         this.state = {order: null};
     }
 
-    //todo - move to Store architecture
+    componentDidMount() {
+        this.props.onMount();
+    }
+
+    /*
     loadCompletedOrderFromServer() {
         let { orderId } = this.props.params;
 
@@ -32,10 +43,7 @@ class Confirmation extends React.Component {
             });
         }
     }
-
-    componentDidMount() {
-        this.loadCompletedOrderFromServer();
-    }
+    */
 
     render() {
         if (SessionStore.isLoggedIn() && this.state.order != null) {
@@ -62,4 +70,18 @@ class Confirmation extends React.Component {
     }
 }
 
-export default Confirmation;
+const mapStateToProps = (state) => {
+    return {
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onMount: () => {
+            getTransaction()(dispatch);
+        }
+    };
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Confirmation);

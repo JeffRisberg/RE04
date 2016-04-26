@@ -1,6 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+/**
+ * Renders one charity
+ *
+ * @author Jeff Risberg
+ * @since March 2016
+ */
 class Charity extends React.Component {
 
     render() {

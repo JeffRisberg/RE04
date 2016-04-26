@@ -1,9 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux';
 
-import SessionStore from '../../../store/SessionStore'
+import { queryBasket } from '../actions/basketItems';
+
+import SessionStore from '../store/SessionStore'
 import Donation from './Donation'
 
+/**
+ * Shows the user's current basketContents
+ */
 class Basket extends React.Component {
     constructor() {
         super();
@@ -12,7 +18,11 @@ class Basket extends React.Component {
         this.clearBasket = this.clearBasket.bind(this);
     }
 
-    //todo - move to Store architecture
+    componentDidMount() {
+        this.loadBasketFromServer();
+    }
+
+    /*
     loadBasketFromServer() {
         if (SessionStore.isLoggedIn()) {
             $.ajax({
@@ -31,10 +41,7 @@ class Basket extends React.Component {
             });
         }
     }
-
-    componentDidMount() {
-        this.loadBasketFromServer();
-    }
+    */
 
     clearBasket() {
         if (SessionStore.isLoggedIn()) {
@@ -99,4 +106,18 @@ class Basket extends React.Component {
     }
 }
 
-export default Basket;
+const mapStateToProps = (state) => {
+    return {
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onMount: () => {
+            queryBasket()(dispatch);
+        }
+    };
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Basket);

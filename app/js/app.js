@@ -5,22 +5,35 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 
-import reducers from './reducers';
+import basketItems from './reducers/basketItems';
+import categories from './reducers/categories';
+import charities from './reducers/charities';
+import donors from './reducers/donors';
+import transactions from './reducers/transactions';
 
 import AppRoot from './components/AppRoot.js';
 import Home from './components/Home.js';
 import Login from './components/Login.js';
-import About from './components/About.js';
-import Browse from './components/Browse.js';
+import Search from './components/Search.js';
 import GivingHistory from './components/GivingHistory.js';
+import Basket from './components/Basket.js';
+import Donate from './components/Donate.js';
+import Confirmation from './components/Confirmation.js';
 
-var inventory = {
-    items: {idList: [], records: {}},
-    events: {idList: [], records: {}}
+var initialContent = {
+    basketItems: {idList: [], records: {}},
+    categories: {idList: [], records: {}},
+    charities: {idList: [], records: {}},
+    donors: {idList: [], records: {}},
+    transactions: {idList: [], records: {}}
 };
 
-const reducer = combineReducers({
-    ...reducers,
+const reducers = combineReducers({
+    basketItems,
+    categories,
+    charities,
+    donors,
+    transactions,
     routing: routerReducer
 });
 
@@ -28,7 +41,7 @@ const middleware = routerMiddleware(browserHistory);
 
 const store = createStore(
     reducers,
-    inventory,
+    initialContent,
     applyMiddleware(middleware)
 );
 
@@ -38,9 +51,11 @@ ReactDOM.render(
             <Route path="/" component={AppRoot}>
                 <IndexRoute component={Home}/>
                 <Route path="/login" component={Login}/>
-                <Route path="/about" component={About}/>
-                <Route path="/browse" component={Browse}/>
+                <Route path="/search" component={Search}/>
                 <Route path="/givingHistory" component={GivingHistory}/>
+                <Route path="/basket" component={Basket}/>
+                <Route path="/donate/:ein" component={Donate}/>
+                <Route path="confirmation/:orderId" component={Confirmation}/>
             </Route>
         </Router>
     </Provider>,

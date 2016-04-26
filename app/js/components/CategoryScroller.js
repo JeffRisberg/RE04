@@ -1,47 +1,42 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux';
 
+import { queryCategories } from '../actions/categories';
+
+/**
+ * Draws a left-right horizontal scroller of top categories
+ *
+ * @author Peter Cowan, Jeff Risberg
+ * @since April 2016
+ */
 class CategoryScroller extends React.Component {
 
     constructor(props) {
-        super(props)
-        this.state = {loading: true, category: null}
+        super(props);
     }
 
     componentDidMount() {
-        this.loadCategoryFromServer();
-    }
-
-    loadCategoryFromServer() {
-        $.ajax({
-            url: "/ws/categories/" + this.props.internalName,
-            dataType: 'json',
-            cache: false,
-            success: function (response) {
-                this.setState({loading: false, category: response.data});
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
+        this.props.onMount();
     }
 
     render() {
-        if (this.state.loading || this.state.category == null) return null;
+        const categoryRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
 
-        const imageItems = this.state.category.listCharities.map(function (listCharity, index) {
-            var imagePath = '/images/' + listCharity.logoImage.path;
-            var imageFile = listCharity.logoImage.fileName;
+        const imageItems = categoryRecords.map(function (category, index) {
+            var imagePath = '/images/' + category.logoImage.path;
+            var imageFile = category.logoImage.fileName;
             return (
                     <li key={index} className="col-md-2">
                         <img className="thumbnail" src={ imagePath + imageFile} width="128" height="77" />
                         <br/>
-                        <Link to={"/donate/" + listCharity.charity.ein} className="btn">
+                        <Link to={"/donate/" /*+ listCharity.charity.ein*/} className="btn">
                             Donate Now
                         </Link>
                     </li>
             );
         });
+
         return (
             <div className="container">
                 <div className="row">
@@ -56,4 +51,20 @@ class CategoryScroller extends React.Component {
     }
 }
 
-export default CategoryScroller;
+const mapStateToProps = (state) => {
+    return {
+        categories: state.categories,
+        charities: state.charities
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onMount: () => {
+            queryCategories()(dispatch);
+        }
+    };
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CategoryScroller);

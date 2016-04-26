@@ -1,3 +1,6 @@
+/**
+ * This is used for login and logout.
+ */
 import fetch from 'isomorphic-fetch';
 
 export const login = (login, password) => {

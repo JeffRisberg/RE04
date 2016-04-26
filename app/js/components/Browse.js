@@ -1,33 +1,46 @@
 import React from 'react'
+import { connect } from 'react-redux';
+
+import { queryCategories } from '../actions/categories';
+import { queryCharities } from '../actions/charities';
+
 import Category from './Category'
 import Charity from './Charity'
 import CharityList from './CharityList'
 
+/**
+ * Renders a category list and a set of charities
+ */
 class Browse extends React.Component {
     constructor() {
         super();
+    }
 
-        this.state = {categories: [], category: null, charities: []};
-        this.loadCharitiesFromServer = this.loadCharitiesFromServer.bind(this);
-        this.loadCategoriesFromServer = this.loadCategoriesFromServer.bind(this);
+    componentDidMount() {
+        this.props.onMount();
     }
 
     render() {
-        if (this.state.categories == null || this.state.categories.length == 0) return null;
-
-        var charityList = (this.state.charities != null && this.state.charities.length > 0)
-            ? (<CharityList charities={this.state.charities}/>)
-            : null;
+        const categoryRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
 
         let loadCharitiesHandler = (category) => {
-            return this.loadCharitiesFromServer(category);
+            return this.props.onChangeCategory(category);
         };
-        var categoryNodes = this.state.categories.map(function (category, index) {
+
+        var categoryNodes = categoryRecords.map(function (category, index) {
             return (
-                <Category category={category} loadCharities={loadCharitiesHandler} key={index}></Category>
+                <Category category={category} loadCharities={loadCharitiesHandler} key={index}>
+                </Category>
             );
         });
-        var categoryHeader = (this.state.category != null)
+
+        const charityRecords = this.props.charities.idList.map(id => this.props.charities.records[id]);
+
+        var charityList = (charityRecords.length > 0)
+            ? (<CharityList charities={charityRecords} />)
+            : null;
+
+        var charityListHeader = (false && this.state.category != null)
             ? <div><h3>Displaying charities for {this.state.category.name}</h3></div>
             : null;
 
@@ -38,48 +51,33 @@ class Browse extends React.Component {
                         {categoryNodes}
                     </div>
                     <div className="col-md-10">
-                        <div>{categoryHeader}</div>
+                        <div>{charityListHeader}</div>
                         {charityList}
                     </div>
                 </div>
             </div>
         )
     }
-
-    componentDidMount() {
-        this.loadCategoriesFromServer();
-    }
-
-    loadCategoriesFromServer() {
-        var url = "/ws/charities/guide/categories";
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            cache: false,
-            success: function (response) {
-                this.loadCharitiesFromServer(response.data[0]);
-                this.setState({categories: response.data});
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
-    }
-
-    loadCharitiesFromServer(category) {
-        var url = "/ws/charities/categories/" + category.id;
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            cache: false,
-            success: function (response) {
-                this.setState({charities: response.data, category: category});
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
-    }
 }
 
-export default Browse;
+const mapStateToProps = (state) => {
+    return {
+        categories: state.categories,
+        category: state.category,
+        charities: state.charities
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onMount: () => {
+            queryCategories()(dispatch);
+        },
+        onChangeCategory: (category) => {
+            queryCharities(category)(dispatch);
+        }
+    };
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Browse);

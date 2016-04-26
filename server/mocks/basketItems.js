@@ -6,11 +6,11 @@ module.exports = function (app) {
     var bodyParser = require('body-parser');
     basketRouter.use(bodyParser.json());
 
-    var transactionDB = app.transactionDB;
+    var basketItemDB = app.basketItemDB;
 
     basketRouter.get('/', function (req, res) {
         delete req.query["_"];
-        transactionDB.find(req.query).exec(function (error, charities) {
+        basketItemDB.find(req.query).exec(function (error, charities) {
             res.send({
                 'data': charities
             })

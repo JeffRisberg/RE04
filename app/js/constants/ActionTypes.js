@@ -1,5 +1,15 @@
-export const LOGIN = 'LOGIN';
-export const LOGOUT = 'LOGOUT';
+export const DONOR_LOGIN = 'LOGIN';
+export const DONOR_LOGOUT = 'LOGOUT';
 
-export const GET_CHARITY = 'GET_CHARITY';
-export const GET_GIVING_HISTORY = 'GET_GIVING_HISTORY';
+export const GET_CHARITIES = 'GET_CHARITY';
+export const APPEND_CHARITIES = 'APPEND_CHARITY';
+
+export const RESET_CATEGORIES = 'RESET_CATEGORIES';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_CATEGORY = 'GET_CATEGORY';
+
+export const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
+export const GET_TRANSACTION = 'GET_TRANSACTION';
+
+export const GET_BASKETS = 'GET_BASKET_ITEMS';
+export const GET_BASKET = 'GET_BASKET_ITEM';

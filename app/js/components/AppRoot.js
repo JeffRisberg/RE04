@@ -23,26 +23,21 @@ class AppRoot extends React.Component {
 
         return (
             <div>
-                <div className="navbar navbar-default">
+                <div className="row" style={{background: '#eee'}}>
+                    <div className="col-md-5" style={{margin: '10px 0px 10px 0px', textAlign: 'left'}}>
+                        <Link to="/"><img src="/images/WellsFargoLogo.jpg" border="0" width="60"/></Link>
+                        <span style={{marginLeft: '15px', fontWeight: 'bold', fontSize: '25px'}}>GoFar Rewards</span>
+                    </div>
+                    <div className="col-md-7" style={{marginTop: '20px', textAlign: 'right'}}>
+                        {headerText}
+                    </div>
+                </div>
+                <div className="navbar navbar-inverse">
                     <div className="navbar-inner">
                         <div className="navbar-collapse collapse">
-                            <div className="row" style={{background: '#eee'}}>
-                                <div className="col-md-3" style={{marginTop: '20px', textAlign: 'left'}}>
-                                    Search
-                                </div>
-                                <div className="col-md-6" style={{textAlign: 'center'}}>
-                                    <h1 style={{marginTop: '10px'}}>Wells Fargo Prototype</h1>
-                                </div>
-                                <div className="col-md-3" style={{marginTop: '20px', textAlign: 'right'}}>
-                                    {headerText}
-                                </div>
-                            </div>
-
                             <ul className="nav navbar-nav">
                                 <li><NavLink to="/login">Login</NavLink></li>
-                                <li><NavLink to="/about">About</NavLink></li>
                                 <li><NavLink to="/search">Search Charities</NavLink></li>
-                                <li><NavLink to="/browse">Browse Charities</NavLink></li>
                                 <li><NavLink to="/givingHistory">Giving History</NavLink></li>
                                 <li><NavLink to="/basket">Giving Basket</NavLink></li>
                             </ul>

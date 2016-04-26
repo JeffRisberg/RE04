@@ -1,12 +1,22 @@
 import React from 'react'
-import SessionStore from '../../../store/SessionStore'
+import { connect } from 'react-redux';
 
+import SessionStore from '../store/SessionStore'
+
+/**
+ * Render donate screen, including fetching of charity data, and posting of donation.
+ *
+ * @author Jeff Risberg, Peter Cowan
+ * @since April 2016
+ */
 class Donate extends React.Component {
     constructor() {
         super();
-        this.state = {loading: true, charity: null, amount: null,
-                    shareName: true, shareEmail: true, shareAddress: true,
-                    designation: null, giftName: null, memorialName: null};
+        this.state = {
+            charity: null, amount: null,
+            shareName: true, shareEmail: true, shareAddress: true,
+            designation: null, giftName: null, memorialName: null
+        };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -14,59 +24,47 @@ class Donate extends React.Component {
         this.composeDonationJson = this.composeDonationJson.bind(this)
     }
 
-    componentDidMount() {
-        this.loadCharityFromServer();
-    }
-
-    loadCharityFromServer() {
-        var token = SessionStore.getToken();
-
-        var url = "/ws/charities";
-        $.ajax({
-            url: url + "/" + this.props.params.ein,
-            beforeSend: function (request) {
-                request.setRequestHeader("auth-token", token);
-            },
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                this.setState({loading: false, charity: data});
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
-    }
-
     render() {
+        var ein = this.props.params.ein;
 
-        if (this.state.loading == false) {
-            return (
-                <form onSubmit={this.handleSubmit}>
-                    <p>
-                    You are donating to: {this.state.charity.name}
-                    </p>
-                    <p>
-                    {this.state.charity.addressLine1}<br/>
-                    {this.state.charity.city}, {this.state.charity.state} {this.state.charity.zip}<br/>
-                    Description: {this.state.charity.description}</p>
-                    <p>Enter amount: <input type="text" name="amount" onChange={this.handleChange}/></p>
-                    <p>
-                        <input type="checkbox" name="shareName" checked={this.state.shareName} onChange={this.handleCheck}/> Name&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="checkbox" name="shareEmail" checked={this.state.shareEmail} onChange={this.handleCheck}/> Email&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="checkbox" name="shareAddress" checked={this.state.shareAddress} onChange={this.handleCheck}/> Mailing Address&nbsp;&nbsp;&nbsp;&nbsp;
-                    </p>
-                    <p>Program: <input type="text" name="designation" onChange={this.handleChange}/></p>
-                    <p>In the name of: <input type="text" name="giftName" onChange={this.handleChange}/></p>
-                    <p>In memory of: <input type="text" name="memorialName" onChange={this.handleChange}/></p>
+        var charity = null;
+        for (var prop in this.props.charities.records) {
+            var record = this.props.charities.records[prop];
 
-                    <input type="submit" value="Donate"/>
-                </form>
-            );
-        }
-        else {
-            return null;
-        }
+            if (record.ein == ein) charity = record;
+        };
+
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <p>
+                    You are donating to: {charity.name}
+                </p>
+
+                <p>
+                    {charity.addressLine1}<br/>
+                    {charity.city}, {charity.state} {charity.zip}<br/>
+                    Description: {charity.description}</p>
+
+                <p>Enter amount: <input type="text" name="amount" onChange={this.handleChange}/></p>
+
+                <p>
+                    <input type="checkbox" name="shareName" checked={this.state.shareName} onChange={this.handleCheck}/>
+                    Name&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="shareEmail" checked={this.state.shareEmail}
+                           onChange={this.handleCheck}/> Email&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="shareAddress" checked={this.state.shareAddress}
+                           onChange={this.handleCheck}/> Mailing Address&nbsp;&nbsp;&nbsp;&nbsp;
+                </p>
+
+                <p>Program: <input type="text" name="designation" onChange={this.handleChange}/></p>
+
+                <p>In the name of: <input type="text" name="giftName" onChange={this.handleChange}/></p>
+
+                <p>In memory of: <input type="text" name="memorialName" onChange={this.handleChange}/></p>
+
+                <input type="submit" value="Donate"/>
+            </form>
+        );
     }
 
     handleSubmit(e) {
@@ -115,4 +113,15 @@ class Donate extends React.Component {
     }
 }
 
-export default Donate;
+const mapStateToProps = (state) => {
+    return {
+        charities: state.charities
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {};
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Donate);

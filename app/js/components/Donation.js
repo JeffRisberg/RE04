@@ -1,6 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+/**
+ * Renders one donation of the Confirmation screen
+ *
+ * @author Jeff Risberg, Brandon Risberg
+ * @since March 2016
+ */
 class Donation extends React.Component {
 
     constructor() {
@@ -19,7 +25,8 @@ class Donation extends React.Component {
                 <br/>
                 Program: {this.props.donation.designation}
                 <br/>
-                Share Name: {this.props.donation.shareName}, Share Email: {this.props.donation.shareEmail}, Share Address: {this.props.donation.shareAddress}
+                Share Name: {this.props.donation.shareName}, Share Email: {this.props.donation.shareEmail}, Share
+                Address: {this.props.donation.shareAddress}
                 <br/>
                 Gift Name: { recipientName}
                 <hr/>

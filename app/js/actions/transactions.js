@@ -1,51 +1,20 @@
+/**
+ * This is used for the giving-history component.
+ */
 import fetch from 'isomorphic-fetch';
 
-let nextCharityId = 10;
 let nextTransactionId = 10;
 
-export const fetchCharities = () => {
+export const fetchTransaction = () => {
     return function (dispatch) {
 
-        return fetch('/ws/charities', {})
+        return fetch('/ws/transactions', {})
             .then(response => response.json())
             .then((json) => {
-                dispatch(receiveCharities(json.data));
+                dispatch(receiveTransactions(json.data));
             });
     };
 };
-
-export const receiveCharities = (charities) => {
-    return {
-        type: 'RECEIVE_CHARITIES',
-        charities
-    };
-};
-
-export const addCharity = (text) => {
-    fetch("/ws/charities", {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            charity: {
-                text: text,
-                value: 12,
-                completed: false
-            }
-        })
-    }).then(response => {
-        console.log(response);
-    });
-
-    return {
-        type: 'ADD_CHARITY',
-        id: nextCharityId++,
-        text
-    };
-};
-
 
 export const fetchTransactions = () => {
     return function (dispatch) {
@@ -73,16 +42,3 @@ export const addTransaction = (text, time) => {
         time
     };
 };
-
-
-export const login = (login, password) => {
-    return function (dispatch) {
-
-        return fetch('/ws/donor/login', {})
-            .then(response => response.json())
-            .then((json) => {
-                dispatch(login(json.data));
-            });
-    };
-};
-

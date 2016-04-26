@@ -1,8 +1,9 @@
+/**
+ * This is used for charity fetches, including charitylists.
+ */
 import fetch from 'isomorphic-fetch';
 
-let nextCharityId = 10;
-
-export const fetchCharities = () => {
+export const queryCharities = () => {
     return function (dispatch) {
 
         return fetch('/ws/charities', {})
@@ -15,7 +16,7 @@ export const fetchCharities = () => {
 
 export const receiveCharities = (charities) => {
     return {
-        type: 'RECEIVE_CHARITIES',
+        type: 'RESET_CHARITIES',
         charities
     };
 };
@@ -44,15 +45,3 @@ export const addCharity = (text) => {
         text
     };
 };
-
-export const login = (login, password) => {
-    return function (dispatch) {
-
-        return fetch('/ws/donor/login', {})
-            .then(response => response.json())
-            .then((json) => {
-                dispatch(login(json.data));
-            });
-    };
-};
-

@@ -1,25 +1,25 @@
-import { GET_GIVING_HISTORY } from '../constants/ActionTypes'
+import { RESET_TRANSACTIONS } from '../constants/ActionTypes'
 
-const giving_history = (state = [], action = {}) => {
+const basketItems = (state = [], action = {}) => {
   switch (action.type) {
-    case 'RESET_GIVING_HISTORY': // clear prior charities
+    case 'RESET_BASKET_ITEMS': // clear prior basketItems
     {
       const idList = [];
       const records = {};
 
-      action.items.forEach(record => {
+      action.transactions.forEach(record => {
         records[record.id] = record;
         idList.push(record.id);
       });
 
       return {idList, records};
     }
-    case 'APPEND_GIVING_HISTORY':
+    case 'APPEND_BASKET_ITEM':
     {
       const idList = state.idList;
       const records = state.records;
 
-      action.items.forEach(record => {
+      action.transactions.forEach(record => {
         const id = record.id;
 
         if (idList.indexOf(id) < 0) idList.push(id);
@@ -33,4 +33,4 @@ const giving_history = (state = [], action = {}) => {
   }
 };
 
-export default giving_history;
+export default basketItems;
