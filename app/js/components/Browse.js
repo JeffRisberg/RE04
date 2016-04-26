@@ -14,6 +14,7 @@ import CharityList from './CharityList'
 class Browse extends React.Component {
     constructor() {
         super();
+        this.category = null;
     }
 
     componentDidMount() {
@@ -24,6 +25,7 @@ class Browse extends React.Component {
         const categoryRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
 
         let loadCharitiesHandler = (category) => {
+            this.category = category;
             return this.props.onChangeCategory(category);
         };
 
@@ -40,8 +42,8 @@ class Browse extends React.Component {
             ? (<CharityList charities={charityRecords} />)
             : null;
 
-        var charityListHeader = (false && this.state.category != null)
-            ? <div><h3>Displaying charities for {this.state.category.name}</h3></div>
+        var charityListHeader = (this.category != null)
+            ? <div><h3>Displaying charities for {this.category.name}</h3></div>
             : null;
 
         return (
