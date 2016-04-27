@@ -1,25 +1,25 @@
-import { RESET_LIST_CHARITIES } from '../constants/ActionTypes'
+import { GET_CHARITY } from '../constants/ActionTypes'
 
-const listCharities = (state = [], action = {}) => {
+const currentCharities = (state = [], action = {}) => {
   switch (action.type) {
-    case 'RESET_LIST_CHARITIES': // clear prior categories
+    case 'SET_CHARITIES': // clear prior charities
     {
       const idList = [];
       const records = {};
 
-      action.listCharities.forEach(record => {
+      action.charities.forEach(record => {
         records[record.id] = record;
         idList.push(record.id);
       });
 
       return {idList, records};
     }
-    case 'APPEND_LIST_CHARITIES':
+    case 'APPEND_CHARITIES': // probably not used
     {
       const idList = state.idList;
       const records = state.records;
 
-      action.listCharities.forEach(record => {
+      action.charities.forEach(record => {
         const id = record.id;
 
         if (idList.indexOf(id) < 0) idList.push(id);
@@ -33,4 +33,4 @@ const listCharities = (state = [], action = {}) => {
   }
 };
 
-export default listCharities;
+export default currentCharities;

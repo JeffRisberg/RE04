@@ -20,7 +20,7 @@ module.exports = function (app) {
 
     charitiesRouter.get('/categories/:id', function (req, res) {
         delete req.query["_"];
-        charityDB.find(req.query).exec(function (error, charities) {
+        charityDB.find({categoryId: req.params.id}).exec(function (error, charities) {
             res.send({
                 'status': "ok",
                 'data': charities

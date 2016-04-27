@@ -7,21 +7,7 @@ export const queryCategories = () => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                    type: 'RESET_CATEGORIES',
-                    categories: json.data
-                })
-            });
-    }
-};
-
-export const getCategory = (id) => {
-    return function (dispatch) {
-
-        return fetch('/ws/categories/' + id, {})
-            .then(response => response.json())
-            .then((json) => {
-                dispatch({
-                    type: 'APPEND_CATEGORIES',
+                    type: 'SET_CATEGORIES',
                     categories: json.data
                 })
             });

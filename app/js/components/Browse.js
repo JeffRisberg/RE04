@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 
 import { queryCategories } from '../actions/categories';
-import { queryCharities } from '../actions/charities';
+import { queryCurrentCharities } from '../actions/currentCharities';
 
 import Category from './Category'
 import Charity from './Charity'
@@ -36,9 +36,9 @@ class Browse extends React.Component {
             );
         });
 
-        const charityRecords = this.props.charities.idList.map(id => this.props.charities.records[id])
+        const charityRecords = this.props.currentCharities.idList.map(id => this.props.currentCharities.records[id])
             .filter(charity => {
-                return (this.category == null) || (charity.categoryId == this.category.id);
+                return (this.category == null) || true || (charity.categoryId == this.category.id);
             }
         );
 
@@ -69,18 +69,16 @@ class Browse extends React.Component {
 const mapStateToProps = (state) => {
     return {
         categories: state.categories,
-        category: state.category,
-        charities: state.charities
+        currentCharities: state.currentCharities
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         onMount: () => {
             queryCategories()(dispatch);
-            queryCharities(null)(dispatch);
         },
         onChangeCategory: (category) => {
-            queryCharities(category)(dispatch);
+            queryCurrentCharities(category)(dispatch);
         }
     };
 };

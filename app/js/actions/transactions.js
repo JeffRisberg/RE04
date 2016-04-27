@@ -3,19 +3,6 @@
  */
 import fetch from 'isomorphic-fetch';
 
-let nextTransactionId = 10;
-
-export const fetchTransaction = () => {
-    return function (dispatch) {
-
-        return fetch('/ws/transactions', {})
-            .then(response => response.json())
-            .then((json) => {
-                dispatch(receiveTransactions(json.data));
-            });
-    };
-};
-
 export const fetchTransactions = () => {
     return function (dispatch) {
 
@@ -29,16 +16,14 @@ export const fetchTransactions = () => {
 
 export const receiveTransactions = (transactions) => {
     return {
-        type: 'RECEIVE_TRANSACTIONS',
+        type: 'SET_TRANSACTIONS',
         transactions
     };
 };
 
-export const addTransaction = (text, time) => {
+export const addTransaction = (transaction) => {
     return {
         type: 'ADD_TRANSACTION',
-        id: nextTransactionId++,
-        text,
-        time
+        transaction
     };
 };

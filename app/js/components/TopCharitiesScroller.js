@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
-import { getListCharities } from '../actions/listCharities';
+import { getTopCharities } from '../actions/topCharities';
 
 /**
- * Draws a left-right horizontal scroller of charities in a specified category.
+ * Draws a left-right horizontal scroller of the top charities.
  *
  * @author Peter Cowan, Jeff Risberg
  * @since April 2016
@@ -21,22 +21,27 @@ class TopCharitiesScroller extends React.Component {
     }
 
     render() {
-        // this is wrong
-        const charityRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
+        if (this.props.topCharities == undefined) return null;
 
-        const imageItems = charityRecords.map(function (charity, index) {
-            var imagePath = '/images/' + category.logoImage.path;
-            var imageFile = category.logoImage.fileName;
-            return (
+        var topCharities =
+            this.props.topCharities.idList.map((id) => { return this.props.topCharities.records[id]});
+
+        const imageItems =
+            topCharities.map(function (topCharity, index) {
+                var imagePath = '/images/' + topCharity.logoImage.path;
+                var imageFile = topCharity.logoImage.fileName;
+                var charity = topCharity.charity;
+
+                return (
                     <li key={index} className="col-md-2">
-                        <img className="thumbnail" src={ imagePath + imageFile} width="128" height="77" />
+                        <img className="thumbnail" src={ imagePath + imageFile} width="128" height="77"/>
                         <br/>
-                        <Link to={"/donate/" /*+ listCharity.charity.ein*/} className="btn">
+                        <Link to={"/donate/" + charity.ein} className="btn">
                             Donate Now
                         </Link>
                     </li>
-            );
-        });
+                );
+            });
 
         return (
             <div className="container">
@@ -54,15 +59,13 @@ class TopCharitiesScroller extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        categories: state.categories,
-        listCharities: state.listCharities,
-        charities: state.charities
+        topCharities: state.topCharities
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         onMount: () => {
-            getListCharities()(dispatch);
+            getTopCharities()(dispatch);
         }
     };
 };
