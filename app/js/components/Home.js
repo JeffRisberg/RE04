@@ -8,7 +8,7 @@ export default React.createClass({
     render() {
         return <div>
 
-            <div>
+            <div style={{marginBottom: '20px'}}>
                 <div><TopCharitiesScroller topCharitiesCategoryId="1" /></div>
                 <hr/>
                 <Browse/>
