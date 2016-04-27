@@ -45,8 +45,8 @@ module.exports = function (app) {
         });
     });
 
-    charitiesRouter.get('/:id', function (req, res) {
-        charityDB.find({id: req.params.id}).exec(function (error, charities) {
+    charitiesRouter.get('/:ein', function (req, res) {
+        charityDB.find({ein: req.params.ein}).exec(function (error, charities) {
             if (charities.length > 0)
                 res.send({
                     'data': charities[0]

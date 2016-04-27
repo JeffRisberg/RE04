@@ -5,43 +5,32 @@ import { connect } from 'react-redux';
 
 import DonationForm from './DonationForm'
 
+import { queryCharity } from '../actions/currentCharities';
+
 import SessionStore from '../store/SessionStore'
 
 class Donate extends React.Component {
     constructor() {
         super();
-        this.state = {loading: true, charity: null};
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
-        //this.loadCharityFromServer();
+        this.props.onMount(this.props.ein);
     }
-
-    /*
-    loadCharityFromServer() {
-        $.ajax({
-            url: "/ws/charities/" + this.props.params.ein,
-            beforeSend: function (request) {
-                request.setRequestHeader("auth-token", SessionStore.getToken());
-            },
-            dataType: 'json',
-            cache: false,
-            success: function (response) {
-                this.setState({loading: false, charity: response.data});
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
-    }
-    */
 
     render() {
-        if (this.state.loading == false) {
+        var charity = null;
+        for (id in this.props.currentCharities.records) {
+            var thisCharity = this.props.currentCharities.records[id];
+            if (thisCharity != undefined && thisCharity.ein == this.props.ein)
+                charity = thisCharity;
+        }
+
+        if (charity != null) {
             return (
-                <DonationForm charity={this.state.charity} handleSubmit={this.handleSubmit} />
+                <DonationForm charity={this.state.charity} handleSubmit={this.handleSubmit}/>
             );
         }
         else {
@@ -50,7 +39,8 @@ class Donate extends React.Component {
     }
 
     handleSubmit({formData}) {
-        if (this.state.charity != null) {
+        var charity = null;
+        if (charity != null) {
 
             $.ajax({
                 url: '/ws/basket/donations/' + this.state.charity.ein,
@@ -82,12 +72,14 @@ class Donate extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        // to be filled in
+        currentCharities: state.currentCharities
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        // to be filled in
+        onMount: (ein) => {
+            queryCharity(ein)(dispatch);
+        }
     };
 };
 export default connect(

@@ -14,7 +14,6 @@ class Category extends React.Component {
     }
 
     handleLoadCharities() {
-        console.log("loading charities for category " + this.props.category.name);
         this.props.loadCharities(this.props.category);
     }
 

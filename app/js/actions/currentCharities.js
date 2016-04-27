@@ -17,3 +17,18 @@ export const queryCurrentCharities = (category) => {
             });
     };
 };
+
+export const queryCharity = (ein) => {
+    return function (dispatch) {
+
+        return fetch('/ws/charities/' + ein, {})
+            .then(response => response.json())
+            .then((json) => {
+                dispatch({
+                        type: 'SET_CHARITIES',
+                        charities: json.data
+                    }
+                );
+            });
+    };
+};
