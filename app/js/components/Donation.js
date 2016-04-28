@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 /**
- * Renders one donation of the Confirmation screen
+ * Renders one donation.  Used on the Basket screen and the Confirmation screen.
  *
  * @author Jeff Risberg, Brandon Risberg
  * @since March 2016

@@ -3,7 +3,7 @@ import Category from './Category'
 import Charity from './Charity'
 import CharityList from './CharityList'
 
-class Guide extends React.Component {
+class Browse extends React.Component {
     constructor() {
         super();
 
@@ -80,4 +80,4 @@ class Guide extends React.Component {
     }
 }
 
-export default Guide;
+export default Browse;

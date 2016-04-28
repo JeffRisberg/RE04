@@ -2,12 +2,12 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
-import { queryBasket } from '../actions/basketItems';
+import { queryBasket, clearBasket } from '../actions/basketItems';
 
 import Donation from './Donation'
 
 /**
- * Shows the donor's current basketContents
+ * Shows the donor's current basket contents
  *
  * @author Jeff Risberg
  * @since March 2016
@@ -21,83 +21,54 @@ class Basket extends React.Component {
     }
 
     componentDidMount() {
-        this.props.onMount();
-    }
-
-    /*
-    loadBasketFromServer() {
-        if (SessionStore.isLoggedIn()) {
-            $.ajax({
-                url: "/ws/basket/",
-                beforeSend: function (request) {
-                    request.setRequestHeader("auth-token", SessionStore.getToken());
-                },
-                dataType: 'json',
-                cache: false,
-                success: function (data) {
-                    this.setState({order: data});
-                }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
+        if (this.props.donor != undefined && this.props.donor != null) {
+            this.props.onMount(this.props.donor.token);
         }
     }
-    */
 
     clearBasket() {
-        if (this.props.donor != null) {
-            /*
-            $.ajax({
-                url: "/ws/basket/clear",
-                beforeSend: function (request) {
-                    request.setRequestHeader("auth-token", SessionStore.getToken());
-                },
-                dataType: 'json',
-                type: 'PUT',
-                cache: false,
-                success: function (data) {
-                    var newOrderId = data.id;
-                    SessionStore.setOrderId(newOrderId);
-                    this.setState({order: data});
-                }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
-            */
+        if (this.props.donor != undefined && this.props.donor != null) {
+            this.props.doClearBasket(this.props.donor.token);
         }
     }
 
     render() {
-        if (this.props.donor != null && this.state.order != null) {
-            if (this.state.order.donations.length > 0) {
-                var donations = this.state.order.donations.map(function (donation, index) {
-                    return (
-                        <Donation donation={donation} key={index}></Donation>
-                    );
-                });
+        if (this.props.donor != null) {
+            if (this.props.basketItems != null && this.props.basketItems != undefined) {
+                var donations = this.props.basketItems.donations;
 
-                return (
-                    <div>
-                        <div style={{padding: '10px', border: '1px solid gray'}}>
-                            {donations}
+                if (donations != undefined && donations.length > 0) {
+                    var donationItems = donations.map(function (donation, index) {
+                        return (
+                            <Donation donation={donation} key={index}></Donation>
+                        );
+                    });
+
+                    return (
+                        <div>
+                            <div style={{padding: '10px', border: '1px solid gray'}}>
+                                {donationItems}
+                            </div>
+                            <div style={{padding: '10px', border: '1px solid gray'}}>
+                                <Link to={"checkout/"} className="btn">
+                                    Proceed to Checkout
+                                </Link>
+                            </div>
+                            <div style={{padding: '10px', border: '1px solid gray'}}>
+                                <button onClick={this.clearBasket}>Clear Basket</button>
+                            </div>
                         </div>
-                        <div style={{padding: '10px', border: '1px solid gray'}}>
-                            <Link to={"/Checkout/"} className="btn">
-                                Proceed to Checkout
-                            </Link>
-                        </div>
-                        <div style={{padding: '10px', border: '1px solid gray'}}>
-                            <button onClick={this.clearBasket}>Clear Basket</button>
-                        </div>
-                    </div>
-                );
+                    );
+                }
+                else {
+                    return (
+                        <h4>Your basket is empty.</h4>
+                    );
+                }
             }
             else {
-                return (
-                    <h4>Your basket is empty.</h4>
-                );
+                // fetch still pending
+                return null;
             }
         }
         else {
@@ -112,12 +83,17 @@ class Basket extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        donor: state.donor,
+        basketItems: state.basketItems
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        onMount: () => {
-            queryBasket()(dispatch);
+        onMount: (token) => {
+            queryBasket(token)(dispatch);
+        },
+        doClearBasket: (token) => {
+            clearBasket(token)(dispatch);
         }
     };
 };

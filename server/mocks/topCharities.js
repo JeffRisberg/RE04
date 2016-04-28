@@ -26,7 +26,7 @@ module.exports = function (app) {
                     tc['charity'] = charity;
                 });
                 res.send({
-                    'status': "ok",
+                    'status': "success",
                     'data': topCharities
                 });
             });
@@ -37,7 +37,7 @@ module.exports = function (app) {
         topCharityDB.find({id: req.params.id}).exec(function (error, topCharities) {
             if (listCharities.length > 0)
                 res.send({
-                    'status': "ok",
+                    'status': "success",
                     'data': topCharities[0]
                 });
             else {

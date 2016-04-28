@@ -5,10 +5,16 @@ import fetch from 'isomorphic-fetch';
 
 import { push } from 'react-router-redux'
 
-export const queryBasket = () => {
+export const queryBasket = (token) => {
     return function (dispatch) {
 
-        return fetch('/ws/basket/fetch', {})
+        return fetch('/ws/basket', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'auth-token': token
+            }
+        })
             .then(response => response.json())
             .then((json) => {
                 dispatch({
@@ -19,16 +25,17 @@ export const queryBasket = () => {
     };
 };
 
-export const addToBasket = (donation, thenUrl) => {
+export const addToBasket = (token, donation, ein, thenUrl) => {
     return function (dispatch) {
 
-        return fetch('/ws/basket/donate', {
+        return fetch('/ws/basket/donations/' + ein, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'auth-token': token
             },
-            body: JSON.stringify({donation: donation})
+            body: JSON.stringify(donation)
         })
             .then(response => response.json())
             .then((json) => {
@@ -36,4 +43,25 @@ export const addToBasket = (donation, thenUrl) => {
             });
     };
 };
+
+export const clearBasket = (token) => {
+    return function (dispatch) {
+
+        return fetch('/ws/basket/clear', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'auth-token': token
+            }
+        })
+            .then(response => response.json())
+            .then((json) => {
+                dispatch({
+                    type: "CLEAR_BASKET_ITEMS"
+                });
+            });
+    };
+};
+
 

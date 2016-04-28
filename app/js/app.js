@@ -55,11 +55,11 @@ ReactDOM.render(
         <Router history={browserHistory}>
             <Route path="/" component={AppRoot}>
                 <IndexRoute component={Home}/>
-                <Route path="/login" component={Login}/>
-                <Route path="/search" component={Search}/>
-                <Route path="/givingHistory" component={GivingHistory}/>
-                <Route path="/basket" component={Basket}/>
-                <Route path="/donate/:ein" component={Donate}/>
+                <Route path="login" component={Login}/>
+                <Route path="search" component={Search}/>
+                <Route path="givingHistory" component={GivingHistory}/>
+                <Route path="basket" component={Basket}/>
+                <Route path="donate/:ein" component={Donate}/>
                 <Route path="updateDonation/:donationId" component={UpdateDonation}/>
                 <Route path="giftMessage/:donationId" component={GiftMessage}/>
                 <Route path="confirmation/:orderId" component={Confirmation}/>

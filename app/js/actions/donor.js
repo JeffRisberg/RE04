@@ -12,6 +12,8 @@ export const login = (login, password) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
+            contentType: "application/json",
+            dataType: 'json',
             body: JSON.stringify({login: login, password: password})
         })
             .then(response => response.json())
@@ -25,14 +27,15 @@ export const login = (login, password) => {
     };
 };
 
-export const logout = () => {
+export const logout = (token) => {
     return function (dispatch) {
 
         return fetch('/ws/donors/logout', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'auth-token': token
             }
         })
             .then(response => response.json())

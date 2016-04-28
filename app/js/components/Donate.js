@@ -58,8 +58,7 @@ class Donate extends React.Component {
         if (charity != null) {
 
             var donation = formData;
-            console.log(donation);
-            this.props.doAddToBasket(donation, "/basket");
+            this.props.doAddToBasket(this.props.donor.token, donation, charity.ein, "/basket");
 
             /*
              $.ajax({
@@ -102,8 +101,8 @@ const mapDispatchToProps = (dispatch) => {
         onMount: (ein) => {
             queryCharityByEin(ein)(dispatch);
         },
-        doAddToBasket: (donation, thenUrl) => {
-            addToBasket(donation, thenUrl)(dispatch);
+        doAddToBasket: (token, donation, ein, thenUrl) => {
+            addToBasket(token, donation, ein, thenUrl)(dispatch);
         }
     };
 };

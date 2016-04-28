@@ -14,13 +14,16 @@ import { queryBasket } from '../actions/basketItems';
 class Checkout extends React.Component {
     constructor() {
         super();
+
         this.state = {loading: true, order: null};
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
-        this.props.onMount();
+        if (this.props.donor != undefined && this.props.donor != null) {
+            this.props.onMount(this.props.donor.token);
+        }
     }
 
     getInitialState() {
@@ -29,27 +32,6 @@ class Checkout extends React.Component {
             order: null
         };
     }
-
-    /*
-    loadBasketFromServer() {
-        if (SessionStore.isLoggedIn()) {
-            $.ajax({
-                url: "/ws/basket/",
-                beforeSend: function (request) {
-                    request.setRequestHeader("auth-token", SessionStore.getToken());
-                },
-                dataType: 'json',
-                cache: false,
-                success: function (response) {
-                    this.setState({order: response.data});
-                }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
-        }
-    }
-    */
 
     handleSubmit(e) {
         e.preventDefault();
@@ -109,12 +91,14 @@ class Checkout extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        donor: state.donor,
+        basketItems: state.basketItems
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        onMount: () => {
-            queryBasket()(dispatch);
+        onMount: (token) => {
+            queryBasket(token)(dispatch);
         }
     };
 };

@@ -47,7 +47,9 @@ class Login extends React.Component {
     }
 
     logout() {
-        this.props.doLogout();
+        if (this.props.donor != undefined && this.props.donor != null) {
+            this.props.doLogout(this.props.donor.token);
+        }
     }
 
     handleSubmit({formData}) {
@@ -92,8 +94,8 @@ const mapDispatchToProps = (dispatch) => {
         doLogin: (loginValue, password) => {
             login(loginValue, password)(dispatch);
         },
-        doLogout: () => {
-            logout()(dispatch);
+        doLogout: (token) => {
+            logout(token)(dispatch);
         }
     };
 };
