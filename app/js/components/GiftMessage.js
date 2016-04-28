@@ -19,7 +19,7 @@ class GiftMessage extends React.Component {
         $.ajax({
             url: url,
             beforeSend: function (request) {
-                request.setRequestHeader("auth-token", SessionStore.getToken());
+                request.setRequestHeader("auth-token", this.props.donor.token);
             },
             dataType: 'json',
             cache: false,
@@ -81,7 +81,7 @@ class GiftMessage extends React.Component {
             $.ajax({
                 url: '/ws/basket/donations/' + this.state.donation.id + '/gift/' + this.state.donation.gift.id,
                 beforeSend: function (request) {
-                    request.setRequestHeader("auth-token", SessionStore.getToken());
+                    request.setRequestHeader("auth-token", this.props.donor.token);
                 },
                 type: 'PUT',
                 contentType: "application/json",
