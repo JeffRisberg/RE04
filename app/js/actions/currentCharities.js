@@ -18,17 +18,33 @@ export const queryCurrentCharities = (category) => {
     };
 };
 
-export const queryCharity = (ein) => {
+export const queryCharity = (id) => {
     return function (dispatch) {
 
-        return fetch('/ws/charities/' + ein, {})
+        return fetch('/ws/charities/' + id, {})
             .then(response => response.json())
             .then((json) => {
                 dispatch({
                         type: 'SET_CHARITIES',
-                        charities: json.data
+                        charities: [json.data]
                     }
                 );
             });
     };
 };
+
+export const queryCharityByEin = (ein) => {
+    return function (dispatch) {
+
+        return fetch('/ws/charities/byEin/' + ein, {})
+            .then(response => response.json())
+            .then((json) => {
+                dispatch({
+                        type: 'SET_CHARITIES',
+                        charities: [json.data]
+                    }
+                );
+            });
+    };
+};
+

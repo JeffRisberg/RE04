@@ -3,15 +3,21 @@ import { Link } from 'react-router'
 import Form from "react-jsonschema-form";
 import { connect } from 'react-redux';
 
-import SessionStore from '../store/SessionStore'
-
 import { login, logout } from '../actions/donor';
 
+/**
+ * The login component handles login and logout of a donor.
+ *
+ * A jsonSchema form is used for input.
+ *
+ * @author Jeff Risberg, Peter Cowan
+ * @since March 2016
+ */
 class Login extends React.Component {
+
     constructor() {
         super();
 
-        this.state = {loggedIn: SessionStore.isLoggedIn()};
         this.logout = this.logout.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -41,76 +47,29 @@ class Login extends React.Component {
     }
 
     logout() {
-        var token = SessionStore.getToken();
-
-        this.props.dispatch(logout);
-
-        //var url = "/ws/donors/logout";
-        //$.ajax({
-        //    url: url,
-        //    type: 'PUT',
-        //    beforeSend: function (request) {
-        //        request.setRequestHeader("auth-token", token);
-        //    },
-        //    contentType: "application/json",
-        //    dataType: 'json',
-        //    success: function (response) {
-        //    }.bind(this),
-        //    error: function (xhr, status, err) {
-        //        console.error(this.props.url, status, err.toString());
-        //    }.bind(this)
-        //});
-
-        SessionStore.setLogin(null);
-        SessionStore.setPassword(null);
-        SessionStore.setDonorId(null);
-        SessionStore.setOrderId(null);
-        SessionStore.clearToken();
-
-        this.setState({loggedIn: SessionStore.isLoggedIn()});
+        this.props.doLogout();
     }
 
     handleSubmit({formData}) {
         var loginValue = formData.login.trim();
         var password = formData.password.trim();
 
-        SessionStore.setLogin(login);
-        SessionStore.setPassword(password);
-        SessionStore.setDonorId(null);
-        SessionStore.setOrderId(null);
-        SessionStore.clearToken();
-
-        this.props.dispatch(login(loginValue, password));
-
-        //var url = "/ws/donors/login";
-        //$.ajax({
-        //    url: url,
-        //    type: 'POST',
-        //    contentType: "application/json",
-        //    dataType: 'json',
-        //    data: JSON.stringify(formData),
-        //    success: function (data) {
-        //        SessionStore.setToken(data.token);
-        //        SessionStore.setDonorId(data.donorId);
-        //        SessionStore.setOrderId(data.orderId);
-        //        this.setState({loggedIn: SessionStore.isLoggedIn()});
-        //    }.bind(this),
-        //    error: function (xhr, status, err) {
-        //        console.error(this.props.url, status, err.toString());
-        //    }.bind(this)
-        //});
+        this.props.doLogin(loginValue, password);
     }
 
     render() {
-        if (SessionStore.isLoggedIn())
+        if (this.props.donor != undefined && this.props.donor != null)
             return (
                 <div>
-                    <p>You are logged in as {SessionStore.getLogin()}</p>
+                    <p>
+                        You are logged in as {this.props.donor.firstName} {this.props.donor.lastName}
+                    </p>
                     <button onClick={this.logout}>Logout</button>
                 </div>
-            )
+            );
         else
             return (
+                <div style={{width: '500px'}}>
             <Form schema={this.schema}
                   uiSchema={this.uiSchema}
                   onSubmit={this.handleSubmit}>
@@ -118,8 +77,27 @@ class Login extends React.Component {
                     <input type="submit" value="Login"/>
                 </div>
             </Form>
+                    </div>
             )
     }
 }
 
-export default connect()(Login);
+const mapStateToProps = (state) => {
+    return {
+        donor: state.donor
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        doLogin: (loginValue, password) => {
+            login(loginValue, password)(dispatch);
+        },
+        doLogout: () => {
+            logout()(dispatch);
+        }
+    };
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Login);

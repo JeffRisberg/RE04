@@ -9,11 +9,16 @@ import Charity from './Charity'
 import CharityList from './CharityList'
 
 /**
- * Renders a category list and a set of charities
+ * Renders a category list on the left, and a set of charities for the selected category on
+ * the right.
+ *
+ * @author Jeff Risberg, Peter Cowan
+ * @since April 2016
  */
 class Browse extends React.Component {
     constructor() {
         super();
+
         this.category = null;
     }
 
@@ -22,7 +27,8 @@ class Browse extends React.Component {
     }
 
     render() {
-        const categoryRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
+        const categoryRecords =
+            this.props.categories.idList.map(id => this.props.categories.records[id]);
 
         let loadCharitiesHandler = (category) => {
             this.category = category;

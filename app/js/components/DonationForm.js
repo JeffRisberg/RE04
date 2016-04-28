@@ -1,6 +1,14 @@
 import React from 'react'
+import { render } from "react-dom";
+
 import Form from "react-jsonschema-form";
 
+/**
+ * Uses a forms package to create a donation screen
+ *
+ * @author Peter Cowan, Jeff Risberg
+ * @since April 2016
+ */
 class DonationForm extends React.Component {
 
     constructor() {
@@ -43,11 +51,9 @@ class DonationForm extends React.Component {
                 }
             }
         };
-
     }
 
     render() {
-
         return (
             <div>
                 <p>
@@ -59,13 +65,15 @@ class DonationForm extends React.Component {
                     {this.props.charity.city}, {this.props.charity.state} {this.props.charity.zip}<br/>
                     Description: {this.props.charity.description}</p>
 
+                <div style={{width: '500px'}}>
                     <Form schema={this.schema}
                           onSubmit={this.props.handleSubmit}
-                        formData={this.props.formData}>
-                    <div>
-                        <input type="submit" value="Donate"/>
-                    </div>
-                </Form>
+                          formData={this.props.formData}>
+                        <div>
+                            <input type="submit" value="Donate"/>
+                        </div>
+                    </Form>
+                </div>
             </div>
         );
     }

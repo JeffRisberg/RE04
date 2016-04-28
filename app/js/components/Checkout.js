@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
-import SessionStore from '../../../store/SessionStore'
+import { queryBasket } from '../actions/basketItems';
 
 /**
  * Fetches Basket contents and renders a checkout screen
@@ -67,6 +67,7 @@ class Checkout extends React.Component {
             expYear: expYear
         };
 
+        /*
         var orderId = SessionStore.getOrderId();
 
         $.ajax({
@@ -87,6 +88,7 @@ class Checkout extends React.Component {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
+        */
     }
 
     render() {
@@ -112,7 +114,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onMount: () => {
-            queryTopCategories()(dispatch);
+            queryBasket()(dispatch);
         }
     };
 };

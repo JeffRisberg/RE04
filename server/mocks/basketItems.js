@@ -7,14 +7,33 @@ module.exports = function (app) {
     basketRouter.use(bodyParser.json());
 
     var basketItemDB = app.basketItemDB;
+    var donationDB = app.donationDB;
 
     basketRouter.get('/', function (req, res) {
         delete req.query["_"];
-        basketItemDB.find(req.query).exec(function (error, charities) {
+        basketItemDB.find(req.query).exec(function (error, donations) {
             res.send({
-                'data': charities
+                'data': donations
             })
         })
+    });
+
+    basketRouter.post('/donate', function (req, res) {
+        // Look for the most recently created record
+        donationDB.find({}).sort({id: -1}).limit(1).exec(function (err, donations) {
+
+            console.log(req.body.donation);
+            if (donations.length != 0)
+                req.body.donation.id = donations[0].id + 1;
+            else
+                req.body.donation.id = 1;
+
+            // Insert the new record
+            donationDB.insert(req.body.donation, function (err, newDonation) {
+                res.status(201);
+                res.send(JSON.stringify({donation: newDonation}));
+            })
+        });
     });
 
     app.use('/ws/basket', basketRouter);

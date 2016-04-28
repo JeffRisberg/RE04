@@ -1,25 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux';
 
 import NavLink from './NavLink'
-import SessionStore from '../store/SessionStore'
 
 class AppRoot extends React.Component {
-    constructor() {
-        super();
-
-        SessionStore.addListener('change', () => {
-            this.setState({
-                token: SessionStore.getToken()
-            })
-        });
-    }
 
     render() {
-        var login = SessionStore.getLogin();
-        var token = SessionStore.getToken();
+        var headerText = "Please Login";
+        if (this.props.donor != null) {
+            var firstName = this.props.donor.firstName;
+            var lastName = this.props.donor.lastName;
 
-        var headerText = (token != null ? ("Welcome, " + login) : "Please Login");
+            headerText = "Welcome, " + firstName + " " + lastName;
+        }
 
         return (
             <div>
@@ -51,4 +45,16 @@ class AppRoot extends React.Component {
     }
 }
 
-export default AppRoot;
+const mapStateToProps = (state) => {
+    return {
+        donor: state.donor
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+    };
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AppRoot);

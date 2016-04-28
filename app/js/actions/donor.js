@@ -6,10 +6,42 @@ import fetch from 'isomorphic-fetch';
 export const login = (login, password) => {
     return function (dispatch) {
 
-        return fetch('/ws/donor/login', {})
+        return fetch('/ws/donors/login', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({login: login, password: password})
+        })
             .then(response => response.json())
             .then((json) => {
-                dispatch(login(json.data));
+                dispatch({
+                        type: 'SET_DONOR',
+                        donor: json.data
+                    }
+                );
+            });
+    };
+};
+
+export const logout = () => {
+    return function (dispatch) {
+
+        return fetch('/ws/donors/logout', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then((json) => {
+                dispatch({
+                        type: 'CLEAR_DONOR',
+                        donor: json.data
+                    }
+                );
             });
     };
 };

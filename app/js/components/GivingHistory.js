@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 
 import { queryTransactions } from '../actions/transactions';
 
-import SessionStore from '../store/SessionStore'
 import GivingHistoryItem from './GivingHistoryItem'
 
 /**
  * Fetches and renders a user's giving history
+ *
+ * @author Jeff Risberg
+ * @since March 2016
  */
 class GivingHistory extends React.Component {
     constructor() {
@@ -21,35 +23,8 @@ class GivingHistory extends React.Component {
         this.props.onMount();
     }
 
-    /*
-    loadGivingHistoryFromServer() {
-        if (SessionStore.isLoggedIn()) {
-            var donorId = SessionStore.getDonorId();
-            var token = SessionStore.getToken();
-
-            var url = "/ws/donors/" + donorId + "/history?year=2016";
-
-            $.ajax({
-                url: url,
-                beforeSend: function (request)
-                {
-                    request.setRequestHeader("auth-token", token);
-                },
-                dataType: 'json',
-                cache: false,
-                success: function (data) {
-                this.setState({givingHistoryItems: data});
-                }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
-        }
-    }
-    */
-
     render() {
-        if (SessionStore.isLoggedIn()) {
+        if (this.props.donor != null) {
             var givingHistoryItemNodes = this.state.givingHistoryItems.map(function (givingHistoryItem, index) {
                 return (
                     <GivingHistoryItem givingHistoryItem={givingHistoryItem} key={index}>
@@ -75,6 +50,7 @@ class GivingHistory extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        donor: state.donor
     };
 };
 const mapDispatchToProps = (dispatch) => {

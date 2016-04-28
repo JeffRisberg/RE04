@@ -19,6 +19,8 @@ import Search from './components/Search.js';
 import GivingHistory from './components/GivingHistory.js';
 import Basket from './components/Basket.js';
 import Donate from './components/Donate.js';
+import GiftMessage from './components/GiftMessage.js';
+import UpdateDonation from './components/UpdateDonation.js';
 import Confirmation from './components/Confirmation.js';
 
 var initialContent = {
@@ -58,6 +60,8 @@ ReactDOM.render(
                 <Route path="/givingHistory" component={GivingHistory}/>
                 <Route path="/basket" component={Basket}/>
                 <Route path="/donate/:ein" component={Donate}/>
+                <Route path="updateDonation/:donationId" component={UpdateDonation}/>
+                <Route path="giftMessage/:donationId" component={GiftMessage}/>
                 <Route path="confirmation/:orderId" component={Confirmation}/>
             </Route>
         </Router>

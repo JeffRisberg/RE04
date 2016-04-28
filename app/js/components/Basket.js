@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 
 import { queryBasket } from '../actions/basketItems';
 
-import SessionStore from '../store/SessionStore'
 import Donation from './Donation'
 
 /**
- * Shows the user's current basketContents
+ * Shows the donor's current basketContents
+ *
+ * @author Jeff Risberg
+ * @since March 2016
  */
 class Basket extends React.Component {
     constructor() {
@@ -19,7 +21,7 @@ class Basket extends React.Component {
     }
 
     componentDidMount() {
-        this.loadBasketFromServer();
+        this.props.onMount();
     }
 
     /*
@@ -44,7 +46,8 @@ class Basket extends React.Component {
     */
 
     clearBasket() {
-        if (SessionStore.isLoggedIn()) {
+        if (this.props.donor != null) {
+            /*
             $.ajax({
                 url: "/ws/basket/clear",
                 beforeSend: function (request) {
@@ -62,11 +65,12 @@ class Basket extends React.Component {
                     console.error(this.props.url, status, err.toString());
                 }.bind(this)
             });
+            */
         }
     }
 
     render() {
-        if (SessionStore.isLoggedIn() && this.state.order != null) {
+        if (this.props.donor != null && this.state.order != null) {
             if (this.state.order.donations.length > 0) {
                 var donations = this.state.order.donations.map(function (donation, index) {
                     return (

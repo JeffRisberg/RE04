@@ -58,7 +58,8 @@ module.exports = function (app) {
             var token = generateUUID();
 
             if (donors.length != 0) {
-                var donorId = donors[0].id;
+                var donor = donors[0];
+                var donorId = donor.id;
 
                 transactionDB.find({}).sort({id: -1}).limit(1).exec(function (err, transactions) {
                     var newTransactionId = 1;
@@ -71,7 +72,13 @@ module.exports = function (app) {
                     // Insert the new record
                     transactionDB.insert(newTransaction, function (err, newTransaction) {
 
-                        var newAuthToken = {token: token, donorId: donorId, orderId: newTransactionId};
+                        var newAuthToken = {
+                            token: token,
+                            donorId: donorId,
+                            firstName: donor.firstName,
+                            lastName: donor.lastName,
+                            orderId: newTransactionId
+                        };
 
                         authTokenDB.insert(newAuthToken, function (err, result) {
                             res.status(201);
@@ -87,7 +94,8 @@ module.exports = function (app) {
     });
 
     donorsRouter.post('/logout', function (req, res) {
-        // to be filled in
+        res.status(201);
+        res.send(JSON.stringify({data: null}));
     });
 
     donorsRouter.get('/:id', function (req, res) {
@@ -97,7 +105,7 @@ module.exports = function (app) {
                     'data': donors[0]
                 });
             else {
-                req.status(404);
+                res.status(404);
                 res.send({
                     'data': null
                 });
