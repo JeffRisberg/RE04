@@ -20,25 +20,34 @@ class Donate extends React.Component {
     }
 
     render() {
-        var charity = null;
-        var id;
-        if (this.props.currentCharities.records != undefined) {
-            for (id in this.props.currentCharities.records) {
-                var c = this.props.currentCharities.records[id];
+        if (this.props.donor != null) {
+            var charity = null;
+            var id;
+            if (this.props.currentCharities.records != undefined) {
+                for (id in this.props.currentCharities.records) {
+                    var c = this.props.currentCharities.records[id];
 
-                if (c != undefined && c.ein == this.props.params.ein) {
-                    charity = c;
+                    if (c != undefined && c.ein == this.props.params.ein) {
+                        charity = c;
+                    }
                 }
             }
-        }
 
-        if (charity != null) {
-            return (
-                <DonationForm charity={charity} handleSubmit={this.handleSubmit}/>
-            );
+            if (charity != null) {
+                return (
+                    <DonationForm charity={charity} handleSubmit={this.handleSubmit}/>
+                );
+            }
+            else {
+                return null;
+            }
         }
         else {
-            return null;
+            return (
+                <div>
+                    <p>Please log in first to make a donation</p>
+                </div>
+            )
         }
     }
 
@@ -56,36 +65,9 @@ class Donate extends React.Component {
         }
 
         if (charity != null) {
-
             var donation = formData;
+
             this.props.doAddToBasket(this.props.donor.token, donation, charity.ein, "/basket");
-
-            /*
-             $.ajax({
-             url: '/ws/basket/donations/' + this.state.charity.ein,
-             beforeSend: function (request) {
-             request.setRequestHeader("auth-token", SessionStore.getToken());
-             },
-             type: 'POST',
-             contentType: "application/json",
-             dataType: 'json',
-             data: JSON.stringify(formData),
-             success: function (response) {
-             console.log('giftName: ' + formData.giftName);
-             console.log('formData: ' + JSON.stringify(formData));
-
-             if (formData.giftName || formData.memorialName) {
-             console.log('Added donation: ' + response.data.id);
-             this.props.history.pushState(null, '/giftMessage/' + response.data.id);
-             } else {
-             this.props.history.pushState(null, '/basket');
-             }
-             }.bind(this),
-             error: function (xhr, status, err) {
-             console.error(this.props.url, status, err.toString());
-             }.bind(this)
-             });
-             */
         }
     }
 }

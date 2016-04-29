@@ -22,7 +22,7 @@ module.exports = function (app) {
         charityDB.find({ein: req.params.ein}).exec(function (error, charities) {
             if (charities.length > 0)
 
-                // Look for the most recently created record
+            // Look for the most recently created record
                 basketItemDB.find({}).sort({id: -1}).limit(1).exec(function (err, basketItems) {
 
                     req.body.charity = charities[0];
@@ -39,6 +39,13 @@ module.exports = function (app) {
                         res.send(JSON.stringify({donation: newBasketItem}));
                     })
                 });
+        });
+    });
+
+    basketRouter.put('/clear', function (req, res) {
+        basketItemDB.remove({}, {multi: true}, function (err, count) {
+            res.status(201);
+            res.send(JSON.stringify({donations: []}));
         });
     });
 
