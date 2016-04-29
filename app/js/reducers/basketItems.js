@@ -1,4 +1,4 @@
-import { RESET_TRANSACTIONS } from '../constants/ActionTypes'
+import { SET_BASKET_ITEMS } from '../constants/ActionTypes'
 
 const basketItems = (state = [], action = {}) => {
   switch (action.type) {
