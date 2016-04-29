@@ -18,42 +18,44 @@ import CharityList from './CharityList'
 class Browse extends React.Component {
     constructor() {
         super();
-
-        this.category = null;
     }
 
     componentDidMount() {
-        this.props.onMount();
+        const currentCategory = this.props.currentCategory;
+        if (currentCategory == null) {
+            this.props.onMount();
+        }
     }
 
     render() {
+        const currentCategory = this.props.currentCategory;
+
         const categoryRecords =
             this.props.categories.idList.map(id => this.props.categories.records[id]);
 
         let loadCharitiesHandler = (category) => {
-            this.category = category;
             return this.props.onChangeCategory(category);
         };
 
         var categoryNodes = categoryRecords.map(function (category, index) {
             return (
-                <Category category={category} loadCharities={loadCharitiesHandler} key={index}>
+                <Category category={category}
+                          active={category == currentCategory}
+                          loadCharities={loadCharitiesHandler}
+                          key={index}>
                 </Category>
             );
         });
 
-        const charityRecords = this.props.currentCharities.idList.map(id => this.props.currentCharities.records[id])
-            .filter(charity => {
-                return (this.category == null) || true || (charity.categoryId == this.category.id);
-            }
-        );
+        const charityRecords =
+            this.props.currentCharities.idList.map(id => this.props.currentCharities.records[id]);
 
         var charityList = (charityRecords.length > 0)
             ? (<CharityList charities={charityRecords}/>)
             : null;
 
-        var charityListHeader = (this.category != null)
-            ? <div><h3>Displaying charities for {this.category.name}</h3></div>
+        var charityListHeader = (currentCategory != null)
+            ? <div><h3>Displaying charities for {currentCategory.name}</h3></div>
             : null;
 
         return (
@@ -75,6 +77,7 @@ class Browse extends React.Component {
 const mapStateToProps = (state) => {
     return {
         categories: state.categories,
+        currentCategory: state.currentCategory,
         currentCharities: state.currentCharities
     };
 };

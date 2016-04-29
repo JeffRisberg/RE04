@@ -1,8 +1,8 @@
-import { GET_CHARITY } from '../constants/ActionTypes'
+import { SET_CURRENT_CHARITIES } from '../constants/ActionTypes'
 
 const currentCharities = (state = [], action = {}) => {
   switch (action.type) {
-    case 'SET_CHARITIES': // clear prior charities
+    case 'SET_CURRENT_CHARITIES': // clear prior charities
     {
       const idList = [];
       const records = {};
@@ -14,7 +14,7 @@ const currentCharities = (state = [], action = {}) => {
 
       return {idList, records};
     }
-    case 'APPEND_CHARITIES': // probably not used
+    case 'APPEND_CURRENT_CHARITIES': // probably not used
     {
       const idList = state.idList;
       const records = state.records;

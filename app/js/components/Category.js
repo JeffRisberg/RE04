@@ -10,6 +10,7 @@ import { Link } from 'react-router'
 class Category extends React.Component {
     constructor() {
         super();
+
         this.handleLoadCharities = this.handleLoadCharities.bind(this);
     }
 
@@ -18,11 +19,20 @@ class Category extends React.Component {
     }
 
     render() {
-        return (
-            <div onClick={this.handleLoadCharities}>
-                <strong>{this.props.category.name}</strong>
-            </div>
-        )
+        if (this.props.active) {
+            return (
+                <div style={{padding: '2', background: 'black', color: 'white'}} onClick={this.handleLoadCharities}>
+                    <strong>{this.props.category.name}</strong>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div style={{padding: '2'}} onClick={this.handleLoadCharities}>
+                    <strong>{this.props.category.name}</strong>
+                </div>
+            )
+        }
     }
 }
 

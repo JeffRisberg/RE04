@@ -7,6 +7,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 
 import basketItems from './reducers/basketItems';
 import categories from './reducers/categories';
+import currentCategory from './reducers/currentCategory';
 import currentCharities from './reducers/currentCharities';
 import donor from './reducers/donor';
 import topCharities from './reducers/topCharities';
@@ -24,8 +25,9 @@ import UpdateDonation from './components/UpdateDonation.js';
 import Confirmation from './components/Confirmation.js';
 
 var initialContent = {
-    basketItems: {idList: [], records: {}},
+    basketItems: {donations: []},
     categories: {idList: [], records: {}},
+    currentCategory: null,
     currentCharities: {idList: [], records: {}},
     donor: null,
     topCharities: {idList: [], records: {}},
@@ -35,6 +37,7 @@ var initialContent = {
 const reducers = combineReducers({
     basketItems,
     categories,
+    currentCategory,
     currentCharities,
     donor,
     topCharities,

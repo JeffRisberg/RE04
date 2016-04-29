@@ -14,7 +14,7 @@ const categories = (state = [], action = {}) => {
 
       return {idList, records};
     }
-    case 'APPEND_CATEGORIES':
+    case 'APPEND_CATEGORIES': // not sure if this is called
     {
       const idList = state.idList;
       const records = state.records;

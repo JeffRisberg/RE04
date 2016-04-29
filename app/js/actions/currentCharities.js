@@ -10,10 +10,13 @@ export const queryCurrentCharities = (category) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: 'SET_CHARITIES',
-                        charities: json.data
-                    }
-                );
+                    type: 'SET_CURRENT_CATEGORY',
+                    category: category
+                });
+                dispatch({
+                    type: 'SET_CURRENT_CHARITIES',
+                    charities: json.data
+                });
             });
     };
 };
@@ -25,7 +28,7 @@ export const queryCharity = (id) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: 'SET_CHARITIES',
+                        type: 'SET_CURRENT_CHARITIES',
                         charities: [json.data]
                     }
                 );
