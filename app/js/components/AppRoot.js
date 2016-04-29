@@ -19,7 +19,7 @@ class AppRoot extends React.Component {
             <div>
                 <div className="row" style={{background: '#eee'}}>
                     <div className="col-md-5" style={{margin: '10px 0px 10px 0px', textAlign: 'left'}}>
-                        <Link to="/"><img src="/resources/images/WellsFargoLogo.jpg" border="0" width="60"/></Link>
+                        <Link to="/"><img src="/images/WellsFargoLogo.jpg" border="0" width="60"/></Link>
                         <span style={{marginLeft: '15px', fontWeight: 'bold', fontSize: '25px'}}>GoFar Rewards</span>
                     </div>
                     <div className="col-md-7" style={{marginTop: '20px', textAlign: 'right'}}>

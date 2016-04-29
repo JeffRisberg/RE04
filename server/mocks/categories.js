@@ -18,6 +18,16 @@ module.exports = function (app) {
         })
     });
 
+    categoriesRouter.get('/guide', function (req, res) {
+        delete req.query["_"];
+        categoryDB.find(req.query).exec(function (error, categories) {
+            res.send({
+                'status': "ok",
+                'data': categories
+            })
+        })
+    });
+
     categoriesRouter.get('/categories/:id', function (req, res) {
         delete req.query["_"];
         categoryDB.find(req.query).exec(function (error, categories) {

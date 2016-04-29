@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 export const queryCategories = () => {
     return function (dispatch) {
 
-        return fetch('/ws/charities/guide/categories', {})
+        return fetch('/ws/categories/guide', {})
             .then(response => response.json())
             .then((json) => {
                 dispatch({

@@ -7,7 +7,7 @@ module.exports = function (app) {
     basketRouter.use(bodyParser.json());
 
     var basketItemDB = app.basketItemDB;
-    var donationDB = app.donationDB;
+    var charityDB = app.charityDB;
 
     basketRouter.get('/', function (req, res) {
         delete req.query["_"];
@@ -18,21 +18,26 @@ module.exports = function (app) {
         })
     });
 
-    basketRouter.post('/donate', function (req, res) {
-        // Look for the most recently created record
-        donationDB.find({}).sort({id: -1}).limit(1).exec(function (err, donations) {
+    basketRouter.post('/donations/:ein', function (req, res) {
+        charityDB.find({ein: req.params.ein}).exec(function (error, charities) {
+            if (charities.length > 0)
 
-            console.log(req.body.donation);
-            if (donations.length != 0)
-                req.body.donation.id = donations[0].id + 1;
-            else
-                req.body.donation.id = 1;
+                // Look for the most recently created record
+                basketItemDB.find({}).sort({id: -1}).limit(1).exec(function (err, donations) {
 
-            // Insert the new record
-            donationDB.insert(req.body.donation, function (err, newDonation) {
-                res.status(201);
-                res.send(JSON.stringify({donation: newDonation}));
-            })
+                    req.body.charityId = charities[0].id;
+                    console.log(req.body);
+                    if (donations.length != 0)
+                        req.body.id = donations[0].id + 1;
+                    else
+                        req.body.id = 1;
+
+                    // Insert the new record
+                    donationDB.insert(req.body, function (err, newDonation) {
+                        res.status(201);
+                        res.send(JSON.stringify({donation: newDonation}));
+                    })
+                });
         });
     });
 
