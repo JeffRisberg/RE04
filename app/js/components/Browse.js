@@ -60,6 +60,7 @@ class Browse extends React.Component {
 
         return (
             <div className="container">
+                <h3 style={{borderBottom: '3px solid black'}}>Find a Charity by Cause</h3>
                 <div className="row">
                     <div className="col-md-2">
                         {categoryNodes}

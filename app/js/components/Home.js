@@ -7,47 +7,42 @@ import Browse from './Browse';
 export default React.createClass({
     render() {
         return <div>
-
-            <div style={{marginBottom: '20px'}}>
-                <div><TopCharitiesScroller topCharitiesCategoryId="1" /></div>
-                <hr/>
-                <Browse/>
+            <div>
+                <img src="http://placehold.it/1150x250"/>
             </div>
             <div className="row">
                 <div className="col-md-4">
+                    <h3>Top Charities</h3>
+
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                        in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Redeem your rewards, donate to a top charity.
                     </p>
 
                     <p>
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                        mollit anim id est laborum.
+                        <a>View List</a>
                     </p>
                 </div>
                 <div className="col-md-4">
-                    <p>
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                        voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                        occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi,
-                        id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-                        distinctio.
-                    </p>
+                    <h3>Support a Cause</h3>
+
+                    <p>Browse a list of popular charites by Cause</p>
+
+                    <p><a>View Causes</a></p>
                 </div>
 
                 <div className="col-md-4" style={{background: '#f0f0f'}}>
-                    <p>
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                        voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                        occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi,
-                        id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
-                        distinctio.
-                    </p>
+                    <h3>Find a charity</h3>
 
-                    <h3>Powered by JustGive</h3>
+                    <p>Search for any charity by name or location</p>
+
+                    <p>
+                        <a>Search Now</a>
+                    </p>
                 </div>
+            </div>
+            <div style={{marginBottom: '20px'}}>
+                <div><TopCharitiesScroller topCharitiesCategoryId="1"/></div>
+                <Browse/>
             </div>
         </div>
     }

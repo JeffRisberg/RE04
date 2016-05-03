@@ -45,6 +45,7 @@ class TopCharitiesScroller extends React.Component {
 
         return (
             <div className="container">
+                <h3 style={{borderBottom: '3px solid black'}}>Top Charities</h3>
                 <div className="row">
                     <div className="col-md-12">
                         <ul className="horizontal-slide">
