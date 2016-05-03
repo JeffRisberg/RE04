@@ -48,7 +48,7 @@ class Login extends React.Component {
 
     logout() {
         if (this.props.donor != undefined && this.props.donor != null) {
-            this.props.doLogout(this.props.donor.token);
+            this.props.logout(this.props.donor.token);
         }
     }
 
@@ -56,7 +56,7 @@ class Login extends React.Component {
         var loginValue = formData.login.trim();
         var password = formData.password.trim();
 
-        this.props.doLogin(loginValue, password);
+        this.props.login(loginValue, password);
     }
 
     render() {
@@ -89,17 +89,8 @@ const mapStateToProps = (state) => {
         donor: state.donor
     };
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        doLogin: (loginValue, password) => {
-            login(loginValue, password)(dispatch);
-        },
-        doLogout: (token) => {
-            logout(token)(dispatch);
-        }
-    };
-};
+
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    {login, logout}
 )(Login);

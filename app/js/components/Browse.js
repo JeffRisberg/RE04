@@ -23,7 +23,7 @@ class Browse extends React.Component {
     componentDidMount() {
         const currentCategory = this.props.currentCategory;
         if (currentCategory == null) {
-            this.props.onMount();
+            this.props.queryCategories();
         }
     }
 
@@ -34,7 +34,7 @@ class Browse extends React.Component {
             this.props.categories.idList.map(id => this.props.categories.records[id]);
 
         let loadCharitiesHandler = (category) => {
-            return this.props.onChangeCategory(category);
+            return this.props.queryCurrentCharities(category);
         };
 
         var categoryNodes = categoryRecords.map(function (category, index) {
@@ -84,7 +84,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onMount: () => {
-            queryCategories()(dispatch);
+            dispatch(queryCategories());
         },
         onChangeCategory: (category) => {
             queryCurrentCharities(category)(dispatch);
@@ -93,5 +93,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    {queryCategories, queryCurrentCharities}
 )(Browse);

@@ -15,22 +15,13 @@ class Checkout extends React.Component {
     constructor() {
         super();
 
-        this.state = {loading: true, order: null};
-
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
         if (this.props.donor != undefined && this.props.donor != null) {
-            this.props.onMount(this.props.donor.token);
+            this.props.queryBasket(this.props.donor.token);
         }
-    }
-
-    getInitialState() {
-        return {
-            loading: true,
-            order: null
-        };
     }
 
     handleSubmit(e) {
@@ -50,27 +41,27 @@ class Checkout extends React.Component {
         };
 
         /*
-        var orderId = SessionStore.getOrderId();
+         var orderId = SessionStore.getOrderId();
 
-        $.ajax({
-            url: '/ws/basket/checkout',
-            beforeSend: function (request) {
-                request.setRequestHeader("auth-token", SessionStore.getToken());
-            },
-            type: 'PUT',
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify(creditCard),
-            success: function (data) {
-                this.props.history.pushState(null, '/confirmation/' + orderId);
-                var newOrderId = data.id;
-                SessionStore.setOrderId(newOrderId);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
-        */
+         $.ajax({
+         url: '/ws/basket/checkout',
+         beforeSend: function (request) {
+         request.setRequestHeader("auth-token", SessionStore.getToken());
+         },
+         type: 'PUT',
+         contentType: "application/json",
+         dataType: 'json',
+         data: JSON.stringify(creditCard),
+         success: function (data) {
+         this.props.history.pushState(null, '/confirmation/' + orderId);
+         var newOrderId = data.id;
+         SessionStore.setOrderId(newOrderId);
+         }.bind(this),
+         error: function (xhr, status, err) {
+         console.error(this.props.url, status, err.toString());
+         }.bind(this)
+         });
+         */
     }
 
     render() {
@@ -78,7 +69,7 @@ class Checkout extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <input type="hidden" ref="cardType" value="Visa"/>
-                    CardNumber: <input type="text" ref="cardNumber"/><br/>
+                    Card Number: <input type="text" ref="cardNumber"/><br/>
                     CV Code: <input type="text" ref="cscCode"/><br/>
                     Exp Month: <input type="text" ref="expMonth"/><br/>
                     Exp Year: <input type="text" ref="expYear"/><br/>
@@ -95,14 +86,7 @@ const mapStateToProps = (state) => {
         basketItems: state.basketItems
     };
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onMount: (token) => {
-            queryBasket(token)(dispatch);
-        }
-    };
-};
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    {queryBasket}
 )(Checkout);

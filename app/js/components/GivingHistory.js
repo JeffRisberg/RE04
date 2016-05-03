@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
-import { queryTransactions } from '../actions/transactions';
+import { queryGivingHistory } from '../actions/givingHistoryItems';
 
 import GivingHistoryItem from './GivingHistoryItem'
 
@@ -15,17 +15,20 @@ import GivingHistoryItem from './GivingHistoryItem'
 class GivingHistory extends React.Component {
     constructor() {
         super();
-
-        this.state = {givingHistoryItems: []};
     }
 
     componentDidMount() {
-        this.props.onMount();
+        if (this.props.donor != undefined && this.props.donor != null) {
+            console.log('donor: ' + JSON.stringify(this.props.donor));
+            this.props.queryGivingHistory(this.props.donor.token, this.props.donor);
+        }
     }
 
     render() {
-        if (this.props.donor != null) {
-            var givingHistoryItemNodes = this.state.givingHistoryItems.map(function (givingHistoryItem, index) {
+        if (this.props.donor != undefined && this.props.donor != null) {
+            const givingHistoryItems = this.props.givingHistoryItems;
+            var givingHistoryItemNodes = givingHistoryItems.idList.map(function (itemId, index) {
+                let givingHistoryItem = givingHistoryItems.records[itemId];
                 return (
                     <GivingHistoryItem givingHistoryItem={givingHistoryItem} key={index}>
                     </GivingHistoryItem>
@@ -50,17 +53,12 @@ class GivingHistory extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        donor: state.donor
+        donor: state.donor,
+        givingHistoryItems: state.givingHistoryItems
     };
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onMount: () => {
-            queryGivingHistory()(dispatch);
-        }
-    };
-};
+
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    {queryGivingHistory}
 )(GivingHistory);

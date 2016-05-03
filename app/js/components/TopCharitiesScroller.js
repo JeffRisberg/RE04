@@ -17,7 +17,7 @@ class TopCharitiesScroller extends React.Component {
     }
 
     componentDidMount() {
-        this.props.onMount();
+        this.props.getTopCharities();
     }
 
     render() {
@@ -62,14 +62,8 @@ const mapStateToProps = (state) => {
         topCharities: state.topCharities
     };
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onMount: () => {
-            getTopCharities()(dispatch);
-        }
-    };
-};
+
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    {getTopCharities}
 )(TopCharitiesScroller);

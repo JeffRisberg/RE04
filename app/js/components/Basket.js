@@ -22,13 +22,13 @@ class Basket extends React.Component {
 
     componentDidMount() {
         if (this.props.donor != undefined && this.props.donor != null) {
-            this.props.onMount(this.props.donor.token);
+            this.props.queryBasket(this.props.donor.token);
         }
     }
 
     clearBasket() {
         if (this.props.donor != undefined && this.props.donor != null) {
-            this.props.doClearBasket(this.props.donor.token);
+            this.props.clearBasket(this.props.donor.token);
         }
     }
 
@@ -87,17 +87,8 @@ const mapStateToProps = (state) => {
         basketItems: state.basketItems
     };
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onMount: (token) => {
-            queryBasket(token)(dispatch);
-        },
-        doClearBasket: (token) => {
-            clearBasket(token)(dispatch);
-        }
-    };
-};
+
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    {queryBasket, clearBasket}
 )(Basket);

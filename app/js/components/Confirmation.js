@@ -18,7 +18,7 @@ class Confirmation extends React.Component {
     }
 
     componentDidMount() {
-        this.props.onMount();
+        this.props.getTransaction();
     }
 
     /*
@@ -73,14 +73,7 @@ const mapStateToProps = (state) => {
     return {
     };
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onMount: () => {
-            getTransaction()(dispatch);
-        }
-    };
-};
+
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(Confirmation);

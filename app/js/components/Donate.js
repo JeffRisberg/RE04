@@ -16,7 +16,7 @@ class Donate extends React.Component {
     }
 
     componentDidMount() {
-        this.props.onMount(this.props.params.ein);
+        this.props.queryCharityByEin(this.props.params.ein);
     }
 
     render() {
@@ -67,7 +67,7 @@ class Donate extends React.Component {
         if (charity != null) {
             var donation = formData;
 
-            this.props.doAddToBasket(this.props.donor.token, donation, charity.ein, "/basket");
+            this.props.addToBasket(this.props.donor.token, donation, charity.ein, "/basket");
         }
     }
 }
@@ -78,17 +78,7 @@ const mapStateToProps = (state) => {
         currentCharities: state.currentCharities
     };
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onMount: (ein) => {
-            queryCharityByEin(ein)(dispatch);
-        },
-        doAddToBasket: (token, donation, ein, thenUrl) => {
-            addToBasket(token, donation, ein, thenUrl)(dispatch);
-        }
-    };
-};
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    {queryCharityByEin, addToBasket}
 )(Donate);

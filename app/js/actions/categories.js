@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import { queryCurrentCharities } from '../actions/currentCharities';
 
 export const queryCategories = () => {
-    return function (dispatch) {
+    return function (dispatch, getState) {
 
         return fetch('/ws/categories/guide', {})
             .then(response => response.json())
@@ -20,3 +20,4 @@ export const queryCategories = () => {
             });
     }
 };
+
