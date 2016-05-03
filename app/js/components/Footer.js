@@ -13,7 +13,7 @@ class Footer extends React.Component {
             <div>
                 <div className="row" style={{marginTop: '10px',  padding: '5px'}}>
                     <div className="col-md-12" style={{textAlign: 'center'}}>
-                        Charitable donation services provided by <a>JustGive.org</a>
+                        Charitable donation services provided by <a href="http://www.justgive.org">JustGive.org</a>
                     </div>
                 </div>
                 <div className="row" style={{background: '#888', color: 'white', padding: '5px'}}>

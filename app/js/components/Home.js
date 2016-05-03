@@ -19,15 +19,15 @@ export default React.createClass({
                     </p>
 
                     <p>
-                        <a>View List</a>
+                        <a href="#topCharities">View List</a>
                     </p>
                 </div>
                 <div className="col-md-4">
                     <h3>Support a Cause</h3>
 
-                    <p>Browse a list of popular charites by Cause</p>
+                    <p>Browse a list of popular charities by Cause</p>
 
-                    <p><a>View Causes</a></p>
+                    <p><a href="#byCause">View Causes</a></p>
                 </div>
 
                 <div className="col-md-4" style={{background: '#f0f0f'}}>
@@ -36,7 +36,7 @@ export default React.createClass({
                     <p>Search for any charity by name or location</p>
 
                     <p>
-                        <a>Search Now</a>
+                        <Link to="/search">Search Now</Link>
                     </p>
                 </div>
             </div>
