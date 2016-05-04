@@ -16,8 +16,7 @@ export const queryCategories = () => {
                     categories: json.data
                 });
 
-                queryCurrentCharities(firstCategory)(dispatch);
+                dispatch(queryCurrentCharities(firstCategory));
             });
     }
 };
-

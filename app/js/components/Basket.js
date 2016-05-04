@@ -22,13 +22,13 @@ class Basket extends React.Component {
 
     componentDidMount() {
         if (this.props.donor != undefined && this.props.donor != null) {
-            this.props.queryBasket(this.props.donor.token);
+            this.props.queryBasket();
         }
     }
 
     clearBasket() {
         if (this.props.donor != undefined && this.props.donor != null) {
-            this.props.clearBasket(this.props.donor.token);
+            this.props.clearBasket();
         }
     }
 

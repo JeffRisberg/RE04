@@ -18,6 +18,7 @@ export const login = (login, password) => {
         })
             .then(response => response.json())
             .then((json) => {
+                console.log('logged in');
                 dispatch({
                         type: 'SET_DONOR',
                         donor: json.data
@@ -38,11 +39,11 @@ export const logout = (token) => {
                 'auth-token': token
             }
         })
-            .then(response => response.json())
-            .then((json) => {
+            .then((response) => {
+                console.log('logged out');
                 dispatch({
                         type: 'CLEAR_DONOR',
-                        donor: json.data
+                        donor: null
                     }
                 );
             });

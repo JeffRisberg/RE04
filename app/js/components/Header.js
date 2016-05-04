@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import NavLink from './NavLink'
+import { login, logout } from '../actions/donor';
 
 /**
  * Appears at top of screen
@@ -14,11 +15,13 @@ import NavLink from './NavLink'
 class Header extends React.Component {
     render() {
         var headerText = "Not logged in";
+        let loginLogout = <Link to="/login" style={{marginLeft: '10px'}} >Login</Link>;
         if (this.props.donor != null) {
             var firstName = this.props.donor.firstName;
             var points = this.props.donor.points;
 
             headerText = firstName + " " + points + " points";
+            loginLogout = <a onClick={this.props.logout} style={{marginLeft: '10px'}} >Logout</a>;
         }
 
         return (
@@ -36,7 +39,7 @@ class Header extends React.Component {
                         <p>Rewards Id #12345
                             <a style={{marginLeft: '10px'}}>Account Settings</a>
                             <a style={{marginLeft: '10px'}}>Help</a>
-                            <a style={{marginLeft: '10px'}}>Logout</a>
+                            {loginLogout}
                         </p>
 
                         <p>
@@ -84,6 +87,7 @@ const mapStateToProps = (state) => {
     };
 };
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    {logout}
 )(Header);
 

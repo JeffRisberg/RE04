@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 
 import { queryCategories } from '../actions/categories';
@@ -15,25 +15,19 @@ import CharityList from './CharityList'
  * @author Jeff Risberg, Peter Cowan
  * @since April 2016
  */
-class Browse extends React.Component {
-    constructor() {
-        super();
+class Browse extends Component {
+    constructor(props) {
+        super(props);
     }
 
     componentDidMount() {
-        const currentCategory = this.props.currentCategory;
-        if (currentCategory == null) {
-            this.props.queryCategories();
-        }
+        this.props.queryCategories();
     }
 
     render() {
         const currentCategory = this.props.currentCategory;
-
-        const categoryRecords =
-            this.props.categories.idList.map(id => this.props.categories.records[id]);
-
-        let loadCharitiesHandler = (category) => {
+        const categoryRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
+        const loadCharitiesHandler = (category) => {
             return this.props.queryCurrentCharities(category);
         };
 
@@ -47,12 +41,9 @@ class Browse extends React.Component {
             );
         });
 
-        const charityRecords =
-            this.props.currentCharities.idList.map(id => this.props.currentCharities.records[id]);
+        const charityRecords = this.props.currentCharities.idList.map(id => this.props.currentCharities.records[id]);
 
-        var charityList = (charityRecords.length > 0)
-            ? (<CharityList charities={charityRecords}/>)
-            : null;
+        var charityList = (charityRecords.length > 0) ? (<CharityList charities={charityRecords}/>) : null;
 
         var charityListHeader = (currentCategory != null)
             ? <div><h3>Displaying charities for {currentCategory.name}</h3></div>
@@ -61,6 +52,7 @@ class Browse extends React.Component {
         return (
             <div className="container">
                 <h3 style={{borderBottom: '3px solid black'}}>Find a Charity by Cause</h3>
+
                 <div className="row">
                     <div className="col-md-2">
                         {categoryNodes}
@@ -75,21 +67,17 @@ class Browse extends React.Component {
     }
 }
 
+Browse.propTypes = {
+    categories: PropTypes.object.isRequired,
+    currentCategory: PropTypes.object,
+    currentCharities: PropTypes.object.isRequired
+};
+
 const mapStateToProps = (state) => {
     return {
         categories: state.categories,
         currentCategory: state.currentCategory,
         currentCharities: state.currentCharities
-    };
-};
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onMount: () => {
-            dispatch(queryCategories());
-        },
-        onChangeCategory: (category) => {
-            queryCurrentCharities(category)(dispatch);
-        }
     };
 };
 export default connect(

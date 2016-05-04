@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import Donation from './Donation'
+import { queryCompletedBasket } from '../actions/completedBasketItems';
 
 /**
  * Render the confirmation screen
@@ -11,42 +12,18 @@ import Donation from './Donation'
  * @since April 2016
  */
 class Confirmation extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {order: null};
+    constructor(props) {
+        super(props);
     }
 
     componentDidMount() {
-        this.props.getTransaction();
+        this.props.queryCompletedBasket(this.props.params.orderId);
     }
-
-    /*
-    loadCompletedOrderFromServer() {
-        let { orderId } = this.props.params;
-
-        if (SessionStore.isLoggedIn()) {
-            $.ajax({
-                url: "/ws/donors/" + SessionStore.getDonorId() + "/history/" + orderId,
-                beforeSend: function (request) {
-                    request.setRequestHeader("auth-token", SessionStore.getToken());
-                },
-                dataType: 'json',
-                cache: false,
-                success: function (data) {
-                    this.setState({order: data});
-                }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
-        }
-    }
-    */
 
     render() {
-        if (SessionStore.isLoggedIn() && this.state.order != null) {
-            var donations = this.state.order.donations.map(function (donation, index) {
+        if (this.props.donations != null && this.props.donations != undefined) {
+
+            var donations = this.props.donations.map(function (donation, index) {
                 return (
                     <Donation donation={donation} key={index}></Donation>
                 );
@@ -55,25 +32,28 @@ class Confirmation extends React.Component {
             return (
                 <div>
                     <h3>Order Confirmation</h3>
+
                     <p>Thank you for your generous donations. </p>
-                    <p>Your confirmation number is {this.state.order.id}</p>
+
+                    <p>Your confirmation number is {this.props.orderId}</p>
+
                     <div style={{padding: '10px', border: '1px solid gray'}}>
                         {donations}
                     </div>
                 </div>
             );
-        }
-        else {
+        } else {
             return null;
         }
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-    };
+const mapStateToProps = (state, ownProps) => {
+    return {orderId: ownProps.orderId,
+            donations: state.completedBasketItems.donations};
 };
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    {queryCompletedBasket}
 )(Confirmation);

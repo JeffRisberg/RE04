@@ -7,6 +7,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
 
 import basketItems from './reducers/basketItems';
+import completedBasketItems from './reducers/basketItems';
 import categories from './reducers/categories';
 import currentCategory from './reducers/currentCategory';
 import currentCharities from './reducers/currentCharities';
@@ -29,6 +30,7 @@ import UpdateDonation from './components/UpdateDonation.js';
 
 var initialContent = {
     basketItems: {donations: []},
+    completedBasketItems: {donations: []},
     categories: {idList: [], records: {}},
     currentCategory: null,
     currentCharities: {idList: [], records: {}},
@@ -40,6 +42,7 @@ var initialContent = {
 
 const reducers = combineReducers({
     basketItems,
+    completedBasketItems,
     categories,
     currentCategory,
     currentCharities,

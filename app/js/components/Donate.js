@@ -67,7 +67,7 @@ class Donate extends React.Component {
         if (charity != null) {
             var donation = formData;
 
-            this.props.addToBasket(this.props.donor.token, donation, charity.ein, "/basket");
+            this.props.addToBasket(donation, charity.ein, "/basket");
         }
     }
 }

@@ -18,14 +18,13 @@ class Login extends React.Component {
     constructor() {
         super();
 
-        this.logout = this.logout.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.schema = {
             "title": null,
             "type": "object",
             "required": [
-                "login","password"
+                "login", "password"
             ],
             "properties": {
                 "login": {
@@ -46,12 +45,6 @@ class Login extends React.Component {
         };
     }
 
-    logout() {
-        if (this.props.donor != undefined && this.props.donor != null) {
-            this.props.logout(this.props.donor.token);
-        }
-    }
-
     handleSubmit({formData}) {
         var loginValue = formData.login.trim();
         var password = formData.password.trim();
@@ -66,20 +59,20 @@ class Login extends React.Component {
                     <p>
                         You are logged in as {this.props.donor.firstName} {this.props.donor.lastName}
                     </p>
-                    <button onClick={this.logout}>Logout</button>
+                    <button onClick={() => {this.props.logout(this.props.donor.token)}}>Logout</button>
                 </div>
             );
         else
             return (
                 <div style={{width: '500px'}}>
-            <Form schema={this.schema}
-                  uiSchema={this.uiSchema}
-                  onSubmit={this.handleSubmit}>
-                <div>
-                    <input type="submit" value="Login"/>
+                    <Form schema={this.schema}
+                          uiSchema={this.uiSchema}
+                          onSubmit={this.handleSubmit}>
+                        <div>
+                            <input type="submit" value="Login"/>
+                        </div>
+                    </Form>
                 </div>
-            </Form>
-                    </div>
             )
     }
 }
