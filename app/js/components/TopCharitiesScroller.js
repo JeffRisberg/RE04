@@ -7,7 +7,7 @@ import { getTopCharities } from '../actions/topCharities';
 /**
  * Draws a left-right horizontal scroller of the top charities.
  *
- * @author Peter Cowan, Jeff Risberg
+ * @author Jeff Risberg
  * @since April 2016
  */
 class TopCharitiesScroller extends React.Component {

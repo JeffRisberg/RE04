@@ -10,7 +10,7 @@ import { addToBasket } from '../actions/basketItems';
 /**
  * Donation entry screen
  *
- * @author Jeff Risberg, Peter Cowan, Brandon Risberg
+ * @author Jeff Risberg, Brandon Risberg
  * @since March 2016
  */
 class Donate extends React.Component {

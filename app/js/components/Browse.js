@@ -12,7 +12,7 @@ import CharityList from './CharityList'
  * Renders a category list on the left, and a set of charities for the selected category on
  * the right.
  *
- * @author Jeff Risberg, Peter Cowan
+ * @author Jeff Risberg
  * @since April 2016
  */
 class Browse extends Component {

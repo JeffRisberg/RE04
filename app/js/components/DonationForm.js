@@ -6,7 +6,7 @@ import Form from "react-jsonschema-form";
 /**
  * Uses a forms package to create a donation screen
  *
- * @author Peter Cowan, Jeff Risberg
+ * @author various
  * @since April 2016
  */
 class DonationForm extends React.Component {

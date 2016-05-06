@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 /**
  * Render one category
  *
- * @author Peter Cowan, Jeff Risberg
+ * @author Jeff Risberg
  * @since April 2016
  */
 class Category extends React.Component {

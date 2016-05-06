@@ -8,7 +8,7 @@ import { queryCompletedBasket } from '../actions/completedBasketItems';
 /**
  * Render the confirmation screen
  *
- * @author Peter Cowan
+ * @author Jeff Risberg
  * @since April 2016
  */
 class Confirmation extends React.Component {

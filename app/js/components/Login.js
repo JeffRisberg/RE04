@@ -10,7 +10,7 @@ import { login, logout } from '../actions/donor';
  *
  * A jsonSchema form is used for input.
  *
- * @author Jeff Risberg, Peter Cowan
+ * @author Jeff Risberg, Brandon Risberg
  * @since March 2016
  */
 class Login extends React.Component {
