@@ -35,7 +35,7 @@ class Confirmation extends React.Component {
 
                     <p>Thank you for your generous donations.</p>
 
-                    <p>Your confirmation number is {this.props.orderId}</p>
+                    <p>Your confirmation number is {this.props.params.orderId}</p>
 
                     <div style={{padding: '10px', border: '1px solid gray'}}>
                         {donations}
@@ -48,9 +48,8 @@ class Confirmation extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
-        orderId: ownProps.orderId,
         donations: state.completedBasketItems.donations
     };
 };

@@ -53,9 +53,7 @@ module.exports = function (app) {
 
                 // Take the basket items and create donations
                 basketItemDB.find({}).exec(function (err, basketItems) {
-                    console.log(basketItems);
                     basketItems.forEach(function (item) {
-                        console.log(item);
 
                         // Insert the new record
                         const newDonation = {
@@ -65,11 +63,10 @@ module.exports = function (app) {
                             flatCharge: 0.35
                         };
                         donationDB.insert(newDonation, function (err, newDonationResult) {
-                            console.log("newDonationResult");
                         });
                     });
 
-                    // clear the basket
+                    // Clear the basket
                     basketItemDB.remove({}, {multi: true}, function (err, count) {
                     });
                 });
