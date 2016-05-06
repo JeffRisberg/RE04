@@ -9,11 +9,13 @@ module.exports = function (app) {
     var authTokenDB = app.authTokenDB;
     var donorDB = app.donorDB;
     var transactionDB = app.transactionDB;
+    var donationDB = app.donationDB;
+    var charityDB = app.charityDB;
 
     function generateUUID() {
         var d = new Date().getTime();
 
-        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
             var r = (d + Math.random() * 16) % 16 | 0;
             d = Math.floor(d / 16);
             return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
@@ -42,14 +44,49 @@ module.exports = function (app) {
         })
     });
 
-    /** return */
+    /** return the giving history */
     donorsRouter.get("/:donorId/history", function (req, res) { // year=?
         const donorId = req.params.donorId;
-        const orderId = req.params.orderId;
 
-        donorDB.find({id: donorId}).limit(1).exec(function (err, donors) {
-            res.status(201);
-            res.send(JSON.stringify({donor: donors[0]}));
+        charityDB.find({}, function (error, charities) {
+
+            donorDB.find({id: donorId}).limit(1).exec(function (err, donors) {
+
+                if (donors.length > 0) {
+                    const donor = donors[0];
+
+                    transactionDB.find({donorId: donor.id}).exec(function (err, transactions) {
+                        const transactionIds = transactions.map(function (tran) {
+                            return tran.id
+                        });
+
+                        donationDB.find({transactionId: {$in: transactionIds}}).exec(function (err, donations) {
+
+                            const transactionDate = transactions[0].transactionDate
+                            // Substitute the charity record for the id field
+                            donations.map(function (don) {
+                                var charityId = don["charityId"];
+                                var charity = null;
+
+                                charities.forEach((c) => {
+                                    if (c.id == charityId) charity = c;
+                                });
+                                don['donationId'] = don['id'];
+                                don['charityName'] = charity.name;
+                                don['transactionDate'] = 'Jan 8, 2016 10:55:20 PM';
+                                don['transactionDateTime'] = parseInt(transactionDate);
+                                don['amount'] = parseInt(don['amount']);
+                            });
+
+                            res.send({data: donations});
+                        });
+                    });
+                }
+                else {
+                    res.status(404);
+                    res.send(JSON.stringify({data: null}));
+                }
+            });
         })
     });
 
