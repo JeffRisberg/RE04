@@ -6,8 +6,10 @@ module.exports = function (app) {
     var bodyParser = require('body-parser');
     basketRouter.use(bodyParser.json());
 
+    var authTokenDB = app.authTokenDB;
     var basketItemDB = app.basketItemDB;
     var charityDB = app.charityDB;
+    var donationDB = app.donationDB;
 
     basketRouter.get('/', function (req, res) {
         delete req.query["_"];
@@ -22,7 +24,7 @@ module.exports = function (app) {
         charityDB.find({ein: req.params.ein}).exec(function (error, charities) {
             if (charities.length > 0)
 
-            // Look for the most recently created record
+                // Look for the most recently created record
                 basketItemDB.find({}).sort({id: -1}).limit(1).exec(function (err, basketItems) {
 
                     req.body.charity = charities[0];
@@ -40,6 +42,41 @@ module.exports = function (app) {
                     })
                 });
         });
+    });
+
+    basketRouter.put('/checkout', function (req, res) {
+        var token = req.headers['auth-token'];
+
+        authTokenDB.find({token: token}).exec(function (err, tokens) {
+            if (token.length > 0) {
+                const authToken = tokens[0];
+
+                // Take the basket items and create donations
+                basketItemDB.find({}).exec(function (err, basketItems) {
+                    console.log(basketItems);
+                    basketItems.forEach(function (item) {
+                        console.log(item);
+
+                        // Insert the new record
+                        const newDonation = {
+                            transactionId: authToken.orderId,
+                            charityId: item.charityId,
+                            amount: item.amount,
+                            flatCharge: 0.35
+                        };
+                        donationDB.insert(newDonation, function (err, newDonationResult) {
+                            console.log("newDonationResult");
+                        });
+                    });
+
+                    // clear the basket
+                    basketItemDB.remove({}, {multi: true}, function (err, count) {
+                    });
+                });
+            }
+        });
+
+        res.send(JSON.stringify({status: "good", data: []}));
     });
 
     basketRouter.put('/clear', function (req, res) {

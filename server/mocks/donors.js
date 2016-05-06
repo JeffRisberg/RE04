@@ -33,14 +33,35 @@ module.exports = function (app) {
         })
     });
 
-    /** return the completed basket items */
+    /** return a specific order for this donor (used for confirmation screen) */
     donorsRouter.get("/:donorId/history/:orderId", function (req, res) {
         const donorId = req.params.donorId;
         const orderId = req.params.orderId;
 
-        donorDB.find({id: donorId}).limit(1).exec(function (err, donors) {
-            res.status(201);
-            res.send(JSON.stringify({donor: donor}));
+        charityDB.find({}, function (error, charities) {
+
+            transactionDB.find({id: orderId}).limit(1).exec(function (err, orders) {
+
+                const transactionIds = orders.map(function (tran) {
+                    return tran.id
+                });
+
+                donationDB.find({transactionId: {$in: transactionIds}}).exec(function (err, donations) {
+
+                    donations.map(function (don) {
+                        var charityId = don["charityId"];
+                        var charity = null;
+
+                        charities.forEach((c) => {
+                            if (c.id == charityId) charity = c;
+                        });
+
+                        don['charity'] = charity;
+                    });
+
+                    res.send({data: donations});
+                });
+            });
         })
     });
 
@@ -62,7 +83,8 @@ module.exports = function (app) {
 
                         donationDB.find({transactionId: {$in: transactionIds}}).exec(function (err, donations) {
 
-                            const transactionDate = transactions[0].transactionDate
+                            const transactionDate = transactions[0].transactionDate;
+
                             // Substitute the charity record for the id field
                             donations.map(function (don) {
                                 var charityId = don["charityId"];
