@@ -3,18 +3,20 @@
  */
 import fetch from 'isomorphic-fetch';
 
-export const queryCurrentCharities = (category) => {
+import {SET_CURRENT_CATEGORY, SET_CURRENT_CHARITIES, APPEND_CURRENT_CHARITIES} from '../constants/ActionTypes'
+
+export const queryCategoryCharities = (category) => {
     return function (dispatch) {
 
         return fetch('/ws/charities/categories/' + category.id, {})
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                    type: 'SET_CURRENT_CATEGORY',
+                    type: SET_CURRENT_CATEGORY,
                     category: category
                 });
                 dispatch({
-                    type: 'SET_CURRENT_CHARITIES',
+                    type: SET_CURRENT_CHARITIES,
                     charities: json.data
                 });
             });
@@ -28,7 +30,7 @@ export const queryCharity = (id) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: 'SET_CURRENT_CHARITIES',
+                        type: APPEND_CURRENT_CHARITIES,
                         charities: [json.data]
                     }
                 );
@@ -43,7 +45,7 @@ export const queryCharityByEin = (ein) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: 'SET_CHARITIES',
+                        type: APPEND_CURRENT_CHARITIES,
                         charities: [json.data]
                     }
                 );

@@ -58,7 +58,7 @@ class Checkout extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="content-region">
                 <Form schema={this.schema}
                       uiSchema={this.uiSchema}
                       onSubmit={this.props.checkout}

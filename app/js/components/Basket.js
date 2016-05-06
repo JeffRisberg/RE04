@@ -45,7 +45,9 @@ class Basket extends React.Component {
                     });
 
                     return (
-                        <div>
+                        <div className="content-region">
+                            <div className="content-header">Giving Basket</div>
+
                             <div style={{padding: '10px', border: '1px solid gray'}}>
                                 {donationItems}
                             </div>
@@ -62,7 +64,10 @@ class Basket extends React.Component {
                 }
                 else {
                     return (
-                        <h4>Your basket is empty.</h4>
+                        <div className="content-region">
+                            <div className="content-header">Giving Basket</div>
+                            <h4>Your basket is empty.</h4>
+                        </div>
                     );
                 }
             }
@@ -73,8 +78,10 @@ class Basket extends React.Component {
         }
         else {
             return (
-                <div>
-                    <p>Please log in first to view your Giving Basket</p>
+                <div className="content-region">
+                    <div className="content-header">
+                        Please log in first to view your Giving Basket
+                    </div>
                 </div>
             )
         }

@@ -12,9 +12,8 @@ import categories from './reducers/categories';
 import currentCategory from './reducers/currentCategory';
 import currentCharities from './reducers/currentCharities';
 import donor from './reducers/donor';
-import topCharities from './reducers/topCharities';
-import transactions from './reducers/transactions';
 import givingHistoryItems from './reducers/givingHistoryItems';
+import topCharities from './reducers/topCharities';
 
 import AppRoot from './components/AppRoot.js';
 import Home from './components/Home.js';
@@ -31,13 +30,12 @@ import UpdateDonation from './components/UpdateDonation.js';
 var initialContent = {
     basketItems: {donations: []},
     completedBasketItems: {donations: []},
-    categories: {idList: [], records: {}},
+    categories: {idList: [], records: {}, selected: null},
     currentCategory: null,
     currentCharities: {idList: [], records: {}},
     donor: null,
-    topCharities: {idList: [], records: {}},
-    transactions: {idList: [], records: {}},
-    givingHistoryItems: {idList: [], records: {}}
+    givingHistoryItems: {idList: [], records: {}},
+    topCharities: {idList: [], records: {}}
 };
 
 const reducers = combineReducers({
@@ -47,9 +45,8 @@ const reducers = combineReducers({
     currentCategory,
     currentCharities,
     donor,
-    topCharities,
-    transactions,
     givingHistoryItems,
+    topCharities,
     routing: routerReducer
 });
 

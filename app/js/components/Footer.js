@@ -11,24 +11,47 @@ class Footer extends React.Component {
     render() {
         return (
             <div>
-                <div className="row" style={{marginTop: '10px',  padding: '5px'}}>
-                    <div className="col-md-12" style={{textAlign: 'center'}}>
-                        Charitable donation services provided by <a href="http://www.justgive.org">JustGive.org</a>
+                <div className="footer" style={{marginLeft: '+15px', marginRight: '+15px'}}>
+                    <div className="row white footer-links">
+                        <div className="col-md-12 text-center">
+                            Charitable donation services provided by <a href="http://www.justgive.org">JustGive.org</a>
+                        </div>
+                    </div>
+                    <div className="row darkgrey footer-links">
+                        <div className="col-md-6 text-left">
+                            <a href="https://gofarrewards.wf.com/#/Help">Help</a>
+                            <a href="https://gofarrewards.wf.com/#/ContactUs" className="margin-l">Contact Us</a>
+                        </div>
+                        <div className="col-md-6 text-right">
+                            <a data-toggle="modal" href="#" data-target="#spanishModal" className="margin-r">Español</a>
+                            <a href="https://gofarrewards.wf.com/#/AccountSettings" className="margin-r">Account
+                                Settings</a>
+                            <a href="https://www.wellsfargo.com/privacy-security/" className="margin-r">Privacy
+                                Policy</a>
+                            <a href="https://gofarrewards.wf.com/#/tnc">Terms and Conditions</a>
+                        </div>
+                    </div>
+                    <div className="row dark-gray copyright">
+                        <div className="col-md-12 text-right">
+                            Copyright &copy; 1999-2016 Wells Fargo Bank, N.A. All Rights Reserved.
+                        </div>
                     </div>
                 </div>
-                <div className="row" style={{background: '#888', color: 'white', padding: '5px'}}>
-                    <div className="col-md-6" style={{textAlign: 'left'}}>
-                        <a style={{color: 'white', marginLeft: '10px'}}>Help</a>
-                        <a style={{color: 'white', marginLeft: '10px'}}>Contact Us</a>
-                    </div>
-                    <div className="col-md-6" style={{textAlign: 'right'}}>
-                        <a style={{color: 'white',  marginLeft: '10px'}}>Privacy Policy</a>
-                        <a style={{color: 'white',  marginLeft: '10px'}}>Terms and Conditions</a>
-                    </div>
-                </div>
-                <div className="row" style={{background: '#222', color: 'white', padding: '5px'}}>
-                    <div className="col-md-12" style={{textAlign: 'right'}}>
-                        Copyright (c) 1999-2016 Wells Fargo Bank, N.A.  All Rights Reserved
+
+                <div className="modal fade" id="spanishModal" tabIndex="-1" role="dialog"
+                     aria-labelledby="spanishModalLabel">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                                <h4 className="modal-title" id="myModalLabel">Español</h4>
+                            </div>
+                            <div className="modal-body">
+                                Para asistencia en español, llame al Centro de Servicios de Go Far Rewards al
+                                1-877-517-1358 y marque 2.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

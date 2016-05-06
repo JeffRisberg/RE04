@@ -8,10 +8,16 @@ class AppRoot extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container-fluid">
                 <Header/>
-                {this.props.children}
-                <Footer/>
+
+                <div className="container" style={{minHeight: '400px'}}>
+                    {this.props.children}
+                </div>
+
+                <div className="container">
+                    <Footer/>
+                </div>
             </div>
         )
     }

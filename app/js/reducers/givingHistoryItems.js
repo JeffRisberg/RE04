@@ -1,15 +1,15 @@
-import { RESET_GIVING_HISTORY } from '../constants/ActionTypes'
+import { SET_GIVING_HISTORY } from '../constants/ActionTypes'
 
 const givingHistoryItems = (state = [], action = {}) => {
     switch (action.type) {
-        case 'RESET_GIVING_HISTORY': // clear prior giving history
+        case SET_GIVING_HISTORY: // clear prior giving history
         {
             const idList = [];
             const records = {};
 
             action.data.forEach(record => {
-                records[record.id] = record;
-                idList.push(record.id);
+                records[record.donationId] = record;
+                idList.push(record.donationId);
             });
 
             return {idList, records};

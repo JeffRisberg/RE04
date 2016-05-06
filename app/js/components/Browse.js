@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 
 import { queryCategories } from '../actions/categories';
-import { queryCurrentCharities } from '../actions/currentCharities';
+import { queryCategoryCharities } from '../actions/currentCharities';
 
 import Category from './Category'
 import Charity from './Charity'
@@ -27,14 +27,17 @@ class Browse extends Component {
     render() {
         const currentCategory = this.props.currentCategory;
         const categoryRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
+
         const loadCharitiesHandler = (category) => {
-            return this.props.queryCurrentCharities(category);
+            return this.props.queryCategoryCharities(category);
         };
 
-        var categoryNodes = categoryRecords.map(function (category, index) {
+        const categoryNodes = categoryRecords.map(function (category, index) {
+            const active = (currentCategory != undefined && category == currentCategory);
+
             return (
                 <Category category={category}
-                          active={category == currentCategory}
+                          active={active}
                           loadCharities={loadCharitiesHandler}
                           key={index}>
                 </Category>
@@ -43,15 +46,15 @@ class Browse extends Component {
 
         const charityRecords = this.props.currentCharities.idList.map(id => this.props.currentCharities.records[id]);
 
-        var charityList = (charityRecords.length > 0) ? (<CharityList charities={charityRecords}/>) : null;
+        const charityList = (charityRecords.length > 0) ? (<CharityList charities={charityRecords}/>) : null;
 
-        var charityListHeader = (currentCategory != null)
+        const charityListHeader = (currentCategory != null)
             ? <div><h3>Displaying charities for {currentCategory.name}</h3></div>
             : null;
 
         return (
-            <div className="container">
-                <h3 style={{borderBottom: '3px solid black'}}>Find a Charity by Cause</h3>
+            <div className="content-region">
+                <div className="content-header">Find a Charity by Cause</div>
 
                 <div className="row">
                     <div className="col-md-2">
@@ -82,5 +85,5 @@ const mapStateToProps = (state) => {
 };
 export default connect(
     mapStateToProps,
-    {queryCategories, queryCurrentCharities}
+    {queryCategories, queryCategoryCharities}
 )(Browse);

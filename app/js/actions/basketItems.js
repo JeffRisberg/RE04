@@ -105,7 +105,6 @@ export const checkout = (formData) => {
             .then(response => response.json())
             .then((json) => {
                 var nextUrl = '/confirmation/' + getState().donor.orderId;
-                console.log('checked out, forwawrding to: ' + nextUrl);
                 dispatch(push(nextUrl));
             });
     };

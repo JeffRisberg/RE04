@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
-import { RESET_GIVING_HISTORY } from '../constants/ActionTypes'
+
+import { SET_GIVING_HISTORY } from '../constants/ActionTypes'
 
 export const queryGivingHistory = (token, donor, year = '2016') => {
     return function (dispatch) {
@@ -16,7 +17,7 @@ export const queryGivingHistory = (token, donor, year = '2016') => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                    type: RESET_GIVING_HISTORY,
+                    type: SET_GIVING_HISTORY,
                     data: json.data
                 });
             });

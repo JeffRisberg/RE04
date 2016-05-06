@@ -41,7 +41,6 @@ class Search extends React.Component {
 
         var searchBar = (
             <div>
-                Search Charities:
                 <form onSubmit={this.handleCharitySearch}>
                     <input type="text" name="keywords" onChange={this.handleChange}/>
                     <input type="submit" value="Go"/>
@@ -56,7 +55,11 @@ class Search extends React.Component {
         );
 
         if (this.state.charities == null || this.state.charities.length == 0) {
-            return (<div>{searchBar}</div>);
+            return (
+                <div className="content-region">
+                    <div className="content-header">Search Charities</div>
+                    {searchBar}
+                </div>);
         } else {
             let resultsNav = null;
             if (this.state.pagination.resultCount > this.state.pagination.resultsPerPage) {
@@ -80,17 +83,19 @@ class Search extends React.Component {
                                   onClick={(e) => {self.handleSearchNav(e, page)}}>{page}</a></li>)
                 });
 
-                resultsNav = (<div>
-                    <ul className="pagination">
-                        {previousPage}
-                        {pages}
-                        {nextPage}
-                    </ul>
-                </div>)
+                resultsNav = (
+                    <div>
+                        <ul className="pagination">
+                            {previousPage}
+                            {pages}
+                            {nextPage}
+                        </ul>
+                    </div>)
             }
 
             return (
-                <div>
+                <div className="content-region">
+                    <div className="content-header">Search Charities</div>
                     {searchBar}
                     <hr/>
                     <div>
@@ -115,8 +120,9 @@ class Search extends React.Component {
             contentType: "application/json",
             dataType: 'json',
             success: function (response) {
-                this.setState({charities: response.data, pagination: response.pagination}, () => {console.log('Scrolling');
-                    window.scrollTo(0,0);
+                this.setState({charities: response.data, pagination: response.pagination}, () => {
+                    console.log('Scrolling');
+                    window.scrollTo(0, 0);
                 });
             }.bind(this),
             error: function (xhr, status, err) {
@@ -130,7 +136,9 @@ class Search extends React.Component {
         const offset = (page - 1) * this.state.limit;
         console.log('setting search offset to ' + offset);
 
-        this.setState({offset: offset}, () => {this.searchCharities()});
+        this.setState({offset: offset}, () => {
+            this.searchCharities()
+        });
     }
 
     handleChange(e) {

@@ -1,8 +1,8 @@
-import { RESET_LIST_CHARITIES } from '../constants/ActionTypes'
+import { SET_TOP_CHARITIES } from '../constants/ActionTypes'
 
 const topCharities = (state = [], action = {}) => {
   switch (action.type) {
-    case 'SET_TOP_CHARITIES': // clear prior charities
+    case SET_TOP_CHARITIES:
     {
       const idList = [];
       const records = {};
@@ -10,20 +10,6 @@ const topCharities = (state = [], action = {}) => {
       action.topCharities.forEach(record => {
         records[record.id] = record;
         idList.push(record.id);
-      });
-
-      return {idList, records};
-    }
-    case 'APPEND_TOP_CHARITIES': // probably not used
-    {
-      const idList = state.idList;
-      const records = state.records;
-
-      action.topCharities.forEach(record => {
-        const id = record.id;
-
-        if (idList.indexOf(id) < 0) idList.push(id);
-        records[id] = record;
       });
 
       return {idList, records};

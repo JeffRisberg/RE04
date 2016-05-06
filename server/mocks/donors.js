@@ -31,6 +31,28 @@ module.exports = function (app) {
         })
     });
 
+    /** return the completed basket items */
+    donorsRouter.get("/:donorId/history/:orderId", function (req, res) {
+        const donorId = req.params.donorId;
+        const orderId = req.params.orderId;
+
+        donorDB.find({id: donorId}).limit(1).exec(function (err, donors) {
+            res.status(201);
+            res.send(JSON.stringify({donor: donor}));
+        })
+    });
+
+    /** return */
+    donorsRouter.get("/:donorId/history", function (req, res) { // year=?
+        const donorId = req.params.donorId;
+        const orderId = req.params.orderId;
+
+        donorDB.find({id: donorId}).limit(1).exec(function (err, donors) {
+            res.status(201);
+            res.send(JSON.stringify({donor: donors[0]}));
+        })
+    });
+
     donorsRouter.post('/', function (req, res) {
         // Look for the most recently created record
         donorDB.find({}).sort({id: -1}).limit(1).exec(function (err, donors) {

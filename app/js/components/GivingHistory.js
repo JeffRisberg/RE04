@@ -19,7 +19,6 @@ class GivingHistory extends React.Component {
 
     componentDidMount() {
         if (this.props.donor != undefined && this.props.donor != null) {
-            console.log('donor: ' + JSON.stringify(this.props.donor));
             this.props.queryGivingHistory(this.props.donor.token, this.props.donor);
         }
     }
@@ -27,8 +26,10 @@ class GivingHistory extends React.Component {
     render() {
         if (this.props.donor != undefined && this.props.donor != null) {
             const givingHistoryItems = this.props.givingHistoryItems;
+
             var givingHistoryItemNodes = givingHistoryItems.idList.map(function (itemId, index) {
-                let givingHistoryItem = givingHistoryItems.records[itemId];
+                const givingHistoryItem = givingHistoryItems.records[itemId];
+
                 return (
                     <GivingHistoryItem givingHistoryItem={givingHistoryItem} key={index}>
                     </GivingHistoryItem>
@@ -36,14 +37,45 @@ class GivingHistory extends React.Component {
             });
 
             return (
-                <div style={{padding: '10px', border: '1px solid gray'}}>
-                    {givingHistoryItemNodes}
+                <div className="content-region">
+                    <h3>Giving History</h3>
+
+                    <p>Below is a history of your past donations with Wells Fargo Go Far Rewards.</p>
+
+                    <p>To donate again to a charity select it below.</p>
+
+                    <p>TIP: for a detailed history of your donations for your tax records,
+                        go to Account Activity.
+                    </p>
+
+                    <div style={{marginBottom: '15px'}}>
+                        <select>
+                            <option>2014</option>
+                            <option>2015</option>
+                            <option selected>2016</option>
+                        </select>
+                    </div>
+
+                    <table className="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Date</th>
+                            <th>Transaction #</th>
+                            <th>Charity</th>
+                            <th>Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {givingHistoryItemNodes}
+                        </tbody>
+                    </table>
                 </div>
             );
         }
         else {
             return (
-                <div>
+                <div className="content-region">
                     <p>Please log in first to view Giving History</p>
                 </div>
             )

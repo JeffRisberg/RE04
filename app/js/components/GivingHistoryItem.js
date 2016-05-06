@@ -17,18 +17,18 @@ class GivingHistoryItem extends React.Component {
         var transDateTimeStr = this.props.givingHistoryItem.transactionDateTime;
         var transDateTime = parseInt(transDateTimeStr);
         var charityName = this.props.givingHistoryItem.charityName;
-        var amount = this.props.givingHistoryItem.amount;
+        var points = this.props.givingHistoryItem.amount;
+        var amount = points / 10;
         var flatCharge = this.props.givingHistoryItem.flatCharge;
 
         return (
-            <div style={{marginBottom: '15px'}}>
-                <input type="checkBox"/>&nbsp;
-                <a href="">{charityName}</a>
-                &nbsp;&nbsp;Amount - ${amount.toFixed(2)} View Details
-                <br/>
-                {moment(transDateTime).format("MM/DD/YYYY hh:mm:ss a")} (UTC)
-                - Transaction Id #{transactionId}
-            </div>
+            <tr>
+                <td><input type="checkbox"/></td>
+                <td>{moment(transDateTime).format("MM/DD/YYYY")}</td>
+                <td>{transactionId}</td>
+                <td>{charityName}</td>
+                <td>{points.toFixed(0)} Points (${amount.toFixed(2)} to the charity)</td>
+            </tr>
         );
     }
 }

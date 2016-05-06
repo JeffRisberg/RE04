@@ -3,6 +3,10 @@
  */
 import fetch from 'isomorphic-fetch';
 
+import { push } from 'react-router-redux'
+
+import { SET_DONOR, CLEAR_DONOR } from '../constants/ActionTypes'
+
 export const login = (login, password) => {
     return function (dispatch) {
 
@@ -18,12 +22,12 @@ export const login = (login, password) => {
         })
             .then(response => response.json())
             .then((json) => {
-                console.log('logged in');
                 dispatch({
-                        type: 'SET_DONOR',
+                        type: SET_DONOR,
                         donor: json.data
                     }
                 );
+                dispatch(push("/"));
             });
     };
 };
@@ -42,7 +46,7 @@ export const logout = (token) => {
             .then((response) => {
                 console.log('logged out');
                 dispatch({
-                        type: 'CLEAR_DONOR',
+                        type: CLEAR_DONOR,
                         donor: null
                     }
                 );

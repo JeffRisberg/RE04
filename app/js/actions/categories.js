@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch';
 
-import { queryCurrentCharities } from '../actions/currentCharities';
+import { SET_CATEGORIES } from '../constants/ActionTypes'
+
+import { queryCategoryCharities } from '../actions/currentCharities';
 
 export const queryCategories = () => {
     return function (dispatch, getState) {
@@ -12,11 +14,11 @@ export const queryCategories = () => {
                 const firstCategory = categories[0];
 
                 dispatch({
-                    type: 'SET_CATEGORIES',
+                    type: SET_CATEGORIES,
                     categories: json.data
                 });
 
-                dispatch(queryCurrentCharities(firstCategory));
+                dispatch(queryCategoryCharities(firstCategory));
             });
     }
 };
