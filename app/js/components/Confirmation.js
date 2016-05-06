@@ -30,10 +30,10 @@ class Confirmation extends React.Component {
             });
 
             return (
-                <div>
-                    <h3>Order Confirmation</h3>
+                <div className="content-region">
+                    <div className="content-header">Order Confirmation</div>
 
-                    <p>Thank you for your generous donations. </p>
+                    <p>Thank you for your generous donations.</p>
 
                     <p>Your confirmation number is {this.props.orderId}</p>
 
@@ -49,8 +49,10 @@ class Confirmation extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {orderId: ownProps.orderId,
-            donations: state.completedBasketItems.donations};
+    return {
+        orderId: ownProps.orderId,
+        donations: state.completedBasketItems.donations
+    };
 };
 
 export default connect(
