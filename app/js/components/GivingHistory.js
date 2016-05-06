@@ -7,7 +7,7 @@ import { queryGivingHistory } from '../actions/givingHistoryItems';
 import GivingHistoryItem from './GivingHistoryItem'
 
 /**
- * Fetches and renders a user's giving history
+ * Fetches and renders a donor's giving history
  *
  * @author Jeff Risberg
  * @since March 2016
@@ -40,12 +40,17 @@ class GivingHistory extends React.Component {
                 <div className="content-region">
                     <div className="content-header">Giving History</div>
 
-                    <p>Below is a history of your past donations with Wells Fargo Go Far Rewards.</p>
+                    <p>
+                        Below is a history of your past donations made using your
+                        Wells Fargo Go Far Rewards.
+                    </p>
 
-                    <p>To donate again to a charity select it below.</p>
+                    <p>To donate again to a charity click on the charity name. Or to repeat
+                        the same donation, check the box next to the charity(ies), then
+                        click the "Add Selected Donation(s) to Basket" button.</p>
 
                     <p>TIP: for a detailed history of your donations for your tax records,
-                        go to Account Activity.
+                        go to <a>Account Activity</a>.
                     </p>
 
                     <div style={{marginBottom: '15px'}}>
