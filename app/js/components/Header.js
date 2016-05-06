@@ -13,7 +13,18 @@ import { login, logout } from '../actions/donor';
  * @since April 30. 2016
  */
 class Header extends React.Component {
+
     render() {
+        var location = this.props.currentLocation.substring(1);
+        var breadCrumb = null;
+
+        if (location.startsWith("search")) breadCrumb = "Find a Charity";
+        if (location.startsWith("basket")) breadCrumb = "Giving Basket";
+        if (location.startsWith("donate")) breadCrumb = "Make a Donation";
+        if (location.startsWith("checkout")) breadCrumb = "Checkout";
+        if (location.startsWith("confirmation")) breadCrumb = "Confirmation";
+        if (location.startsWith("givingHistory")) breadCrumb = "Giving History";
+
         var headerText = "Not logged in";
         let loginLogout = <Link to="/login" style={{marginLeft: '10px'}}>Login</Link>;
         if (this.props.donor != null) {
@@ -87,6 +98,7 @@ class Header extends React.Component {
                     <div className="container">
                         <div className="col-md-9" style={{paddingTop: '15px'}}>
                             <NavLink to="/">Donate Home</NavLink>
+                            {breadCrumb != null ? (' > ' + breadCrumb) : ''}
                         </div>
                         <div className="col-md-3" style={{textAlign: 'right'}}>
                             <NavLink to="/basket" style={{marginLeft: '10px'}}>

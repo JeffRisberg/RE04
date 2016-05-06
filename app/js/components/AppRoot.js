@@ -4,12 +4,19 @@ import { Link } from 'react-router'
 import Header from './Header'
 import Footer from './Footer'
 
+/**
+ * @author Jeff Risberg
+ * @since April 2016
+ */
 class AppRoot extends React.Component {
 
     render() {
+
+        var currentLocation = this.props.location.pathname;
+
         return (
             <div className="container-fluid">
-                <Header/>
+                <Header currentLocation={currentLocation} />
 
                 <div className="container" style={{minHeight: '400px'}}>
                     {this.props.children}
@@ -22,5 +29,8 @@ class AppRoot extends React.Component {
         )
     }
 }
+AppRoot.contextTypes = {
+    location: React.PropTypes.object.isRequired
+};
 
 export default AppRoot;
