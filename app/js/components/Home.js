@@ -51,7 +51,7 @@ export default React.createClass({
                         </div>
                     </div>
                 </div>
-                <TopCharitiesScroller ref='topCharities' topCharitiesCategoryId="1"/>
+                <TopCharitiesScroller ref='topCharities'/>
                 <Browse ref='byCause'/>
             </div>
         )

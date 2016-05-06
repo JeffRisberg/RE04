@@ -38,7 +38,7 @@ class GivingHistory extends React.Component {
 
             return (
                 <div className="content-region">
-                    <h3>Giving History</h3>
+                    <div className="content-header">Giving History</div>
 
                     <p>Below is a history of your past donations with Wells Fargo Go Far Rewards.</p>
 
@@ -76,7 +76,7 @@ class GivingHistory extends React.Component {
         else {
             return (
                 <div className="content-region">
-                    <p>Please log in first to view Giving History</p>
+                    <div className="content-header">Please log in first to view Giving History</div>
                 </div>
             )
         }
