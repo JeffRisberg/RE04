@@ -10,7 +10,7 @@ import { login, logout } from '../actions/donor';
  * Appears at top of screen
  *
  * @author Jeff Risberg, Brandon Risberg
- * @since April 30. 2016
+ * @since April 30, 2016
  */
 class Header extends React.Component {
 
