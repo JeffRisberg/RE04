@@ -158,6 +158,7 @@ module.exports = function (app) {
                             donorId: donorId,
                             firstName: donor.firstName,
                             lastName: donor.lastName,
+                            points: donor.points,
                             orderId: newTransactionId
                         };
 
