@@ -41,19 +41,14 @@ class Header extends React.Component {
                     <div className="top-border"></div>
                     <div className="container">
                         <div className="logo col-md-4 col-xs-4">
-                            <img src="/images/GoFar-logo-large.jpg" className="hidden-xs"/>
-                            <img src="/images/GoFar-logo-small.jpg" className="visible-xs-block"/>
+                            <img src="images/Logo.png" />
                         </div>
 
                         <div className="col-md-8 col-xs-7">
                             <div className="account-header-links text-right hidden-xs">
-                                <a href="https://www.wellsfargo.com/" className="margin-r">wellsfargo.com</a>
-                                <a href="#" className="margin-r">Rewards ID [ID]</a>
-                                <a href="https://gofarrewards.wf.com/#/AccountSettings"
-                                   className="margin-r">Settings</a>
-                                <a href="https://gofarrewards.wf.com/#/Help" className="margin-r">Help</a>
-                                <a data-toggle="modal" href="#" data-target="#spanishModal"
-                                   className="margin-r">Español</a>
+                                <a href="" className="margin-r">JustGive</a>
+                                <a href="" className="margin-r">Settings</a>
+                                <a href="" className="margin-r">Help</a>
                                 {loginLogout}
                             </div>
 
@@ -69,13 +64,9 @@ class Header extends React.Component {
                             </a>
 
                             <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLabel">
-                                <li><a href="https://gofarrewards.wf.com/#/AccountSettings"
-                                       className="margin-r">Settings</a></li>
-                                <li><a href="https://gofarrewards.wf.com/#/Help" className="margin-r">Help</a></li>
-                                <li><a data-toggle="modal" href="#" data-target="#spanishModal"
-                                       className="margin-r">Español</a>
-                                </li>
-                                <li><a href="https://www.wellsfargo.com/" className="margin-r">wellsfargo.com</a></li>
+                                <li><a href="" className="margin-r">Settings</a></li>
+                                <li><a href="" className="margin-r">Help</a></li>
+                                <li><a href="http://www.justgive.org" className="margin-r">JustGive</a></li>
                                 <li><a href="#">Sign Off</a></li>
                             </ul>
                         </div>
