@@ -8,8 +8,10 @@ class Browse extends React.Component {
         super();
 
         this.state = {charities: []};
-        this.loadCharitiesFromServer = this.loadCharitiesFromServer.bind(this);
-        this.loadCategoriesFromServer = this.loadCategoriesFromServer.bind(this);
+    }
+
+    componentDidMount() {
+        this.loadCategoriesFromServer();
     }
 
     render() {
@@ -43,12 +45,7 @@ class Browse extends React.Component {
         return null;
     }
 
-    componentDidMount() {
-        this.loadCategoriesFromServer();
-
-    }
-
-    loadCategoriesFromServer() {
+    loadCategoriesFromServer = () => {
         var url = "/ws/charities/guide/categories";
         $.ajax({
             url: url,
@@ -63,7 +60,7 @@ class Browse extends React.Component {
         });
     }
 
-    loadCharitiesFromServer(catId = "1") {
+    loadCharitiesFromServer = (catId = "1") => {
         console.log("loading charities for category " + catId)
         var url = "/ws/charities/categories/" + catId;
         $.ajax({

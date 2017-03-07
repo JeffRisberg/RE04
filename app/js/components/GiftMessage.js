@@ -3,11 +3,8 @@ import React from 'react'
 class GiftMessage extends React.Component {
     constructor() {
         super();
-        this.state = { loading: true, donation: null, recipientName: '', memorialName: '', message: '', recipientEmail: ''};
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.composeGiftMessageJson = this.composeGiftMessageJson.bind(this)
+        this.state = { loading: true, donation: null, recipientName: '', memorialName: '', message: '', recipientEmail: ''};
     }
 
     componentDidMount() {
@@ -73,7 +70,7 @@ class GiftMessage extends React.Component {
         }
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault();
         var donation = this.state.donation;
         if (donation != null) {
@@ -97,7 +94,7 @@ class GiftMessage extends React.Component {
         }
     }
 
-    composeGiftMessageJson() {
+    composeGiftMessageJson = () => {
         var giftMessage = Object.assign({}, this.state);
         delete giftMessage.loading;
         delete giftMessage.donation;
@@ -107,7 +104,7 @@ class GiftMessage extends React.Component {
         return json;
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         console.log("changing " + e.target.name + " to " + e.target.value);
         this.setState({[e.target.name]: e.target.value});
     }

@@ -1,13 +1,12 @@
 import React from 'react'
-//import SessionStore from '../stores/SessionStore'
+
 import DonationForm from './DonationForm'
 
 class UpdateDonation extends React.Component {
     constructor() {
         super();
-        this.state = {loading: true, donation: null, formData: {}};
 
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {loading: true, donation: null, formData: {}};
     }
 
     componentDidMount() {
@@ -52,7 +51,7 @@ class UpdateDonation extends React.Component {
         }
     }
 
-    handleSubmit({formData}) {
+    handleSubmit = ({formData}) => {
         if (this.state.donation.charity != null) {
 
             $.ajax({

@@ -14,12 +14,6 @@ import { addToBasket } from '../actions/basketItems';
  * @since March 2016
  */
 class Donate extends React.Component {
-    constructor() {
-        super();
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.locateCharity = this.locateCharity.bind(this);
-    }
 
     componentDidMount() {
         // We assume that the charity is in the topCharities list or the currentCharities list
@@ -47,7 +41,7 @@ class Donate extends React.Component {
         }
     }
 
-    handleSubmit({formData}) {
+    handleSubmit = ({formData}) => {
         var charity = this.locateCharity(this.props.params.ein);
 
         if (charity != null) {
@@ -57,7 +51,7 @@ class Donate extends React.Component {
         }
     }
 
-    locateCharity(ein) {
+    locateCharity = (ein) => {
         var id;
         if (this.props.currentCharities.records != undefined) {
             for (id in this.props.currentCharities.records) {

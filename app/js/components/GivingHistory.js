@@ -40,18 +40,9 @@ class GivingHistory extends React.Component {
                 <div className="content-region">
                     <div className="content-header">Giving History</div>
 
-                    <p>
-                        Below is a history of your past donations made using your
-                        Wells Fargo Go Far Rewards.
-                    </p>
-
-                    <p>To donate again to a charity click on the charity name. Or to repeat
-                        the same donation, check the box next to the charity(ies), then
-                        click the "Add Selected Donation(s) to Basket" button.</p>
-
-                    <p>TIP: for a detailed history of your donations for your tax records,
-                        go to <a>Account Activity</a>.
-                    </p>
+                    <h2>
+                        Below is a history of your past donations
+                    </h2>
 
                     <div style={{marginBottom: '15px'}}>
                         <select>

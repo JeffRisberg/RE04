@@ -18,8 +18,6 @@ class Login extends React.Component {
     constructor() {
         super();
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-
         this.schema = {
             "title": null,
             "type": "object",
@@ -45,7 +43,7 @@ class Login extends React.Component {
         };
     }
 
-    handleSubmit({formData}) {
+    handleSubmit = ({formData}) => {
         var loginValue = formData.login.trim();
         var password = formData.password.trim();
 

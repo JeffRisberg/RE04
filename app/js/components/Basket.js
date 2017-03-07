@@ -17,7 +17,6 @@ class Basket extends React.Component {
         super();
 
         this.state = {order: null};
-        this.clearBasket = this.clearBasket.bind(this);
     }
 
     componentDidMount() {
@@ -26,7 +25,7 @@ class Basket extends React.Component {
         }
     }
 
-    clearBasket() {
+    clearBasket = () => {
         if (this.props.donor != undefined && this.props.donor != null) {
             this.props.clearBasket();
         }

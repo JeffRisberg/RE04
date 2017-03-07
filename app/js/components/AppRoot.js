@@ -30,7 +30,7 @@ class AppRoot extends React.Component {
     }
 }
 AppRoot.contextTypes = {
-    location: React.PropTypes.object.isRequired
+    location: React.PropTypes.object
 };
 
 export default AppRoot;

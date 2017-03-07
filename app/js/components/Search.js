@@ -17,9 +17,6 @@ class Search extends React.Component {
             offset: 0,
             limit: 10
         };
-        this.handleCharitySearch = this.handleCharitySearch.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.toggleSearchOptions = this.toggleSearchOptions.bind(this);
     }
 
     render() {
@@ -131,7 +128,7 @@ class Search extends React.Component {
         });
     }
 
-    handleSearchNav(e, page) {
+    handleSearchNav = (e, page) => {
         e.preventDefault();
         const offset = (page - 1) * this.state.limit;
         console.log('setting search offset to ' + offset);
@@ -141,11 +138,11 @@ class Search extends React.Component {
         });
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    toggleSearchOptions(e) {
+    toggleSearchOptions = (e) => {
         e.preventDefault();
         this.setState({showOptions: !this.state.showOptions});
     }
