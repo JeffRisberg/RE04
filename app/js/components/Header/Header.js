@@ -3,8 +3,10 @@ import { Link } from 'react-router'
 
 import { connect } from 'react-redux';
 
-import NavLink from './NavLink'
-import { login, logout } from '../actions/donor';
+import NavLink from '../NavLink'
+import { login, logout } from '../../actions/donor';
+
+import './Header.scss';
 
 /**
  * Appears at top of screen
@@ -26,13 +28,13 @@ class Header extends React.Component {
         if (location.startsWith("givingHistory")) breadCrumb = "Giving History";
 
         var headerText = "Not logged in";
-        let loginLogout = <Link to="/login" style={{marginLeft: '10px'}}>Login</Link>;
+        let loginLogout = <Link to="/login" className="margin-r">Login</Link>;
         if (this.props.donor != null) {
             var firstName = this.props.donor.firstName;
             var points = this.props.donor.points;
 
             headerText = firstName + " " + points + " points";
-            loginLogout = <a onClick={this.props.logout} style={{marginLeft: '10px'}}>Logout</a>;
+            loginLogout = <a onClick={this.props.logout} className="margin-r">Logout</a>;
         }
 
         return (
@@ -46,7 +48,6 @@ class Header extends React.Component {
 
                         <div className="col-md-8 col-xs-7">
                             <div className="account-header-links text-right hidden-xs">
-                                <a href="" className="margin-r">JustGive</a>
                                 <a href="" className="margin-r">Settings</a>
                                 <a href="" className="margin-r">Help</a>
                                 {loginLogout}
@@ -66,8 +67,7 @@ class Header extends React.Component {
                             <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLabel">
                                 <li><a href="" className="margin-r">Settings</a></li>
                                 <li><a href="" className="margin-r">Help</a></li>
-                                <li><a href="http://www.justgive.org" className="margin-r">JustGive</a></li>
-                                <li><a href="#">Sign Off</a></li>
+                                <li><a href="#" className="margin-r">Sign Off</a></li>
                             </ul>
                         </div>
                     </div>
@@ -76,8 +76,9 @@ class Header extends React.Component {
                 <div className="row darkgrey">
                     <div className="container">
                         <ul className="nav nav-pills nav-justified" role="tablist">
-                            <li><a href="#myrewards" aria-controls="myrewards" role="tab" data-toggle="tab">My
-                                Rewards</a></li>
+                            <li><a href="#myrewards" aria-controls="myrewards" role="tab" data-toggle="tab">
+                                My Rewards
+                            </a></li>
                             <li><a href="#earn" aria-controls="earn" role="tab" data-toggle="tab">Earn</a></li>
                             <li><a href="#use" aria-controls="use" role="tab" data-toggle="tab">Use</a></li>
                             <li><a href="#share" aria-controls="share" role="tab" data-toggle="tab">Share</a></li>
@@ -99,28 +100,6 @@ class Header extends React.Component {
                                 <div className="giving-history"/>
                             </NavLink>
                         </div>
-                    </div>
-                </div>
-
-                <div id="sessionExpiredModal" className="modal fade" role="dialog">
-                    <div className="modal-dialog">
-
-                        <div className="modal-content">
-                            <div className="modal-header" style={{color: 'white', background: '#AE2573'}}>
-                                <button type="button" className="close" data-dismiss="modal">&times;</button>
-                                <h4 className="modal-title" style={{textAlign: 'center'}}>Attention</h4>
-                            </div>
-                            <div className="modal-body">
-                                <p>Your session will end soon and you will be Signed Off. Would you like to continue your session?</p>
-                            </div>
-                            <div className="modal-footer" style={{textAlign: 'center'}}>
-                                <button type="button" className="btn btn-default" data-dismiss="modal"
-                                        style={{color: 'white', background: '#AE2573'}}>
-                                    Continue
-                                </button>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>

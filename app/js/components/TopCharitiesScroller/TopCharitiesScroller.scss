@@ -1,0 +1,18 @@
+@import "../../../styles/app.scss";
+
+ul.horizontal-slide {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+ul.horizontal-slide li[class*="col"] {
+  display: inline-block;
+  float: none;
+}
+
+ul.horizontal-slide li[class*="col"]:first-child {
+  margin-left: 0;
+}

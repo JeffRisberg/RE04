@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 
 import { Link } from 'react-router'
 
-import TopCharitiesScroller from './TopCharitiesScroller';
-import Browse from './Browse';
+import TopCharitiesScroller from './TopCharitiesScroller/TopCharitiesScroller';
+import Guide from './Guide/Guide';
 
 export default React.createClass({
     render() {
@@ -52,7 +52,7 @@ export default React.createClass({
                     </div>
                 </div>
                 <TopCharitiesScroller ref='topCharities'/>
-                <Browse ref='byCause'/>
+                <Guide ref='byCause'/>
             </div>
         )
     }

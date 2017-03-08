@@ -22,7 +22,7 @@ class Charity extends React.Component {
                 Tax ID: {this.props.charity.ein}
                 </p></td>
                 <td style={{textAlign: 'right'}}>
-                    <Link to={"/donate/" + this.props.charity.ein} className="btn">
+                    <Link to={"/donate/" + this.props.charity.ein} className="donate">
                         Donate Now
                     </Link>
                 </td>

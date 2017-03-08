@@ -2,7 +2,9 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
-import { getTopCharities } from '../actions/topCharities';
+import { getTopCharities } from '../../actions/topCharities';
+
+import './TopCharitiesScroller.scss';
 
 /**
  * Draws a left-right horizontal scroller of the top charities.
@@ -11,10 +13,6 @@ import { getTopCharities } from '../actions/topCharities';
  * @since April 2016
  */
 class TopCharitiesScroller extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.getTopCharities();
@@ -39,7 +37,7 @@ class TopCharitiesScroller extends React.Component {
                     <li key={index} className="col-md-2">
                         <img className="thumbnail" src={ imagePath + imageFile} width="128" height="77"/>
                         <br/>
-                        <Link to={"/donate/" + charity.ein} className="btn">
+                        <Link to={"/donate/" + charity.ein} className="donate">
                             Donate Now
                         </Link>
                     </li>

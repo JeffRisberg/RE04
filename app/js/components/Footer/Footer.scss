@@ -1,0 +1,17 @@
+@import "../../../styles/app.scss";
+
+.footer {
+  font-size: 12px;
+}
+
+div.footer-links {
+  min-height: 40px;
+  line-height: 40px;
+}
+
+div.copyright {
+  min-height: 51px;
+  line-height: 51px;
+  background-color: #000;
+  color: #d7d3c7;
+}

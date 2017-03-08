@@ -10,8 +10,13 @@ module.exports = {
     },
     module: {
         loaders: [
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
             {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
-            {test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader" }
+            {test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader" },
+            {test: /\.(jpe?g|png|gif|svg)$/i, loader: "file-loader?name=/public/icons/[name].[ext]"}
         ]
     },
     plugins: [

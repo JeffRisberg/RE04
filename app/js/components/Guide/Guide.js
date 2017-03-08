@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 
-import { queryCategories } from '../actions/categories';
-import { queryCategoryCharities } from '../actions/currentCharities';
+import { queryCategories } from '../../actions/categories';
+import { queryCategoryCharities } from '../../actions/currentCharities';
 
-import Category from './Category'
-import Charity from './Charity'
-import CharityList from './CharityList'
+import Category from '../Category'
+import CharityList from '../CharityList'
+
+import './Guide.scss';
 
 /**
  * Renders a category list on the left, and a set of charities for the selected category on
@@ -15,11 +16,7 @@ import CharityList from './CharityList'
  * @author Jeff Risberg
  * @since April 2016
  */
-class Browse extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+class Guide extends Component {
     componentDidMount() {
         this.props.queryCategories();
     }
@@ -70,7 +67,7 @@ class Browse extends Component {
     }
 }
 
-Browse.propTypes = {
+Guide.propTypes = {
     categories: PropTypes.object.isRequired,
     currentCategory: PropTypes.object,
     currentCharities: PropTypes.object.isRequired
@@ -86,4 +83,4 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     {queryCategories, queryCategoryCharities}
-)(Browse);
+)(Guide);

@@ -1,0 +1,127 @@
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-darkgrey: #44464a;
+$color-lightgrey: #f0f0f0;
+
+$color-darkblue: #2F0B54;
+$color-lightblue: #8080FF;
+
+$color-maroon: #bb0826;
+$color-beige: #f3f4f3;
+
+body {
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  background: #f3f4f3;
+}
+
+h1 {
+  font-family: "georgia, serif";
+}
+
+h2 {
+  font-family: "georgia, serif";
+}
+
+h3 {
+  font-family: "georgia, serif";
+}
+
+h4 {
+  font-family: "georgia, serif";
+}
+
+/* General purpose CSS classes */
+.white {
+  background-color: $color-white;
+}
+
+.darkgrey, .darkgrey a {
+  background-color: $color-darkgrey;
+  color: $color-white;
+}
+
+a.margin-l {
+  margin-left: 9px;
+}
+
+a.margin-r {
+  margin-right: 9px;
+}
+
+/* Small screen nav bar */
+@media screen and (max-width: 768px) {
+  .nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+
+  .nav-pills > li > a {
+    padding: 12px 0px;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 0px;
+  }
+}
+
+/* Content formatting */
+
+.content-region {
+  background: white;
+  padding: 4px 30px 20px 30px;
+  margin-bottom: 20px;
+}
+
+.content-header {
+  border-bottom: 3px solid $color-maroon;
+  font-family: "georgia, serif";
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  line-height: 1.1;
+  box-sizing: border-box;
+}
+
+.donate {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  background-color: $color-darkblue;
+  background-image: -moz-linear-gradient(top, #9268BD, #2F0B54);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#9268BD), to(#2F0B54));
+  background-image: -webkit-linear-gradient(top, #9268BD, #2F0B54);
+  background-image: -o-linear-gradient(top, #9268BD, #2F0B54);
+  background-image: linear-gradient(to bottom, #9268BD, #2F0B54);
+  background-repeat: repeat-x;
+  border-color: $color-darkblue;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.donate:hover,
+.donate:active,
+.donate.active,
+.donate.disabled,
+.donate[disabled] {
+  color: #FFFFFF;
+  background-color: #2F0B54;
+}
+
