@@ -28,13 +28,13 @@ class Header extends React.Component {
         if (location.startsWith("givingHistory")) breadCrumb = "Giving History";
 
         var headerText = "Not logged in";
-        let loginLogout = <Link to="/login" className="margin-r">Login</Link>;
+        let loginLogout = <Link to="/login" className="margin-l">Login</Link>;
         if (this.props.donor != null) {
             var firstName = this.props.donor.firstName;
             var points = this.props.donor.points;
 
             headerText = firstName + " " + points + " points";
-            loginLogout = <a onClick={this.props.logout} className="margin-r">Logout</a>;
+            loginLogout = <a onClick={this.props.logout} className="margin-l">Logout</a>;
         }
 
         return (
@@ -48,8 +48,8 @@ class Header extends React.Component {
 
                         <div className="col-md-8 col-xs-7">
                             <div className="account-header-links text-right hidden-xs">
-                                <a href="" className="margin-r">Settings</a>
-                                <a href="" className="margin-r">Help</a>
+                                <a href="" className="margin-l">Settings</a>
+                                <a href="" className="margin-l">Help</a>
                                 {loginLogout}
                             </div>
 
@@ -65,9 +65,9 @@ class Header extends React.Component {
                             </a>
 
                             <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLabel">
-                                <li><a href="" className="margin-r">Settings</a></li>
-                                <li><a href="" className="margin-r">Help</a></li>
-                                <li><a href="#" className="margin-r">Sign Off</a></li>
+                                <li><a href="" className="margin-l">Settings</a></li>
+                                <li><a href="" className="margin-l">Help</a></li>
+                                <li><a href="#" className="margin-l">Sign Off</a></li>
                             </ul>
                         </div>
                     </div>

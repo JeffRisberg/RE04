@@ -1,7 +1,7 @@
 import React from 'react'
-import Charity from './Charity'
-import CharityList from './CharityList'
 import ReactDOM from 'react-dom';
+
+import CharityList from './CharityList/CharityList'
 
 class Search extends React.Component {
     constructor() {

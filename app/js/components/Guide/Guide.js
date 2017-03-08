@@ -5,7 +5,7 @@ import { queryCategories } from '../../actions/categories';
 import { queryCategoryCharities } from '../../actions/currentCharities';
 
 import Category from '../Category'
-import CharityList from '../CharityList'
+import CharityList from '../CharityList/CharityList'
 
 import './Guide.scss';
 
@@ -17,6 +17,7 @@ import './Guide.scss';
  * @since April 2016
  */
 class Guide extends Component {
+
     componentDidMount() {
         this.props.queryCategories();
     }
