@@ -9,10 +9,6 @@ import { Link } from 'react-router'
  */
 class Donation extends React.Component {
 
-    constructor() {
-        super();
-    }
-
     render() {
         var charityName = this.props.donation.charity.name;
         var amount = this.props.donation.amount;

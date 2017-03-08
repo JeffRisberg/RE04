@@ -1,8 +1,8 @@
-import { SET_TOP_CHARITIES } from '../constants/ActionTypes'
+import { types } from '../types'
 
 const topCharities = (state = [], action = {}) => {
   switch (action.type) {
-    case SET_TOP_CHARITIES:
+    case types.SET_TOP_CHARITIES:
     {
       const idList = [];
       const records = {};

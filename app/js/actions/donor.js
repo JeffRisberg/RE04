@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch';
 
 import { push } from 'react-router-redux'
 
-import { SET_DONOR, CLEAR_DONOR } from '../constants/ActionTypes'
+import { types } from '../types'
 
 export const login = (login, password) => {
     return function (dispatch) {
@@ -23,7 +23,7 @@ export const login = (login, password) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: SET_DONOR,
+                        type: types.SET_DONOR,
                         donor: json.data
                     }
                 );
@@ -46,7 +46,7 @@ export const logout = (token) => {
             .then((response) => {
                 console.log('logged out');
                 dispatch({
-                        type: CLEAR_DONOR,
+                        type: types.CLEAR_DONOR,
                         donor: null
                     }
                 );

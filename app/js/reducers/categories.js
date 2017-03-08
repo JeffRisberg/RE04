@@ -1,8 +1,8 @@
-import { SET_CATEGORIES } from '../constants/ActionTypes'
+import { types } from '../types'
 
 const categories = (state = [], action = {}) => {
     switch (action.type) {
-        case SET_CATEGORIES: // clear prior categories
+        case types.SET_CATEGORIES: // clear prior categories
         {
             const idList = [];
             const records = {};

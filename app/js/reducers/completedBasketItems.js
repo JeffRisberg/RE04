@@ -1,8 +1,8 @@
-import { SET_COMPLETED_BASKET_ITEMS } from '../constants/ActionTypes'
+import { types } from '../types'
 
 const completedBasketItems = (state = [], action = {}) => {
     switch (action.type) {
-        case SET_COMPLETED_BASKET_ITEMS: // clear prior completed basket Items
+        case types.SET_COMPLETED_BASKET_ITEMS: // clear prior completed basket Items
         {
             return action.data;
         }

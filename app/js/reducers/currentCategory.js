@@ -1,8 +1,8 @@
-import { SET_CURRENT_CATEGORY } from '../constants/ActionTypes'
+import { types } from '../types'
 
 const currentCategory = (state = [], action = {}) => {
     switch (action.type) {
-        case SET_CURRENT_CATEGORY: //
+        case types.SET_CURRENT_CATEGORY: //
         {
             const currentCategory = action.category;
             return currentCategory;

@@ -1,6 +1,9 @@
+/**
+ * This is used for categories fetch
+ */
 import fetch from 'isomorphic-fetch';
 
-import { SET_CATEGORIES } from '../constants/ActionTypes'
+import { types } from '../types'
 
 import { queryCategoryCharities } from '../actions/currentCharities';
 
@@ -14,7 +17,7 @@ export const queryCategories = () => {
                 const firstCategory = categories[0];
 
                 dispatch({
-                    type: SET_CATEGORIES,
+                    type: types.SET_CATEGORIES,
                     categories: json.data
                 });
 

@@ -1,8 +1,8 @@
-import { SET_GIVING_HISTORY } from '../constants/ActionTypes'
+import { types } from '../types'
 
 const givingHistoryItems = (state = [], action = {}) => {
     switch (action.type) {
-        case SET_GIVING_HISTORY: // clear prior giving history
+        case types.SET_GIVING_HISTORY: // clear prior giving history
         {
             const idList = [];
             const records = {};

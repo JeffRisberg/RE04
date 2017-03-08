@@ -3,7 +3,7 @@
  */
 import fetch from 'isomorphic-fetch';
 
-import { SET_TOP_CHARITIES } from '../constants/ActionTypes'
+import { types } from '../types'
 
 export const getTopCharities = () => {
     return function (dispatch) {
@@ -12,7 +12,7 @@ export const getTopCharities = () => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: SET_TOP_CHARITIES,
+                        type: types.SET_TOP_CHARITIES,
                         topCharities: json.data
                     }
                 );

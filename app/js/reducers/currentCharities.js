@@ -1,8 +1,8 @@
-import { SET_CURRENT_CHARITIES, APPEND_CURRENT_CHARITIES } from '../constants/ActionTypes'
+import { types } from '../types'
 
 const currentCharities = (state = [], action = {}) => {
     switch (action.type) {
-        case SET_CURRENT_CHARITIES: // clear prior charities
+        case types.SET_CURRENT_CHARITIES: // clear prior charities
         {
             const idList = [];
             const records = {};
@@ -14,7 +14,7 @@ const currentCharities = (state = [], action = {}) => {
 
             return {idList, records};
         }
-        case APPEND_CURRENT_CHARITIES:
+        case types.APPEND_CURRENT_CHARITIES:
         {
             const updatedState = Object.assign({}, state);
 

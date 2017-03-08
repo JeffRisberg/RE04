@@ -2,7 +2,8 @@
  * This is used for the donor's completed basket confirmation.
  */
 import fetch from 'isomorphic-fetch';
-import { SET_COMPLETED_BASKET_ITEMS } from '../constants/ActionTypes'
+
+import { types } from '../types'
 
 export const queryCompletedBasket = (orderId) => {
     return function (dispatch, getState) {
@@ -17,7 +18,7 @@ export const queryCompletedBasket = (orderId) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                    type: SET_COMPLETED_BASKET_ITEMS,
+                    type: types.SET_COMPLETED_BASKET_ITEMS,
                     data: json.data
                 });
             });

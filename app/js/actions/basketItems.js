@@ -2,7 +2,8 @@
  * This is used for the donor's current basket.
  */
 import fetch from 'isomorphic-fetch';
-import { SET_BASKET_ITEMS, CLEAR_BASKET_ITEMS } from '../constants/ActionTypes'
+
+import { types } from '../types'
 
 import { push } from 'react-router-redux'
 
@@ -19,7 +20,7 @@ export const queryBasket = () => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                    type: SET_BASKET_ITEMS,
+                    type: types.SET_BASKET_ITEMS,
                     data: json.data
                 });
             });
@@ -84,7 +85,7 @@ export const clearBasket = (token) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                    type: CLEAR_BASKET_ITEMS
+                    type: types.CLEAR_BASKET_ITEMS
                 });
             });
     };

@@ -1,11 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Link } from 'react-router'
-import { connect } from 'react-redux';
-
-import DonationForm from './DonationForm'
-
-import { addToBasket } from '../actions/basketItems';
+import React from "react";
+import {Link} from "react-router";
+import {connect} from "react-redux";
+import DonationForm from "./DonationForm";
+import {addToBasket} from "../actions/basketItems";
 
 /**
  * Donation entry screen

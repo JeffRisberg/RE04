@@ -3,7 +3,7 @@
  */
 import fetch from 'isomorphic-fetch';
 
-import {SET_CURRENT_CATEGORY, SET_CURRENT_CHARITIES, APPEND_CURRENT_CHARITIES} from '../constants/ActionTypes'
+import { types } from '../types'
 
 export const queryCategoryCharities = (category) => {
     return function (dispatch) {
@@ -12,11 +12,11 @@ export const queryCategoryCharities = (category) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                    type: SET_CURRENT_CATEGORY,
+                    type: types.SET_CURRENT_CATEGORY,
                     category: category
                 });
                 dispatch({
-                    type: SET_CURRENT_CHARITIES,
+                    type: types.SET_CURRENT_CHARITIES,
                     charities: json.data
                 });
             });
@@ -30,7 +30,7 @@ export const queryCharity = (id) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: APPEND_CURRENT_CHARITIES,
+                        type: types.APPEND_CURRENT_CHARITIES,
                         charities: [json.data]
                     }
                 );

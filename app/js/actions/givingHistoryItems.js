@@ -1,6 +1,9 @@
+/**
+ * This is used for givinghistory display
+ */
 import fetch from 'isomorphic-fetch';
 
-import { SET_GIVING_HISTORY } from '../constants/ActionTypes'
+import { types } from '../types'
 
 export const queryGivingHistory = (token, donor, year = '2016') => {
     return function (dispatch) {
@@ -17,7 +20,7 @@ export const queryGivingHistory = (token, donor, year = '2016') => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                    type: SET_GIVING_HISTORY,
+                    type: types.SET_GIVING_HISTORY,
                     data: json.data
                 });
             });
