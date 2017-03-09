@@ -81,12 +81,17 @@ module.exports = function (app) {
                             return tran.id
                         });
 
-                        donationDB.find({transactionId: {$in: transactionIds}}).exec(function (err, donations) {
+                        const transactionDates = {};
+                        transactions.forEach(function (tran) {
+                            transactionDates[tran.id] = tran.transactionDate;
+                        });
 
-                            const transactionDate = transactions[0].transactionDate;
+                        donationDB.find({transactionId: {$in: transactionIds}}).exec(function (err, donations) {
 
                             // Substitute the charity record for the id field
                             donations.map(function (don) {
+                                const transactionId = don["transactionId"];
+                                var transactionDate = transactionDates[transactionId];
                                 var charityId = don["charityId"];
                                 var charity = null;
 
@@ -95,8 +100,7 @@ module.exports = function (app) {
                                 });
                                 don['donationId'] = don['id'];
                                 don['charityName'] = charity.name;
-                                don['transactionDate'] = 'Jan 8, 2016 10:55:20 PM';
-                                don['transactionDateTime'] = parseInt(transactionDate);
+                                don['transactionDate'] = transactionDate;
                                 don['amount'] = parseInt(don['amount']);
                             });
 
@@ -150,6 +154,8 @@ module.exports = function (app) {
                     }
 
                     var newTransaction = {id: newTransactionId, donorId: donorId};
+                    newTransaction.transactionDate = Date.now();
+
                     // Insert the new record
                     transactionDB.insert(newTransaction, function (err, newTransaction) {
 

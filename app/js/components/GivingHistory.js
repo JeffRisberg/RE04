@@ -48,7 +48,8 @@ class GivingHistory extends React.Component {
                         <select>
                             <option>2014</option>
                             <option>2015</option>
-                            <option selected>2016</option>
+                            <option>2016</option>
+                            <option selected>2017</option>
                         </select>
                     </div>
 

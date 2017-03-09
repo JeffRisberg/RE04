@@ -32,11 +32,12 @@ module.exports = function (app) {
         // Look for the most recently created record
         transactionDB.find({}).sort({id: -1}).limit(1).exec(function (err, transactions) {
 
-            console.log(req.body.transaction);
             if (transactions.length != 0)
                 req.body.transaction.id = transactions[0].id + 1;
             else
                 req.body.transaction.id = 1;
+
+            req.body.transaction.transactionDate = Date.now();
 
             // Insert the new record
             transactionDB.insert(req.body.transaction, function (err, newTransaction) {

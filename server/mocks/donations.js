@@ -22,7 +22,6 @@ module.exports = function (app) {
         // Look for the most recently created record
         donationDB.find({}).sort({id: -1}).limit(1).exec(function (err, donations) {
 
-            console.log(req.body.donation);
             if (donations.length != 0)
                 req.body.donation.id = donations[0].id + 1;
             else
