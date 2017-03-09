@@ -1,35 +1,29 @@
-import { types } from '../types'
+import {handleActions} from "redux-actions";
+import {types} from "../types";
 
-const currentCharities = (state = [], action = {}) => {
-    switch (action.type) {
-        case types.SET_CURRENT_CHARITIES: // clear prior charities
-        {
-            const idList = [];
-            const records = {};
+export default handleActions({
+    [types.SET_CURRENT_CHARITIES]: (state, action) => {
+        const idList = [];
+        const records = {};
 
-            action.charities.forEach(record => {
-                records[record.id] = record;
-                idList.push(record.id);
-            });
+        action.charities.forEach(record => {
+            records[record.id] = record;
+            idList.push(record.id);
+        });
 
-            return {idList, records};
-        }
-        case types.APPEND_CURRENT_CHARITIES:
-        {
-            const updatedState = Object.assign({}, state);
+        return {idList, records};
+    },
 
-            action.charities.forEach(record => {
-                const id = record.id;
+    [types.APPEND_CURRENT_CHARITIES]: (state, action) => {
+        const updatedState = Object.assign({}, state);
 
-                if (updatedState.idList.indexOf(id) < 0) updatedState.idList.push(id);
-                updatedState.records[id] = record;
-            });
+        action.charities.forEach(record => {
+            const id = record.id;
 
-            return updatedState;
-        }
-        default:
-            return state;
+            if (updatedState.idList.indexOf(id) < 0) updatedState.idList.push(id);
+            updatedState.records[id] = record;
+        });
+
+        return updatedState;
     }
-};
-
-export default currentCharities;
+}, {idList: [], records: {}});

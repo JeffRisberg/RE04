@@ -15,17 +15,6 @@ import givingHistoryItems from "./reducers/givingHistoryItems";
 import topCharities from "./reducers/topCharities";
 import routes from "./routes";
 
-var initialContent = {
-    basketItems: {donations: []},
-    completedBasketItems: {donations: []},
-    categories: {idList: [], records: {}, selected: null},
-    currentCategory: null,
-    currentCharities: {idList: [], records: {}},
-    donor: null,
-    givingHistoryItems: {idList: [], records: {}},
-    topCharities: {idList: [], records: {}}
-};
-
 const reducers = combineReducers({
     basketItems,
     completedBasketItems,
@@ -40,7 +29,7 @@ const reducers = combineReducers({
 
 const store = createStore(
     reducers,
-    initialContent,
+    {},
     applyMiddleware(routerMiddleware(hashHistory), thunkMiddleware)
 );
 

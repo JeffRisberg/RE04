@@ -1,19 +1,12 @@
-import { types } from '../types'
+import {handleActions} from "redux-actions";
+import {types} from "../types";
 
-const donor = (state = [], action = {}) => {
-  switch (action.type) {
-    case types.SET_DONOR:
-    {
-      var donor = action.donor;
-      return donor;
+export default handleActions({
+    [types.SET_DONOR]: (state, action) => {
+        var donor = action.donor;
+        return donor;
+    },
+    [types.CLEAR_DONOR]: (state, action) => {
+        return null;
     }
-    case types.CLEAR_DONOR:
-    {
-      return null;
-    }
-    default:
-      return state;
-  }
-};
-
-export default donor;
+}, null);

@@ -1,22 +1,16 @@
-import { types } from '../types'
+import {handleActions} from "redux-actions";
+import {types} from "../types";
 
-const categories = (state = [], action = {}) => {
-    switch (action.type) {
-        case types.SET_CATEGORIES: // clear prior categories
-        {
-            const idList = [];
-            const records = {};
+export default handleActions({
+    [types.SET_CATEGORIES]: (state, action) => { // clear prior categories
+        const idList = [];
+        const records = {};
 
-            action.categories.forEach(record => {
-                records[record.id] = record;
-                idList.push(record.id);
-            });
+        action.categories.forEach(record => {
+            records[record.id] = record;
+            idList.push(record.id);
+        });
 
-            return {idList, records};
-        }
-        default:
-            return state;
+        return {idList, records};
     }
-};
-
-export default categories;
+}, {idList: [], records: {}, selected: null});
