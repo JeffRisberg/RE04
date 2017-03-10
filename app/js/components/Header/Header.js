@@ -2,8 +2,10 @@ import React from "react";
 import {Link} from "react-router";
 import {connect} from "react-redux";
 import NavLink from "../NavLink";
+import Svg from "../Svg/Svg";
 import {logout} from "../../actions/donor";
 import "./Header.scss";
+import icon from '../../../images/RE04LogoSVG.svg';
 
 /**
  * Appears at top of screen
@@ -41,7 +43,7 @@ class Header extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="header__logo col-md-4 col-xs-5">
-                                <img src="images/Logo.png"/>
+                                <Svg markup={{icon}}/>
                             </div>
 
                             <div className="col-md-8 col-xs-7">
