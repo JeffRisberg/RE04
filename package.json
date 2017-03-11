@@ -7,7 +7,10 @@
     "start": "node server/index.js",
     "postinstall": "webpack",
     "webpack": "webpack",
-    "webpack-watch": "webpack --watch --colors"
+    "webpack-watch": "webpack --watch --colors",
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint app",
+    "prepush": "npm run lint"
   },
   "author": "Jeff Risberg",
   "license": "ISC",
@@ -17,6 +20,8 @@
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
+    "babel-eslint": "^6.0.4",
+    "babel-jest": "^19.0.0",
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
@@ -32,6 +37,8 @@
     "express": "^4.15.2",
     "file-loader": "^0.10.1",
     "glob": "^7.1.1",
+    "husky": "^0.13.1",
+    "jest": "^18.1.0",
     "nedb": "^1.8.0",
     "node-sass": "^4.2.0",
     "postcss-loader": "^1.2.2",
