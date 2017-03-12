@@ -3,10 +3,10 @@ import {types} from "../types";
 
 export default handleActions({
     [types.SET_DONOR]: (state, action) => {
-        var donor = action.donor;
+        const donor = action.donor;
         return donor;
     },
-    [types.CLEAR_DONOR]: (state, action) => {
+    [types.CLEAR_DONOR]: () => {
         return null;
     }
 }, null);

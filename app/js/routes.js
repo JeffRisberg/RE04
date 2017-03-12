@@ -1,5 +1,5 @@
 import React from "react";
-import {Router, Route, IndexRoute, hashHistory} from "react-router";
+import {Route, IndexRoute} from "react-router";
 import AppRoot from "./components/AppRoot";
 import Home from "./components/Home";
 

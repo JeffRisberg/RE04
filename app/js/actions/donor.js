@@ -1,11 +1,9 @@
 /**
  * This is used for login and logout.
  */
-import fetch from 'isomorphic-fetch';
-
-import { push } from 'react-router-redux'
-
-import { types } from '../types'
+import fetch from "isomorphic-fetch";
+import {push} from "react-router-redux";
+import {types} from "../types";
 
 export const login = (login, password) => {
     return function (dispatch) {
@@ -23,10 +21,9 @@ export const login = (login, password) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: types.SET_DONOR,
-                        donor: json.data
-                    }
-                );
+                    type: types.SET_DONOR,
+                    donor: json.data
+                });
                 dispatch(push("/"));
             });
     };
@@ -43,13 +40,11 @@ export const logout = (token) => {
                 'auth-token': token
             }
         })
-            .then((response) => {
-                console.log('logged out');
+            .then(() => {
                 dispatch({
-                        type: types.CLEAR_DONOR,
-                        donor: null
-                    }
-                );
+                    type: types.CLEAR_DONOR,
+                    donor: null
+                });
             });
     };
 };

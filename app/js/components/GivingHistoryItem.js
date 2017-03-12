@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 
 import moment from 'moment';
 
@@ -13,12 +12,11 @@ class GivingHistoryItem extends React.Component {
     }
 
     render() {
-        var transactionId = this.props.givingHistoryItem.transactionId;
-        var transDateStr = this.props.givingHistoryItem.transactionDate;
-        var transDate = parseInt(transDateStr);
-        var charityName = this.props.givingHistoryItem.charityName;
-        var amount = this.props.givingHistoryItem.amount;
-        var flatCharge = this.props.givingHistoryItem.flatCharge;
+        const transactionId = this.props.givingHistoryItem.transactionId;
+        const transDateStr = this.props.givingHistoryItem.transactionDate;
+        const transDate = parseInt(transDateStr);
+        const charityName = this.props.givingHistoryItem.charityName;
+        const amount = this.props.givingHistoryItem.amount;
 
         return (
             <tr>

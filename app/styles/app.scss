@@ -16,19 +16,19 @@ body {
 }
 
 h1 {
-  font-family: "georgia, serif";
+  font-family: "georgia", "serif";
 }
 
 h2 {
-  font-family: "georgia, serif";
+  font-family: "georgia", "serif";
 }
 
 h3 {
-  font-family: "georgia, serif";
+  font-family: "georgia", "serif";
 }
 
 h4 {
-  font-family: "georgia, serif";
+  font-family: "georgia", "serif";
 }
 
 /* General purpose CSS classes */
@@ -57,10 +57,10 @@ a.margin-r {
   }
 
   .nav-pills > li > a {
-    padding: 12px 0px;
+    padding: 12px 0;
     font-size: 12px;
     line-height: 14px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 }
 
@@ -74,7 +74,7 @@ a.margin-r {
 
 .content-header {
   border-bottom: 3px solid $color-maroon;
-  font-family: "georgia, serif";
+  font-family: "georgia", "serif";
   font-size: 24px;
   margin-top: 20px;
   margin-bottom: 10px;

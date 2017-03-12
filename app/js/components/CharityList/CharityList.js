@@ -37,9 +37,9 @@ class Charity extends React.Component {
 class CharityList extends React.Component {
 
     render() {
-        var charityNodes = this.props.charities.map(function (charity, index) {
+        const charityNodes = this.props.charities.map(function (charity, index) {
             return (
-                <Charity charity={charity} key={index}></Charity>
+                <Charity charity={charity} key={index}/>
             );
         });
 

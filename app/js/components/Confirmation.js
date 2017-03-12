@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import Donation from './Donation'
@@ -23,9 +22,9 @@ class Confirmation extends React.Component {
     render() {
         if (this.props.donations != null && this.props.donations != undefined) {
 
-            var donations = this.props.donations.map(function (donation, index) {
+            const donations = this.props.donations.map(function (donation, index) {
                 return (
-                    <Donation donation={donation} key={index}></Donation>
+                    <Donation donation={donation} key={index}/>
                 );
             });
 

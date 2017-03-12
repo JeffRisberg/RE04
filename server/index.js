@@ -1,12 +1,12 @@
 /**
  * Serves the application to the browser, serves the bundle, registers mock REST handlers
  */
-var path = require('path');
-var globSync = require('glob').sync;
-var express = require('express');
-var app = express();
+const path = require('path');
+const globSync = require('glob').sync;
+const express = require('express');
+const app = express();
 
-var mocks = globSync('./mocks/**/*.js', {cwd: __dirname}).map(require);
+const mocks = globSync('./mocks/**/*.js', {cwd: __dirname}).map(require);
 
 app.set('port', (process.env.PORT || 3000));
 
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../app/index.html'));
 });
 
-var nedb = require('nedb');
+const nedb = require('nedb');
 
 app.authTokenDB = new nedb({filename: 'db-content/authTokens', autoload: true});
 app.basketItemDB = new nedb({filename: 'db-content/basketItems', autoload: true});

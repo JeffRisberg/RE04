@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
 
 import CharityList from './CharityList/CharityList'
 
@@ -20,7 +19,7 @@ class Search extends React.Component {
     }
 
     render() {
-        var searchOptions = (!this.state.showOptions) ? null
+        const searchOptions = (!this.state.showOptions) ? null
             : (
             <div>
                 <p>
@@ -36,7 +35,7 @@ class Search extends React.Component {
             </div>
         );
 
-        var searchBar = (
+        const searchBar = (
             <div>
                 <form onSubmit={this.handleCharitySearch}>
                     <input type="text" name="keywords" onChange={this.handleChange}/>
@@ -109,8 +108,7 @@ class Search extends React.Component {
     }
 
     searchCharities() {
-        var url = '/ws/charities?keywords=' + this.state.keywords + '&zip=' + this.state.zip + '&city=' + this.state.city + '&state=' + this.state.state + '&offset=' + this.state.offset + '&limit=' + this.state.limit;
-        console.log('search url: ' + url);
+        const url = '/ws/charities?keywords=' + this.state.keywords + '&zip=' + this.state.zip + '&city=' + this.state.city + '&state=' + this.state.state + '&offset=' + this.state.offset + '&limit=' + this.state.limit;
         $.ajax({
             url: url,
             type: 'GET',
@@ -118,12 +116,10 @@ class Search extends React.Component {
             dataType: 'json',
             success: function (response) {
                 this.setState({charities: response.data, pagination: response.pagination}, () => {
-                    console.log('Scrolling');
                     window.scrollTo(0, 0);
                 });
             }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+            error: function () {
             }.bind(this)
         });
     }
@@ -131,7 +127,6 @@ class Search extends React.Component {
     handleSearchNav = (e, page) => {
         e.preventDefault();
         const offset = (page - 1) * this.state.limit;
-        console.log('setting search offset to ' + offset);
 
         this.setState({offset: offset}, () => {
             this.searchCharities()

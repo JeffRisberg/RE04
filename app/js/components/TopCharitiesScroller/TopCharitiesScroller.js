@@ -21,7 +21,7 @@ class TopCharitiesScroller extends React.Component {
     render() {
         if (this.props.topCharities == undefined) return null;
 
-        var topCharities =
+        const topCharities =
             this.props.topCharities.idList.map((id) => {
                 return this.props.topCharities.records[id]
             });
@@ -29,9 +29,9 @@ class TopCharitiesScroller extends React.Component {
         // Remember that the topCharities are listCharity objects
         const imageItems =
             topCharities.map(function (topCharity, index) {
-                var imagePath = '/images/' + topCharity.logoImage.path;
-                var imageFile = topCharity.logoImage.fileName;
-                var charity = topCharity.charity;
+                const imagePath = '/images/' + topCharity.logoImage.path;
+                const imageFile = topCharity.logoImage.fileName;
+                const charity = topCharity.charity;
 
                 return (
                     <li key={index} className="col-md-2">

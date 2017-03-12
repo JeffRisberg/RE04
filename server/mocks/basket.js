@@ -1,15 +1,15 @@
 module.exports = function (app) {
-    var express = require('express');
-    var basketRouter = express.Router();
+    const express = require('express');
+    const basketRouter = express.Router();
 
     // Use the body-parser library in this service
-    var bodyParser = require('body-parser');
+    const bodyParser = require('body-parser');
     basketRouter.use(bodyParser.json());
 
-    var authTokenDB = app.authTokenDB;
-    var basketItemDB = app.basketItemDB;
-    var charityDB = app.charityDB;
-    var donationDB = app.donationDB;
+    const authTokenDB = app.authTokenDB;
+    const basketItemDB = app.basketItemDB;
+    const charityDB = app.charityDB;
+    const donationDB = app.donationDB;
 
     basketRouter.get('/', function (req, res) {
         delete req.query["_"];
@@ -45,7 +45,7 @@ module.exports = function (app) {
     });
 
     basketRouter.put('/checkout', function (req, res) {
-        var token = req.headers['auth-token'];
+        const token = req.headers['auth-token'];
 
         authTokenDB.find({token: token}).exec(function (err, tokens) {
             if (token.length > 0) {

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 import Form from "react-jsonschema-form";
 import { connect } from 'react-redux';
 
@@ -44,8 +43,8 @@ class Login extends React.Component {
     }
 
     handleSubmit = ({formData}) => {
-        var loginValue = formData.login.trim();
-        var password = formData.password.trim();
+        const loginValue = formData.login.trim();
+        const password = formData.password.trim();
 
         this.props.login(loginValue, password);
     }

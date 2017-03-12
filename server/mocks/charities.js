@@ -1,12 +1,12 @@
 module.exports = function (app) {
-    var express = require('express');
-    var charitiesRouter = express.Router();
+    const express = require('express');
+    const charitiesRouter = express.Router();
 
     // Use the body-parser library in this service
-    var bodyParser = require('body-parser');
+    const bodyParser = require('body-parser');
     charitiesRouter.use(bodyParser.json());
 
-    var charityDB = app.charityDB;
+    const charityDB = app.charityDB;
 
     charitiesRouter.get('/', function (req, res) {
         delete req.query["_"];

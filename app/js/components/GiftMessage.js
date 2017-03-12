@@ -12,7 +12,7 @@ class GiftMessage extends React.Component {
     }
 
     loadDonationFromServer() {
-        var url = "/ws/basket/donations/" + this.props.params.donationId;
+        const url = "/ws/basket/donations/" + this.props.params.donationId;
         $.ajax({
             url: url,
             beforeSend: function (request) {
@@ -21,13 +21,11 @@ class GiftMessage extends React.Component {
             dataType: 'json',
             cache: false,
             success: function (response) {
-                console.log("loaded donation: " + JSON.stringify(response.data));
-                var donation = response.data;
-                var gift = donation.gift;
+                const donation = response.data;
+                const gift = donation.gift;
                 this.setState({loading: false, donation: donation, recipientName: gift.recipientName, memorialName: gift.memorialName, message: gift.message, recipientEmail: gift.recipientEmail});
             }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+            error: function () {
             }.bind(this)
         });
     }
@@ -72,7 +70,7 @@ class GiftMessage extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        var donation = this.state.donation;
+        const donation = this.state.donation;
         if (donation != null) {
 
             $.ajax({
@@ -84,28 +82,25 @@ class GiftMessage extends React.Component {
                 contentType: "application/json",
                 dataType: 'json',
                 data: this.composeGiftMessageJson(),
-                success: function (response) {
+                success: function () {
                     this.props.history.pushState(null, '/basket');
                 }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
+                error: function () {
                 }.bind(this)
             });
         }
     }
 
     composeGiftMessageJson = () => {
-        var giftMessage = Object.assign({}, this.state);
+        const giftMessage = Object.assign({}, this.state);
         delete giftMessage.loading;
         delete giftMessage.donation;
 
-        var json = JSON.stringify(giftMessage);
-        console.log("JSON: " + json);
+        const json = JSON.stringify(giftMessage);
         return json;
     }
 
     handleChange = (e) => {
-        console.log("changing " + e.target.name + " to " + e.target.value);
         this.setState({[e.target.name]: e.target.value});
     }
 }

@@ -1,4 +1,6 @@
 node_modules
 dist
 config
+app/js/jquery-2.2.3.min.js
+app/js/bootstrap.min.js
 

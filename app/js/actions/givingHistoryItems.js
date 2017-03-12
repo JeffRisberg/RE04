@@ -8,7 +8,7 @@ import { types } from '../types'
 export const queryGivingHistory = (token, donor, year = '2016') => {
     return function (dispatch) {
 
-        var url = "/ws/donors/" + donor.donorId + "/history?year=" + year;
+        const url = "/ws/donors/" + donor.donorId + "/history?year=" + year;
 
         return fetch(url, {
             headers: {

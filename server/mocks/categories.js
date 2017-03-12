@@ -1,12 +1,12 @@
 module.exports = function (app) {
-    var express = require('express');
-    var categoriesRouter = express.Router();
+    const express = require('express');
+    const categoriesRouter = express.Router();
 
     // Use the body-parser library in this service
-    var bodyParser = require('body-parser');
+    const bodyParser = require('body-parser');
     categoriesRouter.use(bodyParser.json());
 
-    var categoryDB = app.categoryDB;
+    const categoryDB = app.categoryDB;
 
     categoriesRouter.get('/', function (req, res) {
         delete req.query["_"];

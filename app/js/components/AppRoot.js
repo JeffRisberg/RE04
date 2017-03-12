@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
@@ -12,7 +11,7 @@ class AppRoot extends React.Component {
 
     render() {
 
-        var currentLocation = this.props.location.pathname;
+        const currentLocation = this.props.location.pathname;
 
         return (
             <div className="container-fluid">

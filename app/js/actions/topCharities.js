@@ -1,9 +1,8 @@
 /**
  * This is used for the top charities display area
  */
-import fetch from 'isomorphic-fetch';
-
-import { types } from '../types'
+import fetch from "isomorphic-fetch";
+import {types} from "../types";
 
 export const getTopCharities = () => {
     return function (dispatch) {
@@ -12,10 +11,9 @@ export const getTopCharities = () => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: types.SET_TOP_CHARITIES,
-                        topCharities: json.data
-                    }
-                );
+                    type: types.SET_TOP_CHARITIES,
+                    topCharities: json.data
+                });
             });
     };
 };

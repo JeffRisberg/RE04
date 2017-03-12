@@ -1,22 +1,22 @@
 module.exports = function (app) {
-    var express = require('express');
-    var donorsRouter = express.Router();
+    const express = require('express');
+    const donorsRouter = express.Router();
 
     // Use the body-parser library in this service
-    var bodyParser = require('body-parser');
+    const bodyParser = require('body-parser');
     donorsRouter.use(bodyParser.json());
 
-    var authTokenDB = app.authTokenDB;
-    var donorDB = app.donorDB;
-    var transactionDB = app.transactionDB;
-    var donationDB = app.donationDB;
-    var charityDB = app.charityDB;
+    const authTokenDB = app.authTokenDB;
+    const donorDB = app.donorDB;
+    const transactionDB = app.transactionDB;
+    const donationDB = app.donationDB;
+    const charityDB = app.charityDB;
 
     function generateUUID() {
-        var d = new Date().getTime();
+        const d = new Date().getTime();
 
         const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = (d + Math.random() * 16) % 16 | 0;
+            const r = (d + Math.random() * 16) % 16 | 0;
             d = Math.floor(d / 16);
             return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
         });
@@ -35,7 +35,6 @@ module.exports = function (app) {
 
     /** return a specific order for this donor (used for confirmation screen) */
     donorsRouter.get("/:donorId/history/:orderId", function (req, res) {
-        const donorId = req.params.donorId;
         const orderId = req.params.orderId;
 
         charityDB.find({}, function (error, charities) {
@@ -49,8 +48,8 @@ module.exports = function (app) {
                 donationDB.find({transactionId: {$in: transactionIds}}).exec(function (err, donations) {
 
                     donations.map(function (don) {
-                        var charityId = don["charityId"];
-                        var charity = null;
+                        const charityId = don["charityId"];
+                        const charity = null;
 
                         charities.forEach((c) => {
                             if (c.id == charityId) charity = c;
@@ -91,9 +90,9 @@ module.exports = function (app) {
                             // Substitute the charity record for the id field
                             donations.map(function (don) {
                                 const transactionId = don["transactionId"];
-                                var transactionDate = transactionDates[transactionId];
-                                var charityId = don["charityId"];
-                                var charity = null;
+                                const transactionDate = transactionDates[transactionId];
+                                const charityId = don["charityId"];
+                                const charity = null;
 
                                 charities.forEach((c) => {
                                     if (c.id == charityId) charity = c;
@@ -120,7 +119,6 @@ module.exports = function (app) {
         // Look for the most recently created record
         donorDB.find({}).sort({id: -1}).limit(1).exec(function (err, donors) {
 
-            console.log(req.body.donor);
             if (donors.length != 0)
                 req.body.donor.id = donors[0].id + 1;
             else
@@ -135,31 +133,31 @@ module.exports = function (app) {
     });
 
     donorsRouter.post('/login', function (req, res) {
-        var login = req.body.login;
-        var password = req.body.password;
+        const login = req.body.login;
+        const password = req.body.password;
 
         // FIXME:  should check password as well
         donorDB.find({login: login}).limit(1).exec(function (err, donors) {
-            var token = generateUUID();
+            const token = generateUUID();
 
             if (donors.length != 0) {
-                var donor = donors[0];
-                var donorId = donor.id;
+                const donor = donors[0];
+                const donorId = donor.id;
 
                 transactionDB.find({}).sort({id: -1}).limit(1).exec(function (err, transactions) {
-                    var newTransactionId = 1;
+                    let newTransactionId = 1;
 
                     if (transactions.length != 0) {
                         newTransactionId = parseInt(transactions[0].id) + 1;
                     }
 
-                    var newTransaction = {id: newTransactionId, donorId: donorId};
+                    const newTransaction = {id: newTransactionId, donorId: donorId};
                     newTransaction.transactionDate = Date.now();
 
                     // Insert the new record
-                    transactionDB.insert(newTransaction, function (err, newTransaction) {
+                    transactionDB.insert(newTransaction, function (err) {
 
-                        var newAuthToken = {
+                        const newAuthToken = {
                             token: token,
                             donorId: donorId,
                             firstName: donor.firstName,
@@ -168,7 +166,7 @@ module.exports = function (app) {
                             orderId: newTransactionId
                         };
 
-                        authTokenDB.insert(newAuthToken, function (err, result) {
+                        authTokenDB.insert(newAuthToken, function () {
                             res.status(201);
                             res.send(JSON.stringify({data: newAuthToken}));
                         });

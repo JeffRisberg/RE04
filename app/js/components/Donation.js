@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 
 /**
  * Renders one donation.  Used on the Basket screen and the Confirmation screen.
@@ -10,9 +9,9 @@ import { Link } from 'react-router'
 class Donation extends React.Component {
 
     render() {
-        var charityName = this.props.donation.charity.name;
-        var amount = this.props.donation.amount;
-        var recipientName = (this.props.donation.gift == null) ? null : this.props.donation.gift.recipientName;
+        const charityName = this.props.donation.charity.name;
+        const amount = this.props.donation.amount;
+        const recipientName = (this.props.donation.gift == null) ? null : this.props.donation.gift.recipientName;
 
         return (
             <div style={{marginBottom: '15px'}}>

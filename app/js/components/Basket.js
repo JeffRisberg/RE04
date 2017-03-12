@@ -34,12 +34,12 @@ class Basket extends React.Component {
     render() {
         if (this.props.donor != null) {
             if (this.props.basketItems != null && this.props.basketItems != undefined) {
-                var donations = this.props.basketItems.donations;
+                const donations = this.props.basketItems.donations;
 
                 if (donations != undefined && donations.length > 0) {
-                    var donationItems = donations.map(function (donation, index) {
+                    const donationItems = donations.map(function (donation, index) {
                         return (
-                            <Donation donation={donation} key={index}></Donation>
+                            <Donation donation={donation} key={index}/>
                         );
                     });
 

@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router";
 import {connect} from "react-redux";
 import DonationForm from "./DonationForm";
 import {addToBasket} from "../actions/basketItems";
@@ -18,7 +17,7 @@ class Donate extends React.Component {
 
     render() {
         if (this.props.donor != null) {
-            var charity = this.locateCharity(this.props.params.ein);
+            const charity = this.locateCharity(this.props.params.ein);
 
             if (charity != null) {
                 return (
@@ -39,17 +38,17 @@ class Donate extends React.Component {
     }
 
     handleSubmit = ({formData}) => {
-        var charity = this.locateCharity(this.props.params.ein);
+        const charity = this.locateCharity(this.props.params.ein);
 
         if (charity != null) {
-            var donation = formData;
+            const donation = formData;
 
             this.props.addToBasket(donation, charity.ein, "/basket");
         }
     }
 
     locateCharity = (ein) => {
-        var id;
+        const id;
         if (this.props.currentCharities.records != undefined) {
             for (id in this.props.currentCharities.records) {
                 const c = this.props.currentCharities.records[id];

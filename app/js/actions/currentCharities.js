@@ -1,9 +1,8 @@
 /**
  * This is used for fetching (paginated) set of charities given a category
  */
-import fetch from 'isomorphic-fetch';
-
-import { types } from '../types'
+import fetch from "isomorphic-fetch";
+import {types} from "../types";
 
 export const queryCategoryCharities = (category) => {
     return function (dispatch) {
@@ -30,10 +29,9 @@ export const queryCharity = (id) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: types.APPEND_CURRENT_CHARITIES,
-                        charities: [json.data]
-                    }
-                );
+                    type: types.APPEND_CURRENT_CHARITIES,
+                    charities: [json.data]
+                });
             });
     };
 };
@@ -45,10 +43,9 @@ export const queryCharityByEin = (ein) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                        type: APPEND_CURRENT_CHARITIES,
-                        charities: [json.data]
-                    }
-                );
+                    type: types.APPEND_CURRENT_CHARITIES,
+                    charities: [json.data]
+                });
             });
     };
 };

@@ -40,13 +40,13 @@ export const addToBasket = (donation, ein, thenUrl) => {
             body: JSON.stringify(donation)
         })
             .then(response => response.json())
-            .then((json) => {
+            .then(() => {
                 dispatch(push(thenUrl));
             });
     };
 };
 
-export const updateDonation = (donation) => {
+export const updateDonation = (donation, ein) => {
     return function (dispatch, getState) {
 
         return fetch('/ws/basket/donations/' + ein, {
@@ -60,10 +60,8 @@ export const updateDonation = (donation) => {
         })
             .then(response => response.json())
             .then((json) => {
-                console.log('giftName: ' + donation.giftName);
                 if (donation.giftName || donation.memorialName) {
-                    console.log('Added donation: ' + response.data.id);
-                    dispatch(push('/giftMessage/' + response.data.id));
+                    dispatch(push('/giftMessage/' + json.data.id));
                 } else {
                     dispatch(push('/basket'));
                 }
@@ -71,7 +69,7 @@ export const updateDonation = (donation) => {
     };
 };
 
-export const clearBasket = (token) => {
+export const clearBasket = () => {
     return function (dispatch, getState) {
 
         return fetch('/ws/basket/clear', {
@@ -83,7 +81,7 @@ export const clearBasket = (token) => {
             }
         })
             .then(response => response.json())
-            .then((json) => {
+            .then(() => {
                 dispatch({
                     type: types.CLEAR_BASKET_ITEMS
                 });
@@ -104,8 +102,8 @@ export const checkout = (formData) => {
             body: JSON.stringify(formData)
         })
             .then(response => response.json())
-            .then((json) => {
-                var nextUrl = '/confirmation/' + getState().donor.orderId;
+            .then(() => {
+                const nextUrl = '/confirmation/' + getState().donor.orderId;
                 dispatch(push(nextUrl));
             });
     };

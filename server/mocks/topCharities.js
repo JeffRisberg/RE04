@@ -1,13 +1,13 @@
 module.exports = function (app) {
-    var express = require('express');
-    var topCharitiesRouter = express.Router();
+    const express = require('express');
+    const topCharitiesRouter = express.Router();
 
     // Use the body-parser library in this service
-    var bodyParser = require('body-parser');
+    const bodyParser = require('body-parser');
     topCharitiesRouter.use(bodyParser.json());
 
-    var topCharityDB = app.topCharityDB;
-    var charityDB = app.charityDB;
+    const topCharityDB = app.topCharityDB;
+    const charityDB = app.charityDB;
 
     topCharitiesRouter.get('/', function (req, res) {
         delete req.query["_"];
@@ -17,8 +17,8 @@ module.exports = function (app) {
 
                 // Substitute the charity record for the id field
                 topCharities.map(function (tc) {
-                    var charityId = tc["charityId"];
-                    var charity = null;
+                    const charityId = tc["charityId"];
+                    let charity = null;
 
                     charities.forEach((c) => {
                         if (c.id == charityId) charity = c;
@@ -35,7 +35,7 @@ module.exports = function (app) {
 
     topCharitiesRouter.get('/:id', function (req, res) {
         topCharityDB.find({id: req.params.id}).exec(function (error, topCharities) {
-            if (listCharities.length > 0)
+            if (topCharities.length > 0)
                 res.send({
                     'status': "success",
                     'data': topCharities[0]
@@ -53,7 +53,7 @@ module.exports = function (app) {
         res.status(201).end();
     });
 
-    topCharitiesRouter.put('/:id', function (req, res) {
+    topCharitiesRouter.put('/:id', function (req) {
         // we never change listCharities
     });
 

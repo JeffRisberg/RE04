@@ -8,7 +8,7 @@ import { types } from '../types'
 import { queryCategoryCharities } from '../actions/currentCharities';
 
 export const queryCategories = () => {
-    return function (dispatch, getState) {
+    return function (dispatch) {
 
         return fetch('/ws/categories/guide', {})
             .then(response => response.json())

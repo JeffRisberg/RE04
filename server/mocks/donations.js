@@ -1,12 +1,12 @@
 module.exports = function (app) {
-    var express = require('express');
-    var donationsRouter = express.Router();
+    const express = require('express');
+    const donationsRouter = express.Router();
 
     // Use the body-parser library in this service
-    var bodyParser = require('body-parser');
+    const bodyParser = require('body-parser');
     donationsRouter.use(bodyParser.json());
 
-    var donationDB = app.donationDB;
+    const donationDB = app.donationDB;
 
     donationsRouter.get('/', function (req, res) {
         delete req.query["_"];

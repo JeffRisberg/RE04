@@ -16,8 +16,8 @@ import icon from '../../../images/RE04LogoSVG.svg';
 class Header extends React.Component {
 
     render() {
-        var location = this.props.currentLocation.substring(1);
-        var breadCrumb = null;
+        const location = this.props.currentLocation.substring(1);
+        const breadCrumb = null;
 
         if (location.startsWith("search")) breadCrumb = "Find a Charity";
         if (location.startsWith("basket")) breadCrumb = "Giving Basket";
@@ -26,11 +26,11 @@ class Header extends React.Component {
         if (location.startsWith("confirmation")) breadCrumb = "Confirmation";
         if (location.startsWith("givingHistory")) breadCrumb = "Giving History";
 
-        var headerText = "Not logged in";
+        const headerText = "Not logged in";
         let loginLogout = <Link to="/login" className="margin-l">Login</Link>;
         if (this.props.donor != null) {
-            var firstName = this.props.donor.firstName;
-            var points = this.props.donor.points;
+            const firstName = this.props.donor.firstName;
+            const points = this.props.donor.points;
 
             headerText = firstName + " " + points + " points";
             loginLogout = <a onClick={this.props.logout} className="margin-l">Logout</a>;
@@ -61,7 +61,7 @@ class Header extends React.Component {
                                 <a id="dropdownMenuLabel" data-toggle="dropdown" data-target="#" href="#"
                                    aria-expanded="false"
                                    aria-haspopup="true">
-                                    <span className="glyphicon glyphicon-menu-hamburger"></span>
+                                    <span className="glyphicon glyphicon-menu-hamburger"/>
                                 </a>
 
                                 <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLabel">

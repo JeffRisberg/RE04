@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import { queryGivingHistory } from '../actions/givingHistoryItems';
@@ -27,7 +26,7 @@ class GivingHistory extends React.Component {
         if (this.props.donor != undefined && this.props.donor != null) {
             const givingHistoryItems = this.props.givingHistoryItems;
 
-            var givingHistoryItemNodes = givingHistoryItems.idList.map(function (itemId, index) {
+            const givingHistoryItemNodes = givingHistoryItems.idList.map(function (itemId, index) {
                 const givingHistoryItem = givingHistoryItems.records[itemId];
 
                 return (
@@ -56,7 +55,7 @@ class GivingHistory extends React.Component {
                     <table className="table">
                         <thead>
                         <tr>
-                            <th></th>
+                            <th/>
                             <th>Date</th>
                             <th>Transaction #</th>
                             <th>Charity</th>
