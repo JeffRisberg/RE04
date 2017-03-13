@@ -48,7 +48,7 @@ class Donate extends React.Component {
     }
 
     locateCharity = (ein) => {
-        const id;
+        let id;
         if (this.props.currentCharities.records != undefined) {
             for (id in this.props.currentCharities.records) {
                 const c = this.props.currentCharities.records[id];

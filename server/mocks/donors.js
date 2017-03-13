@@ -13,7 +13,7 @@ module.exports = function (app) {
     const charityDB = app.charityDB;
 
     function generateUUID() {
-        const d = new Date().getTime();
+        let d = new Date().getTime();
 
         const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
             const r = (d + Math.random() * 16) % 16 | 0;
@@ -49,7 +49,7 @@ module.exports = function (app) {
 
                     donations.map(function (don) {
                         const charityId = don["charityId"];
-                        const charity = null;
+                        let charity = null;
 
                         charities.forEach((c) => {
                             if (c.id == charityId) charity = c;
@@ -92,7 +92,7 @@ module.exports = function (app) {
                                 const transactionId = don["transactionId"];
                                 const transactionDate = transactionDates[transactionId];
                                 const charityId = don["charityId"];
-                                const charity = null;
+                                let charity = null;
 
                                 charities.forEach((c) => {
                                     if (c.id == charityId) charity = c;
@@ -155,7 +155,7 @@ module.exports = function (app) {
                     newTransaction.transactionDate = Date.now();
 
                     // Insert the new record
-                    transactionDB.insert(newTransaction, function (err) {
+                    transactionDB.insert(newTransaction, function () {
 
                         const newAuthToken = {
                             token: token,

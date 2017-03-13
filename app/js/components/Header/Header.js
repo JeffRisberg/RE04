@@ -17,7 +17,7 @@ class Header extends React.Component {
 
     render() {
         const location = this.props.currentLocation.substring(1);
-        const breadCrumb = null;
+        let breadCrumb = null;
 
         if (location.startsWith("search")) breadCrumb = "Find a Charity";
         if (location.startsWith("basket")) breadCrumb = "Giving Basket";
@@ -26,7 +26,7 @@ class Header extends React.Component {
         if (location.startsWith("confirmation")) breadCrumb = "Confirmation";
         if (location.startsWith("givingHistory")) breadCrumb = "Giving History";
 
-        const headerText = "Not logged in";
+        let headerText = "Not logged in";
         let loginLogout = <Link to="/login" className="margin-l">Login</Link>;
         if (this.props.donor != null) {
             const firstName = this.props.donor.firstName;
