@@ -1,9 +1,14 @@
-module.exports = function (app) {
-    const express = require('express');
-    const charitiesRouter = express.Router();
+const express = require('express');
 
-    // Use the body-parser library in this service
-    const bodyParser = require('body-parser');
+const charitiesRouter = express.Router();
+
+const bodyParser = require('body-parser');
+
+module.exports = (app) => {
+    app.use(bodyParser.urlencoded({
+        extended: true,
+    }));
+
     charitiesRouter.use(bodyParser.json());
 
     const charityDB = app.charityDB;
