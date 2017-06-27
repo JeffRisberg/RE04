@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -12,14 +13,15 @@ module.exports = {
         loaders: [
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                loader: ExtractTextPlugin.extract('css-loader!sass-loader'),
             },
-            {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
-            {test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader" },
-            {test: /\.(jpe?g|png|gif|svg)$/i, loader: "file-loader?name=/public/icons/[name].[ext]"}
+            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
+            { test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader" },
+            { test: /\.(jpe?g|png|gif|svg)$/i, loader: "file-loader?name=/public/icons/[name].[ext]" }
         ]
     },
     plugins: [
-        new webpack.IgnorePlugin(/^(buffertools)$/) // unwanted "deeper" dependency
+        new webpack.IgnorePlugin(/^(buffertools)$/), // unwanted "deeper" dependency
+        new ExtractTextPlugin({ filename: 'public/style.css', allChunks: true })
     ]
 };
