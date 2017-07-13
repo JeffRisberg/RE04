@@ -105,7 +105,6 @@ module.exports = (app) => {
                                 don['donationId'] = don['id'];
                                 don['charityName'] = charity.name;
                                 don['transactionDate'] = transactionDate;
-                                don['amount'] = parseInt(don['amount']);
                             });
 
                             res.send({data: donations});

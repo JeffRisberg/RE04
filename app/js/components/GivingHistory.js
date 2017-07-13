@@ -59,7 +59,7 @@ class GivingHistory extends React.Component {
                             <th>Date</th>
                             <th>Transaction #</th>
                             <th>Charity</th>
-                            <th>Amount</th>
+                            <th className="text-right">Amount</th>
                         </tr>
                         </thead>
                         <tbody>
