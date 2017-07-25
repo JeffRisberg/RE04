@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {Router, hashHistory} from "react-router";
 import {createStore, combineReducers, applyMiddleware} from "redux";
+import { createLogger } from 'redux-logger'
 import {Provider} from "react-redux";
 import {routerReducer, routerMiddleware} from "react-router-redux";
 import thunkMiddleware from "redux-thunk";
@@ -27,10 +28,18 @@ const reducers = combineReducers({
     routing: routerReducer
 });
 
+const logger = createLogger();
+
+const middlewares = [
+    routerMiddleware(history),
+    thunkMiddleware,
+    logger
+];
+
 const store = createStore(
     reducers,
     {},
-    applyMiddleware(routerMiddleware(hashHistory), thunkMiddleware)
+    applyMiddleware(...middlewares)
 );
 
 ReactDOM.render(
