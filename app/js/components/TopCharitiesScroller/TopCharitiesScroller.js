@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
 import { getTopCharities } from '../../actions/topCharities';
 
@@ -13,6 +14,9 @@ import './TopCharitiesScroller.scss';
  * @since April 2016
  */
 class TopCharitiesScroller extends React.Component {
+    static propTypes = {
+        intl: intlShape.isRequired,
+    };
 
     componentDidMount() {
         this.props.getTopCharities();
@@ -46,7 +50,7 @@ class TopCharitiesScroller extends React.Component {
 
         return (
             <div className="content-region">
-                <div className="content-header">Top Charities</div>
+                <div className="content-header"><FormattedMessage id='topCharities|title' /></div>
 
                 <div className="row">
                     <div className="col-md-12">
@@ -66,7 +70,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     {getTopCharities}
-)(TopCharitiesScroller);
+)(TopCharitiesScroller));

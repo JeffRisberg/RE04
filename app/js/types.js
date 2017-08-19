@@ -1,4 +1,6 @@
 export const types = {
+    UPDATE_LOCALE: "UPDATE_LOCALE",
+
     SET_DONOR: 'SET_DONOR',
     CLEAR_DONOR: 'CLEAR_DONOR',
 
@@ -16,6 +18,5 @@ export const types = {
     SET_TOP_CHARITIES: "SET_TOP_CHARITIES",
 
     SET_GIVING_HISTORY: "SET_GIVING_HISTORY"
-}
-
+};
 

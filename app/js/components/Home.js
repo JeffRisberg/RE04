@@ -1,13 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-
-import { Link } from 'react-router'
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { Link } from 'react-router';
 import TopCharitiesScroller from './TopCharitiesScroller/TopCharitiesScroller';
 import Guide from './Guide/Guide';
 
-export default React.createClass({
+class Home extends React.Component {
+    static propTypes = {
+        intl: intlShape.isRequired,
+    };
+
     render() {
+        const intl = this.props.intl;
+
         return (
             <div>
                 <div>
@@ -16,7 +21,7 @@ export default React.createClass({
                 <div className="content-region">
                     <div className="row">
                         <div className="col-md-4">
-                            <h3>Top Charities</h3>
+                            <h3>{intl.formatMessage({ id: 'home|topCharities' })}</h3>
 
                             <p>
                                 Redeem your rewards, donate to a top charity.
@@ -29,7 +34,7 @@ export default React.createClass({
                             </p>
                         </div>
                         <div className="col-md-4">
-                            <h3>Support a Cause</h3>
+                            <h3>{intl.formatMessage({ id: 'home|supportACause' })}</h3>
 
                             <p>Browse a list of popular charities by Cause</p>
 
@@ -40,8 +45,9 @@ export default React.createClass({
                             </p>
                         </div>
 
-                        <div className="col-md-4" style={{background: '#f0f0f'}}>
-                            <h3>Find a Charity</h3>
+                        <div className="col-md-4" style={{ background: '#f0f0f' }}>
+                            <h3>{intl.formatMessage({ id: 'home|findACharity' })}
+                            </h3>
 
                             <p>Search for any charity by name or location</p>
 
@@ -56,4 +62,6 @@ export default React.createClass({
             </div>
         )
     }
-})
+}
+
+export default injectIntl(Home);
