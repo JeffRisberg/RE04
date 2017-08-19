@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { IntlProvider } from 'react-intl';
 import { Router, hashHistory } from 'react-router';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
@@ -14,8 +13,10 @@ import currentCategory from './reducers/currentCategory';
 import currentCharities from './reducers/currentCharities';
 import donor from './reducers/donor';
 import givingHistoryItems from './reducers/givingHistoryItems';
+import localeData from './reducers/localeData';
 import topCharities from './reducers/topCharities';
 import routes from './routes';
+import MyIntlProvider from './components/MyIntlProvider';
 
 const reducers = combineReducers({
     basketItems,
@@ -25,6 +26,7 @@ const reducers = combineReducers({
     currentCharities,
     donor,
     givingHistoryItems,
+    localeData,
     topCharities,
     routing: routerReducer
 });
@@ -43,23 +45,11 @@ const store = createStore(
     applyMiddleware(...middlewares)
 );
 
-const localeData = {
-    locale: 'en',
-    messages: {
-        'home|topCharities': 'Top Charities',
-        'home|supportACause': 'Support a Cause',
-        'home|findACharity': 'Find a Charity',
-        'topCharities|title': 'Top Charities'
-    }
-};
-
 ReactDOM.render(
     <Provider store={store}>
-        <IntlProvider
-            locale='en'
-            messages={localeData.messages}>
+        <MyIntlProvider>
             <Router history={hashHistory} routes={routes}/>
-        </IntlProvider>
+        </MyIntlProvider>
     </Provider>,
     document.getElementById('app-root')
 );

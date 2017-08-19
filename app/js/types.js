@@ -19,4 +19,3 @@ export const types = {
 
     SET_GIVING_HISTORY: "SET_GIVING_HISTORY"
 };
-
