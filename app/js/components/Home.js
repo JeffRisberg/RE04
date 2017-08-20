@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router';
 import TopCharitiesScroller from './TopCharitiesScroller/TopCharitiesScroller';
 import Guide from './Guide/Guide';
