@@ -1,4 +1,5 @@
 import React from 'react'
+import {FormattedNumber} from 'react-intl';
 
 import moment from 'moment';
 
@@ -17,7 +18,6 @@ class GivingHistoryItem extends React.Component {
         const transDate = parseInt(transDateStr);
         const charityName = this.props.givingHistoryItem.charityName;
         const amount = this.props.givingHistoryItem.amount;
-        const amountStr = amount.toLocaleString(undefined, { minimumFractionDigits: 2 });
 
         return (
             <tr>
@@ -25,7 +25,12 @@ class GivingHistoryItem extends React.Component {
                 <td>{moment(transDate).format("MM/DD/YYYY")}</td>
                 <td>{transactionId}</td>
                 <td>{charityName}</td>
-                <td className="text-right">${amountStr}</td>
+                <td className="text-right">
+                    <FormattedNumber
+                        value={amount}
+                        style="currency"
+                        currency="USD"/>
+                    </td>
             </tr>
         );
     }
