@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { intlShape, FormattedMessage } from 'react-intl';
 
 import { getTopCharities } from '../../actions/topCharities';
 
@@ -70,7 +70,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default injectIntl(connect(
+export default connect(
     mapStateToProps,
     {getTopCharities}
-)(TopCharitiesScroller));
+)(TopCharitiesScroller);
