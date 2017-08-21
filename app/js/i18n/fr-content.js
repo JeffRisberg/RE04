@@ -15,4 +15,6 @@ export default {
     'givingHistory|columnLabelDate': 'Date (DD/MM/YYYY)',
     'givingHistory|columnLabelCharity': 'Charité',
     'givingHistory|columnLabelAmount': 'Montant',
+    'guide|title': 'Trouvez une charité par cause',
+    'guide|donateNow': 'Faire un don maintenant',
 };

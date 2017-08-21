@@ -16,5 +16,7 @@ export default {
     'givingHistory|columnLabelTransaction': 'Transaktion #',
     'givingHistory|columnLabelCharity': 'Nächstenliebe',
     'givingHistory|columnLabelAmount': 'Menge',
+    'guide|title': 'Finde eine Wohltätigkeit',
+    'guide|donateNow': 'Spende jetzt',
 };
 

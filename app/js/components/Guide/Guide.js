@@ -1,12 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-
+import { injectIntl, intlShape } from 'react-intl';
 import { queryCategories } from '../../actions/categories';
 import { queryCategoryCharities } from '../../actions/currentCharities';
-
-import Category from '../Category'
-import CharityList from '../CharityList/CharityList'
-
+import Category from '../Category';
+import CharityList from '../CharityList/CharityList';
 import './Guide.scss';
 
 /**
@@ -17,12 +16,19 @@ import './Guide.scss';
  * @since April 2016
  */
 class Guide extends Component {
+    static propTypes = {
+        intl: intlShape.isRequired,
+        categories: PropTypes.object.isRequired,
+        currentCategory: PropTypes.object,
+        currentCharities: PropTypes.object.isRequired
+    };
 
     componentDidMount() {
         this.props.queryCategories();
     }
 
     render() {
+        const intl = this.props.intl;
         const currentCategory = this.props.currentCategory;
         const categoryRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
 
@@ -35,9 +41,9 @@ class Guide extends Component {
 
             return (
                 <Category category={category}
-                          active={active}
-                          loadCharities={loadCharitiesHandler}
-                          key={index}>
+                    active={active}
+                    loadCharities={loadCharitiesHandler}
+                    key={index}>
                 </Category>
             );
         });
@@ -52,7 +58,9 @@ class Guide extends Component {
 
         return (
             <div className="content-region">
-                <div className="content-header">Find a Charity by Cause</div>
+                <div className="content-header">
+                    {intl.formatMessage({ id: 'guide|title' })}
+                </div>
 
                 <div className="row">
                     <div className="col-md-2">
@@ -68,12 +76,6 @@ class Guide extends Component {
     }
 }
 
-Guide.propTypes = {
-    categories: PropTypes.object.isRequired,
-    currentCategory: PropTypes.object,
-    currentCharities: PropTypes.object.isRequired
-};
-
 const mapStateToProps = (state) => {
     return {
         categories: state.categories,
@@ -81,7 +83,8 @@ const mapStateToProps = (state) => {
         currentCharities: state.currentCharities
     };
 };
-export default connect(
+
+export default injectIntl(connect(
     mapStateToProps,
-    {queryCategories, queryCategoryCharities}
-)(Guide);
+    { queryCategories, queryCategoryCharities }
+)(Guide));

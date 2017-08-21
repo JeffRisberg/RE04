@@ -1,10 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
-
 import { getTopCharities } from '../../actions/topCharities';
-
 import './TopCharitiesScroller.scss';
 
 /**
@@ -13,9 +12,10 @@ import './TopCharitiesScroller.scss';
  * @author Jeff Risberg
  * @since April 2016
  */
-class TopCharitiesScroller extends React.Component {
+class TopCharitiesScroller extends Component {
     static propTypes = {
         intl: intlShape.isRequired,
+        topCharities: PropTypes.object,
     };
 
     componentDidMount() {
@@ -23,16 +23,18 @@ class TopCharitiesScroller extends React.Component {
     }
 
     render() {
-        if (this.props.topCharities == undefined) return null;
+        const topCharities = this.props.topCharities;
 
-        const topCharities =
-            this.props.topCharities.idList.map((id) => {
-                return this.props.topCharities.records[id]
+        if (topCharities == undefined) return null;
+
+        const topCharitiesList =
+            topCharities.idList.map((id) => {
+                return topCharities.records[id]
             });
 
         // Remember that the topCharities are listCharity objects
         const imageItems =
-            topCharities.map(function (topCharity, index) {
+            topCharitiesList.map(function (topCharity, index) {
                 const imagePath = '/images/' + topCharity.logoImage.path;
                 const imageFile = topCharity.logoImage.fileName;
                 const charity = topCharity.charity;
@@ -42,7 +44,7 @@ class TopCharitiesScroller extends React.Component {
                         <img className="thumbnail" src={ imagePath + imageFile} width="128" height="77"/>
                         <br/>
                         <Link to={"/donate/" + charity.ein} className="donate">
-                            <FormattedMessage id='topCharities|donateNow' />
+                            <FormattedMessage id='topCharities|donateNow'/>
                         </Link>
                     </li>
                 );
@@ -50,7 +52,7 @@ class TopCharitiesScroller extends React.Component {
 
         return (
             <div className="content-region">
-                <div className="content-header"><FormattedMessage id='topCharities|title' /></div>
+                <div className="content-header"><FormattedMessage id='topCharities|title'/></div>
 
                 <div className="row">
                     <div className="col-md-12">
@@ -72,5 +74,5 @@ const mapStateToProps = (state) => {
 
 export default injectIntl(connect(
     mapStateToProps,
-    {getTopCharities}
+    { getTopCharities }
 )(TopCharitiesScroller));

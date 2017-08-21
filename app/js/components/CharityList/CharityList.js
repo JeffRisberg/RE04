@@ -1,6 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router'
-
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import { Link } from 'react-router';
+import { injectIntl, intlShape } from 'react-intl';
 import './CharityList.scss';
 
 /**
@@ -9,23 +10,29 @@ import './CharityList.scss';
  * @author Jeff Risberg
  * @since March 2016
  */
-class Charity extends React.Component {
+class Charity extends Component {
+    static propTypes = {
+        intl: intlShape.isRequired,
+        charity: PropTypes.object.isRequired,
+    };
 
     render() {
+        const { intl, charity } = this.props;
+
         return (
             <tr>
                 <td><p>
-                    <strong>{this.props.charity.name}</strong>
+                    <strong>{charity.name}</strong>
                     <br/>
-                    {this.props.charity.city},&nbsp;
-                    {this.props.charity.state}&nbsp;
-                    {this.props.charity.zip}
+                    {charity.city},&nbsp;
+                    {charity.state}&nbsp;
+                    {charity.zip}
                     <br/>
-                    Tax ID: {this.props.charity.ein}
+                    Tax ID: {charity.ein}
                 </p></td>
-                <td style={{textAlign: 'right'}}>
-                    <Link to={"/donate/" + this.props.charity.ein} className="donate">
-                        Donate Now
+                <td style={{ textAlign: 'right' }}>
+                    <Link to={"/donate/" + charity.ein} className="donate">
+                        {intl.formatMessage({ id: 'guide|donateNow' })}
                     </Link>
                 </td>
             </tr>
@@ -33,24 +40,29 @@ class Charity extends React.Component {
     }
 }
 
-
 class CharityList extends React.Component {
+    static propTypes = {
+        intl: intlShape.isRequired,
+        charities: PropTypes.array.isRequired,
+    };
 
     render() {
-        const charityNodes = this.props.charities.map(function (charity, index) {
+        const { intl, charities } = this.props;
+
+        const charityNodes = charities.map(function (charity, index) {
             return (
-                <Charity charity={charity} key={index}/>
+                <Charity intl={intl} charity={charity} key={index}/>
             );
         });
 
         return (
-                <table className="table">
+            <table className="table">
                 <tbody>
-                {charityNodes}
+                    {charityNodes}
                 </tbody>
             </table>
         );
     }
 }
 
-export default CharityList;
+export default injectIntl(CharityList);

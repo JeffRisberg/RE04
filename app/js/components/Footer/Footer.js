@@ -30,7 +30,7 @@ class Footer extends React.Component {
                     </div>
                     <div className="row dark-gray copyright">
                         <div className="col-md-12 text-right">
-                            2015-2016 Jeffrey and Brandon Risberg
+                            2015-2016 theRisbergFamily.com
                         </div>
                     </div>
                 </div>

@@ -16,4 +16,6 @@ export default {
     'givingHistory|columnLabelTransaction': 'Transaction #',
     'givingHistory|columnLabelCharity': 'Charity',
     'givingHistory|columnLabelAmount': 'Amount',
+    'guide|title': 'Find a Charity by Cause',
+    'guide|donateNow': 'Donate Now',
 };

@@ -1,4 +1,5 @@
 import React from 'react'
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
@@ -15,6 +16,9 @@ import GivingHistoryItem from './GivingHistoryItem'
 class GivingHistory extends React.Component {
     static propTypes = {
         intl: intlShape.isRequired,
+        donor: PropTypes.object.isRequired,
+        givingHistoryItems: PropTypes.object.isRequired,
+        queryGivingHistory: PropTypes.object.isRequired
     };
 
     constructor() {
@@ -22,17 +26,17 @@ class GivingHistory extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.donor != undefined && this.props.donor != null) {
-            this.props.queryGivingHistory(this.props.donor.token, this.props.donor);
+        const { donor, queryGivingHistory } = this.props;
+
+        if (donor != undefined && donor != null) {
+            queryGivingHistory(donor.token, donor);
         }
     }
 
     render() {
-        const intl = this.props.intl;
+        const { intl, donor, givingHistoryItems } = this.props;
 
-        if (this.props.donor != undefined && this.props.donor != null) {
-            const givingHistoryItems = this.props.givingHistoryItems;
-
+        if (donor != undefined && donor != null) {
             const givingHistoryItemNodes = givingHistoryItems.idList.map(function (itemId, index) {
                 const givingHistoryItem = givingHistoryItems.records[itemId];
 

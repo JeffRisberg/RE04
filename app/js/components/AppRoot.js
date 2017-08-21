@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { PropTypes } from 'prop-types';
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
 
@@ -10,7 +10,6 @@ import Footer from './Footer/Footer'
 class AppRoot extends React.Component {
 
     render() {
-
         const currentLocation = this.props.location.pathname;
 
         return (
@@ -29,7 +28,7 @@ class AppRoot extends React.Component {
     }
 }
 AppRoot.contextTypes = {
-    location: React.PropTypes.object
+    location: PropTypes.object
 };
 
 export default AppRoot;
