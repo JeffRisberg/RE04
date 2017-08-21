@@ -37,6 +37,9 @@ class Header extends React.Component {
             loginLogout = <a onClick={this.props.logout} className="margin-l">Logout</a>;
         }
 
+        const curLocale = this.props.localeData.locale;
+        const curLocaleStyle = { background: 'lightBlue' };
+
         return (
             <div>
                 <div className="header white">
@@ -49,9 +52,26 @@ class Header extends React.Component {
 
                             <div className="col-md-8 col-xs-7">
                                 <div className="account-header-links text-right hidden-xs">
-                                    <a onClick={() => this.props.changeLocale('en')} className="margin-l">EN</a>
-                                    <a onClick={() => this.props.changeLocale('fr')} className="margin-l">FR</a>
-                                    <a onClick={() => this.props.changeLocale('de')} className="margin-l">DE</a>
+                                    <a onClick={() => this.props.changeLocale('en-us')}
+                                        className="margin-l"
+                                        style={curLocale === 'en-us' ? curLocaleStyle : {}}>
+                                        EN-US
+                                    </a>
+                                    <a onClick={() => this.props.changeLocale('en-gb')}
+                                        className="margin-l"
+                                        style={curLocale === 'en-gb' ? curLocaleStyle : {}}>
+                                        EN
+                                    </a>
+                                    <a onClick={() => this.props.changeLocale('fr')}
+                                        className="margin-l"
+                                        style={curLocale === 'fr' ? curLocaleStyle : {}}>
+                                        FR
+                                    </a>
+                                    <a onClick={() => this.props.changeLocale('de')}
+                                        className="margin-l"
+                                        style={curLocale === 'de' ? curLocaleStyle : {}}>
+                                        DE
+                                    </a>
                                     <a href="" className="margin-l">Help</a>
                                     {loginLogout}
                                 </div>
@@ -68,11 +88,33 @@ class Header extends React.Component {
                                 </a>
 
                                 <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLabel">
-                                    <li><a onClick={() => this.props.changeLocale('en')} className="margin-l">EN</a>
+                                    <li>
+                                        <a onClick={() => this.props.changeLocale('en-us')}
+                                            className="margin-l"
+                                            style={curLocale === 'en-us' ? curLocaleStyle : {}}>
+                                            EN-US
+                                        </a>
                                     </li>
-                                    <li><a onClick={() => this.props.changeLocale('fr')} className="margin-l">FR</a>
+                                    <li>
+                                        <a onClick={() => this.props.changeLocale('en-gb')}
+                                            className="margin-l"
+                                            style={curLocale === 'en-gb' ? curLocaleStyle : {}}>
+                                            EN
+                                        </a>
                                     </li>
-                                    <li><a onClick={() => this.props.changeLocale('de')} className="margin-l">DE</a>
+                                    <li>
+                                        <a onClick={() => this.props.changeLocale('fr')}
+                                            className="margin-l"
+                                            style={curLocale === 'fr' ? curLocaleStyle : {}}>
+                                            FR
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a onClick={() => this.props.changeLocale('de')}
+                                            className="margin-l"
+                                            style={curLocale === 'de' ? curLocaleStyle : {}}>
+                                            DE
+                                        </a>
                                     </li>
                                     <li><a href="" className="margin-l">Help</a></li>
                                     <li><a href="#" className="margin-l">Sign Off</a></li>
@@ -106,7 +148,8 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        donor: state.donor
+        donor: state.donor,
+        localeData: state.localeData
     };
 };
 export default connect(

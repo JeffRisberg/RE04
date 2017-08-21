@@ -12,4 +12,7 @@ export default {
     'topCharities|donateNow': 'Donate Now',
     'givingHistory|title': 'Giving History',
     'givingHistory|subtitle': 'Below is a history of your past donations',
+    'givingHistory|columnLabelDate': 'Date (DD/MM/YYYY)',
+    'givingHistory|columnLabelTransaction': 'Transaction #',
+
 };

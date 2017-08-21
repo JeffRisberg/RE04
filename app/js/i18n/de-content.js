@@ -12,5 +12,7 @@ export default {
     'topCharities|donateNow': 'Spende jetzt',
     'givingHistory|title': 'Geschichte geben',
     'givingHistory|subtitle': 'Unten ist eine Geschichte Ihrer Vergangenheit Spenden',
+    'givingHistory|columnLabelDate': 'Datum',
+    'givingHistory|columnLabelTransaction': 'Transaktion #',
 };
 

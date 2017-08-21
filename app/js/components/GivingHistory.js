@@ -65,7 +65,7 @@ class GivingHistory extends React.Component {
                         <thead>
                         <tr>
                             <th/>
-                            <th>Date</th>
+                            <th>{intl.formatMessage({id:'givingHistory|columnLabelDate'})}</th>
                             <th>Transaction #</th>
                             <th>Charity</th>
                             <th className="text-right">Amount</th>
@@ -81,7 +81,9 @@ class GivingHistory extends React.Component {
         else {
             return (
                 <div className="content-region">
-                    <div className="content-header">Please log in first to view Giving History</div>
+                    <div className="content-header">
+                        Please log in first to view Giving History
+                    </div>
                 </div>
             )
         }

@@ -12,4 +12,5 @@ export default {
     'topCharities|donateNow': 'Faire un don maintenant',
     'givingHistory|title': 'Donner de l\'histoire',
     'givingHistory|subtitle': 'Voici une histoire de vos dons passés',
+    'givingHistory|columnLabelDate': 'Date (DD/MM/YYYY)',
 };
