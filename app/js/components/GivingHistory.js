@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
+import { injectIntl, intlShape } from 'react-intl';
 
 import { queryGivingHistory } from '../actions/givingHistoryItems';
 
@@ -12,6 +13,10 @@ import GivingHistoryItem from './GivingHistoryItem'
  * @since March 2016
  */
 class GivingHistory extends React.Component {
+    static propTypes = {
+        intl: intlShape.isRequired,
+    };
+
     constructor() {
         super();
     }
@@ -23,6 +28,8 @@ class GivingHistory extends React.Component {
     }
 
     render() {
+        const intl = this.props.intl;
+
         if (this.props.donor != undefined && this.props.donor != null) {
             const givingHistoryItems = this.props.givingHistoryItems;
 
@@ -37,10 +44,12 @@ class GivingHistory extends React.Component {
 
             return (
                 <div className="content-region">
-                    <div className="content-header">Giving History</div>
+                    <div className="content-header">
+                        {intl.formatMessage({id:'givingHistory|title'})}
+                    </div>
 
                     <h2>
-                        Below is a history of your past donations
+                        {intl.formatMessage({id:'givingHistory|subtitle'})}
                     </h2>
 
                     <div style={{marginBottom: '15px'}}>
@@ -86,7 +95,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     {queryGivingHistory}
-)(GivingHistory);
+)(GivingHistory));

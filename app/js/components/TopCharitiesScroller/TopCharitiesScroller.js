@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
-import { intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
 import { getTopCharities } from '../../actions/topCharities';
 
@@ -38,11 +38,11 @@ class TopCharitiesScroller extends React.Component {
                 const charity = topCharity.charity;
 
                 return (
-                    <li key={index} className="col-md-2">
+                    <li key={index} className="col-md-3">
                         <img className="thumbnail" src={ imagePath + imageFile} width="128" height="77"/>
                         <br/>
                         <Link to={"/donate/" + charity.ein} className="donate">
-                            Donate Now
+                            <FormattedMessage id='topCharities|donateNow' />
                         </Link>
                     </li>
                 );
@@ -70,7 +70,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(
+export default injectIntl(connect(
     mapStateToProps,
     {getTopCharities}
-)(TopCharitiesScroller);
+)(TopCharitiesScroller));

@@ -23,9 +23,7 @@ class Home extends React.Component {
                         <div className="col-md-4">
                             <h3>{intl.formatMessage({ id: 'home|topCharities' })}</h3>
 
-                            <p>
-                                Redeem your rewards, donate to a top charity.
-                            </p>
+                            <p>{intl.formatMessage({ id: 'home|topCharitiesText' })}</p>
 
                             <p>
                                 <a onClick={() => ReactDOM.findDOMNode(this.refs.topCharities).scrollIntoView()}>
@@ -36,7 +34,7 @@ class Home extends React.Component {
                         <div className="col-md-4">
                             <h3>{intl.formatMessage({ id: 'home|supportACause' })}</h3>
 
-                            <p>Browse a list of popular charities by Cause</p>
+                            <p>{intl.formatMessage({ id: 'home|supportACauseText' })}</p>
 
                             <p>
                                 <a onClick={() => ReactDOM.findDOMNode(this.refs.byCause).scrollIntoView()}>
@@ -49,7 +47,7 @@ class Home extends React.Component {
                             <h3>{intl.formatMessage({ id: 'home|findACharity' })}
                             </h3>
 
-                            <p>Search for any charity by name or location</p>
+                            <p>{intl.formatMessage({ id: 'home|findACharityText' })}</p>
 
                             <p>
                                 <Link to="/search">Search Now</Link>
