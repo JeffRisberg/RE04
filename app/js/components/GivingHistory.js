@@ -66,9 +66,9 @@ class GivingHistory extends React.Component {
                         <tr>
                             <th/>
                             <th>{intl.formatMessage({id:'givingHistory|columnLabelDate'})}</th>
-                            <th>Transaction #</th>
-                            <th>Charity</th>
-                            <th className="text-right">Amount</th>
+                            <th>{intl.formatMessage({id:'givingHistory|columnLabelTransaction'})}</th>
+                            <th>{intl.formatMessage({id:'givingHistory|columnLabelCharity'})}</th>
+                            <th className="text-right">{intl.formatMessage({id:'givingHistory|columnLabelAmount'})}</th>
                         </tr>
                         </thead>
                         <tbody>

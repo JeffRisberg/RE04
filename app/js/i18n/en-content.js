@@ -14,5 +14,6 @@ export default {
     'givingHistory|subtitle': 'Below is a history of your past donations',
     'givingHistory|columnLabelDate': 'Date (DD/MM/YYYY)',
     'givingHistory|columnLabelTransaction': 'Transaction #',
-
+    'givingHistory|columnLabelCharity': 'Charity',
+    'givingHistory|columnLabelAmount': 'Amount',
 };

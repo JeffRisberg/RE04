@@ -13,4 +13,6 @@ export default {
     'givingHistory|title': 'Donner de l\'histoire',
     'givingHistory|subtitle': 'Voici une histoire de vos dons passés',
     'givingHistory|columnLabelDate': 'Date (DD/MM/YYYY)',
+    'givingHistory|columnLabelCharity': 'Charité',
+    'givingHistory|columnLabelAmount': 'Montant',
 };

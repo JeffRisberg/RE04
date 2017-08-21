@@ -14,5 +14,7 @@ export default {
     'givingHistory|subtitle': 'Unten ist eine Geschichte Ihrer Vergangenheit Spenden',
     'givingHistory|columnLabelDate': 'Datum',
     'givingHistory|columnLabelTransaction': 'Transaktion #',
+    'givingHistory|columnLabelCharity': 'Nächstenliebe',
+    'givingHistory|columnLabelAmount': 'Menge',
 };
 
