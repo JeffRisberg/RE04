@@ -20,7 +20,7 @@ class GivingHistoryItem extends React.Component {
 
         const transDateStr = this.props.givingHistoryItem.transactionDate;
         const transDate = parseInt(transDateStr);
-console.log(currency);
+
         return (
             <tr>
                 <td><input type="checkbox"/></td>
