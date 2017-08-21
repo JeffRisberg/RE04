@@ -1,6 +1,5 @@
-import React from 'react'
-import {FormattedNumber} from 'react-intl';
-
+import React from 'react';
+import { FormattedNumber } from 'react-intl';
 import moment from 'moment';
 
 /**
@@ -13,12 +12,15 @@ class GivingHistoryItem extends React.Component {
     }
 
     render() {
-        const transactionId = this.props.givingHistoryItem.transactionId;
+        //const transactionId = this.props.givingHistoryItem.transactionId;
+        //const charityName = this.props.givingHistoryItem.charityName;
+        //const amount = this.props.givingHistoryItem.amount;
+        //const currency = this.props.givingHistoryItem.currency;
+        const { transactionId, charityName, amount, currency} = this.props.givingHistoryItem;
+
         const transDateStr = this.props.givingHistoryItem.transactionDate;
         const transDate = parseInt(transDateStr);
-        const charityName = this.props.givingHistoryItem.charityName;
-        const amount = this.props.givingHistoryItem.amount;
-
+console.log(currency);
         return (
             <tr>
                 <td><input type="checkbox"/></td>
@@ -29,8 +31,8 @@ class GivingHistoryItem extends React.Component {
                     <FormattedNumber
                         value={amount}
                         style="currency"
-                        currency="USD"/>
-                    </td>
+                        currency={currency}/>
+                </td>
             </tr>
         );
     }
