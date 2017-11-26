@@ -18,7 +18,7 @@ class Login extends React.Component {
         super();
 
         this.schema = {
-            "title": null,
+            "title": "Login",
             "type": "object",
             "required": [
                 "login", "password"
@@ -47,7 +47,7 @@ class Login extends React.Component {
         const password = formData.password.trim();
 
         this.props.login(loginValue, password);
-    }
+    };
 
     render() {
         if (this.props.donor != undefined && this.props.donor != null)
