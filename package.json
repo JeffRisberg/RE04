@@ -51,7 +51,7 @@
   "dependencies": {
     "bootstrap": "^4.5.0",
     "debug": "^4.1.1",
-    "encoding": "^0.1.12",
+    "encoding": "^0.1.13",
     "isomorphic-fetch": "^2.2.1",
     "lodash-es": ">=4.17.14",
     "moment": "^2.27.0",
