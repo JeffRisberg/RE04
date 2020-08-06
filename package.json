@@ -49,7 +49,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^4.5.2",
     "debug": "^4.1.1",
     "encoding": "^0.1.13",
     "isomorphic-fetch": "^2.2.1",
