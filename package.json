@@ -45,12 +45,12 @@
     "node-sass": "^4.14.1",
     "sass-loader": "^7.3.1",
     "style-loader": "^0.23.1",
-    "webpack": "^5.41.1",
+    "webpack": "^5.42.0",
     "webpack-cli": "^4.0.0"
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
-    "debug": "^4.3.1",
+    "debug": "^4.3.2",
     "encoding": "^0.1.13",
     "isomorphic-fetch": "^3.0.0",
     "lodash-es": "^4.17.21",
