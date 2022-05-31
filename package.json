@@ -19,8 +19,8 @@
     "url": "https://github.com/JeffRisberg/RE04"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.12",
-    "@babel/preset-env": "^7.17.12",
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "babel-eslint": "^8.2.6",
     "babel-jest": "^26.6.3",
@@ -31,7 +31,7 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react": "^7.30.0",
     "file-loader": "^6.0.0",
     "glob": "^7.2.3",
     "husky": "^1.2.1",
@@ -64,6 +64,6 @@
     "redux-form": "^8.3.8",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
-    "sass": "^1.51.0"
+    "sass": "^1.52.1"
   }
 }
