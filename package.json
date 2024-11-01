@@ -19,9 +19,9 @@
     "url": "https://github.com/JeffRisberg/RE04"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.0",
-    "@babel/preset-env": "^7.24.0",
-    "@babel/preset-react": "^7.24.0",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.0",
     "babel-eslint": "^8.2.0",
     "babel-jest": "^26.6.0",
     "babel-loader": "^8.3.0",
@@ -64,6 +64,6 @@
     "redux-form": "^8.3.10",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.2",
-    "sass": "^1.79.0"
+    "sass": "^1.80.0"
   }
 }
