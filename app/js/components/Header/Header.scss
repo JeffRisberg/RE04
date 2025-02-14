@@ -1,14 +1,14 @@
-@import "../../../styles/app.scss";
+@use "../../../styles/app.scss";
 
 .header {
 
   &__top-border {
-    border-top: 8px solid $color-maroon;
+    border-top: 8px solid app.$color-maroon;
     margin-bottom: 14px;
   }
 
   &__bottom-border {
-    border-bottom: 8px solid $color-black;
+    border-bottom: 8px solid app.$color-black;
     margin-top: 14px;
   }
 
@@ -23,13 +23,13 @@
 
   &__account-header-links a {
     font-size: 13px;
-    color: $color-darkgrey;
+    color: app.$color-darkgrey;
   }
 
   &__account-info {
     font-size: 13px;
     font-weight: bold;
-    color: $color-maroon;
+    color: app.$color-maroon;
   }
 
   &__basket {
@@ -47,7 +47,7 @@
   }
 
   &__tabpanel-background {
-    background-color: $color-beige;
+    background-color: app.$color-beige;
     margin: 0px -15px;
   }
 
